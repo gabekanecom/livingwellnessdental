@@ -1,0 +1,50 @@
+'use client'
+
+import BarChart06 from '@/components/charts/bar-chart-06'
+
+// Import utilities
+import { getCssVariable } from '@/components/utils/utils'
+
+export default function FintechCard04() {
+
+  const chartData = {
+    labels: [
+      '02-01-2023', '03-01-2023', '04-01-2023', '05-01-2023',
+    ],
+    datasets: [
+      // Indigo bars
+      {
+        label: 'Inflow',
+        data: [
+          4100, 1900, 2700, 3900,
+        ],
+        backgroundColor: getCssVariable('--color-violet-500'),
+        hoverBackgroundColor: getCssVariable('--color-violet-600'),
+        categoryPercentage: 0.7,
+        borderRadius: 4,
+      },
+      // Gray bars
+      {
+        label: 'Outflow',
+        data: [
+          2000, 1000, 1100, 2600,
+        ],
+        backgroundColor: getCssVariable('--color-violet-200'),
+        hoverBackgroundColor: getCssVariable('--color-violet-300'),
+        categoryPercentage: 0.7,
+        borderRadius: 4,
+      },
+    ],
+  }
+
+  return(
+    <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-sm rounded-xl">
+      <header className="className="px-5 py-4 border-b border-gray-100 ">
+        <h2 className="className="font-semibold text-gray-800 Flow by Account</h2>">
+      </header>
+      {/* Chart built with Chart.js 3 */}
+      {/* Change the height attribute to adjust the chart height */}
+      <BarChart06 data={chartData} width={595} height={248} />
+    </div>
+  )
+}
