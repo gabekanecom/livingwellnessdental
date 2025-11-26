@@ -39,13 +39,17 @@ export async function POST(request: NextRequest) {
           continue;
         }
 
-        // Get author
+        // Get author - use first available user or create system user with fixed UUID
         let author = await prisma.user.findFirst();
         if (!author) {
-          author = await prisma.user.create({
-            data: {
-              email: 'import@system.local',
-              name: 'Wiki Import',
+          const SYSTEM_USER_ID = '00000000-0000-0000-0000-000000000000';
+          author = await prisma.user.upsert({
+            where: { id: SYSTEM_USER_ID },
+            update: {},
+            create: {
+              id: SYSTEM_USER_ID,
+              email: 'system@localhost',
+              name: 'System',
             },
           });
         }

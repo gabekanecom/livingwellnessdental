@@ -1,6 +1,8 @@
 'use client'
 
 import { createContext, Dispatch, SetStateAction, useContext, useState } from 'react'
+import { BrandingProvider } from '@/lib/contexts/BrandingContext'
+import BrandingHead from '@/components/branding-head'
 
 interface ContextProps {
   sidebarOpen: boolean
@@ -24,9 +26,12 @@ export default function AppProvider({
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false)
   const [sidebarExpanded, setSidebarExpanded] = useState<boolean>(false)
   return (
-    <AppContext.Provider value={{ sidebarOpen, setSidebarOpen, sidebarExpanded, setSidebarExpanded }}>
-      {children}
-    </AppContext.Provider>
+    <BrandingProvider>
+      <BrandingHead />
+      <AppContext.Provider value={{ sidebarOpen, setSidebarOpen, sidebarExpanded, setSidebarExpanded }}>
+        {children}
+      </AppContext.Provider>
+    </BrandingProvider>
   )
 }
 

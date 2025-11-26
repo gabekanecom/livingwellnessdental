@@ -13,8 +13,8 @@ export async function GET(request: NextRequest) {
     if (search) {
       where.OR = [
         { name: { contains: search, mode: 'insensitive' } },
-        { code: { contains: search, mode: 'insensitive' } },
-        { city: { contains: search, mode: 'insensitive' } }
+        { city: { contains: search, mode: 'insensitive' } },
+        { address: { contains: search, mode: 'insensitive' } }
       ];
     }
 
@@ -47,22 +47,11 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { name, code, address, city, state, zipCode, phone, email, timezone } = body;
+    const { name, address, city, state, zipCode, phone, email, timezone } = body;
 
-    if (!name || !code) {
+    if (!name) {
       return NextResponse.json(
-        { error: 'Name and code are required' },
-        { status: 400 }
-      );
-    }
-
-    const existingLocation = await prisma.location.findUnique({
-      where: { code }
-    });
-
-    if (existingLocation) {
-      return NextResponse.json(
-        { error: 'A location with this code already exists' },
+        { error: 'Name is required' },
         { status: 400 }
       );
     }
@@ -70,14 +59,13 @@ export async function POST(request: NextRequest) {
     const location = await prisma.location.create({
       data: {
         name,
-        code: code.toUpperCase(),
         address,
         city,
         state,
         zipCode,
         phone,
         email,
-        timezone: timezone || 'America/New_York'
+        timezone: timezone || 'America/Edmonton'
       }
     });
 
@@ -85,10 +73,11 @@ export async function POST(request: NextRequest) {
       data: location,
       message: 'Location created successfully'
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error creating location:', error);
+    const message = error instanceof Error ? error.message : 'Unknown error';
     return NextResponse.json(
-      { error: 'Failed to create location' },
+      { error: 'Failed to create location', details: message },
       { status: 500 }
     );
   }

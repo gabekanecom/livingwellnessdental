@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
+import { createClient } from '@/lib/supabase/server';
 
 export async function POST(
   request: NextRequest,
@@ -9,8 +8,10 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const session = await getServerSession(authOptions);
-    if (!session?.user?.id) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
       return NextResponse.json(
         { error: 'Unauthorized' },
         { status: 401 }
@@ -80,7 +81,6 @@ export async function POST(
     const score = Math.round((correctCount / quiz.questions.length) * 100);
     const passed = score >= (quiz.passingScore || 70);
 
-    // Find the user's enrollment for the course that contains this quiz
     const courseId = quiz.lesson?.module?.course?.id;
     if (!courseId) {
       return NextResponse.json(
@@ -91,7 +91,7 @@ export async function POST(
 
     const enrollment = await prisma.enrollment.findFirst({
       where: {
-        userId: session.user.id,
+        userId: user.id,
         courseId
       }
     });

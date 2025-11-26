@@ -5,11 +5,13 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // Create a demo user
+  // Create a demo user with fixed UUID (for seeding only - real users come from Supabase Auth)
+  const DEMO_USER_ID = '00000000-0000-0000-0000-000000000001';
   const user = await prisma.user.upsert({
-    where: { email: 'admin@livingwellness.dental' },
+    where: { id: DEMO_USER_ID },
     update: {},
     create: {
+      id: DEMO_USER_ID,
       email: 'admin@livingwellness.dental',
       name: 'Admin User',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
@@ -251,9 +253,9 @@ async function main() {
 
   // Create User Types
   const userTypes = [
-    { id: 'super_admin', name: 'Super Admin', description: 'Full system access across all locations', displayOrder: 0 },
-    { id: 'corporate', name: 'Corporate Staff', description: 'Corporate-level access (HR, Finance, Operations)', displayOrder: 1 },
-    { id: 'location_staff', name: 'Location Staff', description: 'Staff assigned to specific dental locations', displayOrder: 2 },
+    { id: 'super_admin', name: 'Super Admin', description: 'Full system access across all locations', hierarchyLevel: 0 },
+    { id: 'corporate', name: 'Corporate Staff', description: 'Corporate-level access (HR, Finance, Operations)', hierarchyLevel: 1 },
+    { id: 'location_staff', name: 'Location Staff', description: 'Staff assigned to specific dental locations', hierarchyLevel: 2 },
   ];
 
   for (const type of userTypes) {

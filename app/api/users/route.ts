@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { createClient } from '@/lib/supabase/server';
+import { validateUserCreation } from '@/lib/permissions/hierarchy';
 
 export async function GET(request: NextRequest) {
   try {
@@ -87,14 +89,39 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, phone, jobTitle, avatar, locationIds, roleAssignments } = body;
+    const supabase = await createClient();
+    const { data: { user: currentUser } } = await supabase.auth.getUser();
 
-    if (!name || !email) {
+    if (!currentUser) {
       return NextResponse.json(
-        { error: 'Name and email are required' },
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    const body = await request.json();
+    const { id, name, email, phone, jobTitle, avatar, locationIds, roleAssignments } = body;
+
+    if (!id || !name || !email) {
+      return NextResponse.json(
+        { error: 'ID (from Supabase Auth), name, and email are required' },
         { status: 400 }
       );
+    }
+
+    if (roleAssignments?.length > 0 || locationIds?.length > 0) {
+      const validation = await validateUserCreation(
+        currentUser.id,
+        roleAssignments || [],
+        locationIds
+      );
+
+      if (!validation.valid) {
+        return NextResponse.json(
+          { error: validation.errors.join('. ') },
+          { status: 403 }
+        );
+      }
     }
 
     const existingUser = await prisma.user.findUnique({
@@ -110,6 +137,7 @@ export async function POST(request: NextRequest) {
 
     const user = await prisma.user.create({
       data: {
+        id,
         name,
         email,
         phone,
@@ -124,7 +152,8 @@ export async function POST(request: NextRequest) {
         userRoles: roleAssignments?.length ? {
           create: roleAssignments.map((ra: { roleId: string; locationId?: string }) => ({
             roleId: ra.roleId,
-            locationId: ra.locationId
+            locationId: ra.locationId,
+            assignedById: currentUser.id
           }))
         } : undefined
       },

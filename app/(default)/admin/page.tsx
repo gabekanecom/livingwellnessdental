@@ -5,7 +5,8 @@ import {
   UsersIcon,
   BuildingOffice2Icon,
   ShieldCheckIcon,
-  KeyIcon
+  KeyIcon,
+  PaintBrushIcon
 } from '@heroicons/react/24/outline';
 
 const adminSections = [
@@ -36,25 +37,25 @@ const adminSections = [
     href: '/admin/permissions',
     icon: KeyIcon,
     color: 'bg-amber-500'
+  },
+  {
+    name: 'Branding',
+    description: 'Customize logo, colors, and company information',
+    href: '/admin/branding',
+    icon: PaintBrushIcon,
+    color: 'bg-pink-500'
   }
 ];
 
 export default function AdminDashboard() {
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-7xl mx-auto">
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Administration</h1>
-        <p className="text-gray-600 mt-1">
-          Manage users, locations, roles, and system settings
-        </p>
-      </div>
-
+    <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {adminSections.map((section) => (
           <Link
             key={section.name}
             href={section.href}
-            className="block p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-gray-300 transition-all"
+            className="block p-6 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-100 hover:border-gray-300 transition-all"
           >
             <div className="flex items-start gap-4">
               <div className={`${section.color} p-3 rounded-lg`}>

@@ -56,29 +56,12 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { name, code, address, city, state, zipCode, phone, email, timezone, isActive } = body;
-
-    if (code) {
-      const existingLocation = await prisma.location.findFirst({
-        where: {
-          code,
-          NOT: { id }
-        }
-      });
-
-      if (existingLocation) {
-        return NextResponse.json(
-          { error: 'A location with this code already exists' },
-          { status: 400 }
-        );
-      }
-    }
+    const { name, address, city, state, zipCode, phone, email, timezone, hours, isActive } = body;
 
     const location = await prisma.location.update({
       where: { id },
       data: {
         name,
-        code: code?.toUpperCase(),
         address,
         city,
         state,
@@ -86,6 +69,7 @@ export async function PUT(
         phone,
         email,
         timezone,
+        hours,
         isActive
       }
     });

@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
           orderBy: { displayOrder: 'asc' }
         }
       } : undefined,
-      orderBy: { displayOrder: 'asc' }
+      orderBy: { hierarchyLevel: 'asc' }
     });
 
     return NextResponse.json({ userTypes });
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { id, name, description, displayOrder } = body;
+    const { id, name, description, hierarchyLevel, isActive } = body;
 
     if (!id || !name) {
       return NextResponse.json(
@@ -62,7 +62,8 @@ export async function POST(request: NextRequest) {
         id,
         name,
         description,
-        displayOrder: displayOrder || 0
+        hierarchyLevel: hierarchyLevel ?? 0,
+        isActive: isActive ?? true
       }
     });
 

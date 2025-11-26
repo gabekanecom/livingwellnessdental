@@ -47,7 +47,7 @@ export default function NewArticlePage() {
           title,
           content,
           categoryId,
-          authorId: 'temp-user-id', // TODO: Get from auth context
+          authorId: 'temp-user-id',
           tags: tags.split(',').map(t => t.trim()).filter(Boolean),
           status,
         }),
@@ -68,8 +68,8 @@ export default function NewArticlePage() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Create New Article</h1>
+    <div className="p-6">
+      <h2 className="text-xl font-semibold text-gray-800 mb-6">Create New Article</h2>
 
       <div className="space-y-6">
         <div>
@@ -81,7 +81,7 @@ export default function NewArticlePage() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             placeholder="Enter article title"
           />
           {title && (
@@ -99,7 +99,7 @@ export default function NewArticlePage() {
             id="category"
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
           >
             <option value="">Select a category</option>
             {categories.map((cat) => (
@@ -119,7 +119,7 @@ export default function NewArticlePage() {
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
             placeholder="e.g. training, onboarding, hr"
           />
         </div>
@@ -146,7 +146,7 @@ export default function NewArticlePage() {
           <button
             onClick={() => handleSave('PUBLISHED')}
             disabled={isSaving}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            className="px-6 py-2 bg-violet-500 text-white rounded-lg hover:bg-violet-600 disabled:opacity-50"
           >
             {isSaving ? 'Publishing...' : 'Publish'}
           </button>

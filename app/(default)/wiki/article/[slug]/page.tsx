@@ -37,7 +37,7 @@ export default async function ArticlePage({ params }: PageProps) {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-8">
+    <div className="p-6">
       <WikiBreadcrumb items={breadcrumbItems} />
       <ArticleView article={article as any} />
     </div>

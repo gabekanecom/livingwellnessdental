@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import SearchInput from './SearchInput';
 
 interface SearchResultsProps {
   searchParams: Promise<{ q?: string }>;
@@ -29,15 +30,15 @@ async function SearchResults({ query }: { query: string }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {results.map((result: any) => (
         <Link
           key={result.id}
           href={`/wiki/article/${result.slug}`}
-          className="block p-6 bg-white border border-gray-200 rounded-lg hover:border-blue-500 hover:shadow-md transition-all"
+          className="block p-4 bg-gray-50 border border-gray-200 rounded-lg hover:border-violet-500 hover:shadow-md transition-all"
         >
           <div className="flex items-start justify-between mb-2">
-            <h3 className="text-xl font-semibold text-gray-900">{result.title}</h3>
+            <h3 className="text-lg font-semibold text-gray-900">{result.title}</h3>
             <span className="text-sm text-gray-500 ml-4">{result.categoryName}</span>
           </div>
           {result.excerpt && (
@@ -53,10 +54,15 @@ export default async function SearchPage({ searchParams }: SearchResultsProps) {
   const { q } = await searchParams;
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Search Results</h1>
+    <div className="p-6">
+      <h2 className="text-xl font-semibold text-gray-800 mb-4">Search</h2>
+      
+      <div className="mb-6">
+        <SearchInput initialQuery={q || ''} />
+      </div>
+
       {q && (
-        <p className="text-gray-600 mb-8">
+        <p className="text-gray-600 mb-6">
           Showing results for: <span className="font-medium">{q}</span>
         </p>
       )}

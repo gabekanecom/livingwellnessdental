@@ -1,19 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   PlusIcon,
   MagnifyingGlassIcon,
-  PencilIcon,
-  TrashIcon,
   BuildingOffice2Icon,
-  UsersIcon
+  UsersIcon,
+  MapPinIcon,
+  PhoneIcon
 } from '@heroicons/react/24/outline';
 
 interface Location {
   id: string;
   name: string;
-  code: string;
   address?: string;
   city?: string;
   state?: string;
@@ -26,22 +26,10 @@ interface Location {
 }
 
 export default function LocationsPage() {
+  const router = useRouter();
   const [locations, setLocations] = useState<Location[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [editingLocation, setEditingLocation] = useState<Location | null>(null);
-  const [formData, setFormData] = useState({
-    name: '',
-    code: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    phone: '',
-    email: '',
-    timezone: 'America/New_York'
-  });
 
   useEffect(() => {
     fetchLocations();
@@ -65,64 +53,8 @@ export default function LocationsPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const url = editingLocation ? `/api/locations/${editingLocation.id}` : '/api/locations';
-      const method = editingLocation ? 'PUT' : 'POST';
-
-      const response = await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        setShowModal(false);
-        setEditingLocation(null);
-        resetForm();
-        fetchLocations();
-      }
-    } catch (error) {
-      console.error('Error saving location:', error);
-    }
-  };
-
-  const handleEdit = (location: Location) => {
-    setEditingLocation(location);
-    setFormData({
-      name: location.name,
-      code: location.code,
-      address: location.address || '',
-      city: location.city || '',
-      state: location.state || '',
-      zipCode: location.zipCode || '',
-      phone: location.phone || '',
-      email: location.email || '',
-      timezone: location.timezone
-    });
-    setShowModal(true);
-  };
-
-  const handleDelete = async (locationId: string) => {
-    if (!confirm('Are you sure you want to delete this location?')) return;
-
-    try {
-      const response = await fetch(`/api/locations/${locationId}`, {
-        method: 'DELETE'
-      });
-      if (response.ok) {
-        fetchLocations();
-      } else {
-        const data = await response.json();
-        alert(data.error || 'Failed to delete location');
-      }
-    } catch (error) {
-      console.error('Error deleting location:', error);
-    }
-  };
-
-  const handleToggleActive = async (location: Location) => {
+  const handleToggleActive = async (e: React.MouseEvent, location: Location) => {
+    e.stopPropagation();
     try {
       const response = await fetch(`/api/locations/${location.id}`, {
         method: 'PUT',
@@ -137,38 +69,16 @@ export default function LocationsPage() {
     }
   };
 
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      code: '',
-      address: '',
-      city: '',
-      state: '',
-      zipCode: '',
-      phone: '',
-      email: '',
-      timezone: 'America/New_York'
-    });
-  };
-
-  const timezones = [
-    'America/New_York',
-    'America/Chicago',
-    'America/Denver',
-    'America/Los_Angeles',
-    'America/Phoenix'
-  ];
-
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-7xl mx-auto">
       <div className="sm:flex sm:items-center sm:justify-between mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Locations</h1>
-          <p className="text-gray-600 mt-1">Manage dental office locations</p>
+          <p className="text-gray-600 mt-1">Manage clinic locations</p>
         </div>
         <button
-          onClick={() => { resetForm(); setEditingLocation(null); setShowModal(true); }}
-          className="mt-4 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700"
+          onClick={() => router.push('/admin/locations/new')}
+          className="mt-4 sm:mt-0 inline-flex items-center gap-2 px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700 transition-colors"
         >
           <PlusIcon className="h-4 w-4" />
           Add Location
@@ -183,72 +93,79 @@ export default function LocationsPage() {
             placeholder="Search locations..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading ? (
-          <div className="col-span-full text-center py-12 text-gray-500">Loading...</div>
+          <div className="col-span-full flex justify-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+          </div>
         ) : locations.length === 0 ? (
-          <div className="col-span-full text-center py-12 text-gray-500">No locations found</div>
+          <div className="col-span-full text-center py-12">
+            <BuildingOffice2Icon className="mx-auto h-12 w-12 text-gray-300" />
+            <h3 className="mt-2 text-sm font-medium text-gray-900">No locations</h3>
+            <p className="mt-1 text-sm text-gray-500">Get started by creating a new location.</p>
+            <div className="mt-6">
+              <button
+                onClick={() => router.push('/admin/locations/new')}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-violet-600 text-white text-sm font-medium rounded-lg hover:bg-violet-700"
+              >
+                <PlusIcon className="h-4 w-4" />
+                Add Location
+              </button>
+            </div>
+          </div>
         ) : (
           locations.map((location) => (
             <div
               key={location.id}
-              className={`bg-white rounded-xl shadow-sm border p-6 ${
+              onClick={() => router.push(`/admin/locations/${location.id}`)}
+              className={`bg-white rounded-xl shadow-sm border p-6 cursor-pointer hover:shadow-md transition-shadow ${
                 location.isActive ? 'border-gray-200' : 'border-red-200 bg-red-50'
               }`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg ${location.isActive ? 'bg-green-100' : 'bg-red-100'}`}>
-                    <BuildingOffice2Icon className={`h-6 w-6 ${location.isActive ? 'text-green-600' : 'text-red-600'}`} />
+                  <div className={`p-2 rounded-lg ${location.isActive ? 'bg-violet-100' : 'bg-red-100'}`}>
+                    <BuildingOffice2Icon className={`h-6 w-6 ${location.isActive ? 'text-violet-600' : 'text-red-600'}`} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">{location.name}</h3>
-                    <p className="text-sm text-gray-500">{location.code}</p>
                   </div>
-                </div>
-                <div className="flex items-center gap-1">
-                  <button
-                    onClick={() => handleEdit(location)}
-                    className="p-1 text-gray-400 hover:text-indigo-600"
-                  >
-                    <PencilIcon className="h-4 w-4" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(location.id)}
-                    className="p-1 text-gray-400 hover:text-red-600"
-                  >
-                    <TrashIcon className="h-4 w-4" />
-                  </button>
                 </div>
               </div>
 
               {(location.address || location.city) && (
-                <p className="text-sm text-gray-600 mb-2">
-                  {location.address && <span>{location.address}<br /></span>}
-                  {location.city && `${location.city}, ${location.state} ${location.zipCode}`}
-                </p>
+                <div className="flex items-start gap-2 text-sm text-gray-600 mb-2">
+                  <MapPinIcon className="h-4 w-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    {location.address && <span>{location.address}<br /></span>}
+                    {location.city && `${location.city}, ${location.state} ${location.zipCode}`}
+                  </div>
+                </div>
               )}
 
               {location.phone && (
-                <p className="text-sm text-gray-600 mb-2">{location.phone}</p>
+                <div className="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                  <PhoneIcon className="h-4 w-4 text-gray-400" />
+                  <span>{location.phone}</span>
+                </div>
               )}
 
               <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
                 <div className="flex items-center gap-1 text-sm text-gray-500">
                   <UsersIcon className="h-4 w-4" />
-                  <span>{location._count?.users || 0} users</span>
+                  <span>{location._count?.users || 0} staff</span>
                 </div>
                 <button
-                  onClick={() => handleToggleActive(location)}
-                  className={`text-xs px-2 py-1 rounded ${
+                  onClick={(e) => handleToggleActive(e, location)}
+                  className={`text-xs px-2.5 py-1 rounded-full font-medium transition-colors ${
                     location.isActive
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
+                      ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                      : 'bg-red-100 text-red-700 hover:bg-red-200'
                   }`}
                 >
                   {location.isActive ? 'Active' : 'Inactive'}
@@ -258,126 +175,6 @@ export default function LocationsPage() {
           ))
         )}
       </div>
-
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h2 className="text-lg font-semibold text-gray-900">
-                {editingLocation ? 'Edit Location' : 'Add Location'}
-              </h2>
-            </div>
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Code</label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.code}
-                    onChange={(e) => setFormData({ ...formData, code: e.target.value.toUpperCase() })}
-                    placeholder="e.g., NYC01"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="col-span-2">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                  <input
-                    type="text"
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
-                  <input
-                    type="text"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
-                    <input
-                      type="text"
-                      value={formData.state}
-                      onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ZIP</label>
-                    <input
-                      type="text"
-                      value={formData.zipCode}
-                      onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Timezone</label>
-                  <select
-                    value={formData.timezone}
-                    onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500"
-                  >
-                    {timezones.map((tz) => (
-                      <option key={tz} value={tz}>{tz}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="flex justify-end gap-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => { setShowModal(false); setEditingLocation(null); }}
-                  className="px-4 py-2 text-sm text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 text-sm text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
-                >
-                  {editingLocation ? 'Update' : 'Create'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

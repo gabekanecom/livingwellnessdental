@@ -48,14 +48,14 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { name, description, displayOrder, isActive } = body;
+    const { name, description, hierarchyLevel, isActive } = body;
 
     const userType = await prisma.userType.update({
       where: { id },
       data: {
         name,
         description,
-        displayOrder,
+        hierarchyLevel,
         isActive
       }
     });

@@ -29,6 +29,7 @@ interface ArticleEditorProps {
 
 export default function ArticleEditor({ content, onChange, placeholder }: ArticleEditorProps) {
   const editor = useEditor({
+    immediatelyRender: false,
     extensions: [
       StarterKit,
       Placeholder.configure({
