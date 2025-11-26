@@ -208,7 +208,7 @@ export default function ColorEditor({ settings, onUpdate, onHasChanges }: ColorE
           <input
             type="color"
             value={color}
-            onChange={(e) => onShadeChange(shade as keyof ColorShades, e.target.value)}
+            onChange={(e) => onShadeChange(shade as unknown as keyof ColorShades, e.target.value)}
             className="w-full h-6 rounded border border-gray-200 cursor-pointer"
           />
           <p className="text-xs text-gray-500 text-center">{shade}</p>
