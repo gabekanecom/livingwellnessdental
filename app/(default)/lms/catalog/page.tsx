@@ -1,6 +1,13 @@
 import prisma from '@/lib/prisma';
 import CourseCard from '@/components/lms/CourseCard';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
+import type { Course, CourseCategory, User } from '@prisma/client';
+
+type CourseWithDetails = Course & {
+  category: CourseCategory | null;
+  createdBy: Pick<User, 'id' | 'name' | 'email'> | null;
+  _count: { enrollments: number };
+};
 
 export const metadata = {
   title: 'Course Catalog',
@@ -68,7 +75,7 @@ export default async function CatalogPage() {
           <span className="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-full">
             All Courses
           </span>
-          {categories.map((category) => (
+          {categories.map((category: CourseCategory) => (
             <span
               key={category.id}
               className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-full hover:bg-gray-200 cursor-pointer transition-colors"
@@ -90,7 +97,7 @@ export default async function CatalogPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {courses.map((course) => (
+          {courses.map((course: CourseWithDetails) => (
             <CourseCard
               key={course.id}
               course={course}
