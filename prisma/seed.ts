@@ -346,14 +346,14 @@ async function main() {
 
   // Create sample locations
   const locations = [
-    { code: 'NYC01', name: 'Manhattan Office', city: 'New York', state: 'NY', address: '123 Main Street', zipCode: '10001', phone: '(212) 555-0100' },
-    { code: 'NYC02', name: 'Brooklyn Office', city: 'Brooklyn', state: 'NY', address: '456 Park Avenue', zipCode: '11201', phone: '(718) 555-0200' },
-    { code: 'LA01', name: 'Los Angeles Office', city: 'Los Angeles', state: 'CA', address: '789 Sunset Blvd', zipCode: '90001', phone: '(310) 555-0300' },
+    { id: 'loc_nyc01', name: 'Manhattan Office', city: 'New York', state: 'NY', address: '123 Main Street', zipCode: '10001', phone: '(212) 555-0100' },
+    { id: 'loc_nyc02', name: 'Brooklyn Office', city: 'Brooklyn', state: 'NY', address: '456 Park Avenue', zipCode: '11201', phone: '(718) 555-0200' },
+    { id: 'loc_la01', name: 'Los Angeles Office', city: 'Los Angeles', state: 'CA', address: '789 Sunset Blvd', zipCode: '90001', phone: '(310) 555-0300' },
   ];
 
   for (const location of locations) {
     await prisma.location.upsert({
-      where: { code: location.code },
+      where: { id: location.id },
       update: {},
       create: location,
     });

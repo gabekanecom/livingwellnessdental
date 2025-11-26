@@ -77,7 +77,7 @@ export async function getUserHierarchyContext(userId: string): Promise<UserHiera
     .map(ut => ut.id);
 
   let canManageAtLocations: string[] | 'ALL' = Array.from(locationIds);
-  if (highestDataScope === 'GLOBAL' || highestDataScope === 'ALL_LOCATIONS') {
+  if (['GLOBAL', 'ALL_LOCATIONS'].includes(highestDataScope)) {
     canManageAtLocations = 'ALL';
   }
 

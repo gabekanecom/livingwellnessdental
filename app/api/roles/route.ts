@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
           select: { userRoles: { where: { isActive: true } } }
         }
       },
-      orderBy: [{ userType: { displayOrder: 'asc' } }, { displayOrder: 'asc' }]
+      orderBy: [{ userType: { hierarchyLevel: 'asc' } }, { name: 'asc' }]
     });
 
     return NextResponse.json({ roles });
