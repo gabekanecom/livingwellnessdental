@@ -6,7 +6,7 @@ export const TransactionsProperties = () => {
       case 'Canceled':
         return 'bg-red-500/20 text-red-700';
       default:
-        return 'bg-gray-400/20 text-gray-500 
+        return 'bg-gray-400/20 text-gray-500';
     }
   }
 
@@ -15,7 +15,7 @@ export const TransactionsProperties = () => {
       case '+':
         return 'text-green-500'
       default:
-        return 'text-gray-800 
+        return 'text-gray-800';
     }
   } 
 

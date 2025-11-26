@@ -32,7 +32,7 @@ export default function ShopCards03() {
                 <h3 className="text-lg text-gray-800 font-semibold">Health and Happiness Workshop</h3>
               </header>
               {/* List */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M5 4a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z" />
@@ -50,7 +50,7 @@ export default function ShopCards03() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Tickets</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Tickets</a>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export default function ShopCards03() {
                 <h3 className="text-lg text-gray-800 font-semibold">Health and Happiness Workshop</h3>
               </header>
               {/* List */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M5 4a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z" />
@@ -99,7 +99,7 @@ export default function ShopCards03() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Tickets</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Tickets</a>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function ShopCards03() {
                 <h3 className="text-lg text-gray-800 font-semibold">Health and Happiness Workshop</h3>
               </header>
               {/* List */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M5 4a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z" />
@@ -148,7 +148,7 @@ export default function ShopCards03() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Tickets</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Tickets</a>
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function ShopCards03() {
                 <h3 className="text-lg text-gray-800 font-semibold">Health and Happiness Workshop</h3>
               </header>
               {/* List */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M5 4a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2H5Z" />
@@ -197,7 +197,7 @@ export default function ShopCards03() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Tickets</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Tickets</a>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ export default function BasicExamples() {
         {/* Basic Modal */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setBasicModalOpen(true) }}>Basic Modal</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setBasicModalOpen(true) }}>Basic Modal</button>
           <ModalBasic isOpen={basicModalOpen} setIsOpen={setBasicModalOpen} title="Basic Modal">
             {/* Modal content */}
             <div className="px-5 pt-4 pb-1">
@@ -33,8 +33,8 @@ export default function BasicExamples() {
             {/* Modal footer */}
             <div className="px-5 py-4">
               <div className="flex flex-wrap justify-end space-x-2">
-                <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setBasicModalOpen(false) }}>Close</button>">
-                <button className="className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800 Understand</button>">
+                <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setBasicModalOpen(false) }}>Close</button>
+                <button className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800">Understand</button>
               </div>
             </div>
           </ModalBasic>
@@ -44,7 +44,7 @@ export default function BasicExamples() {
         {/* Modal w/ Scroll Bar */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setScrollbarModalOpen(true) }}>Modal w/ Scroll Bar</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setScrollbarModalOpen(true) }}>Modal w/ Scroll Bar</button>
           <ModalBasic isOpen={scrollbarModalOpen} setIsOpen={setScrollbarModalOpen} title="Modal w/ Scroll Bar">
             {/* Modal content */}
             <div className="px-5 py-4">
@@ -61,10 +61,10 @@ export default function BasicExamples() {
               </div>
             </div>
             {/* Modal footer */}
-            <div className="className="sticky bottom-0 px-5 py-4 bg-white> border-t border-gray-200 ">
+            <div className="sticky bottom-0 px-5 py-4 bg-white border-t border-gray-200">
               <div className="flex flex-wrap justify-end space-x-2">
-                <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setScrollbarModalOpen(false) }}>Close</button>">
-                <button className="className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800 Understand</button>">
+                <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setScrollbarModalOpen(false) }}>Close</button>
+                <button className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800">Understand</button>
               </div>
             </div>
           </ModalBasic>
@@ -75,7 +75,7 @@ export default function BasicExamples() {
         {/* Cookies */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 aria-controls="cookies-modal" onClick={() => { setCookiesModalOpen(true) }}>Cookies</button>
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" aria-controls="cookies-modal" onClick={() => { setCookiesModalOpen(true) }}>Cookies</button>
           <ModalCookies isOpen={cookiesModalOpen} setIsOpen={setCookiesModalOpen} title="We use cookies 🍪">
             {/* Modal content */}
             <div className="text-sm mb-5">
@@ -86,8 +86,8 @@ export default function BasicExamples() {
             </div>
             {/* Modal footer */}
             <div className="flex flex-wrap justify-end space-x-2">
-              <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setCookiesModalOpen(false) }}>Decline</button>">
-              <button className="className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setCookiesModalOpen(false) }}>I Accept</button>">
+              <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setCookiesModalOpen(false) }}>Decline</button>
+              <button className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setCookiesModalOpen(false) }}>I Accept</button>
             </div>
           </ModalCookies>
           {/* End */}

@@ -1,3 +1,5 @@
+'use client'
+
 import { useFlyoutContext } from '@/app/flyout-context'
 import Image from 'next/image'
 import User01 from '@/public/images/user-32-01.jpg'
@@ -36,7 +38,7 @@ export default function MessagesHeader() {
         {/* Buttons on the right side */}
         <div className="flex">
           <button className="p-1.5 shrink-0 rounded-lg bg-white border border-gray-200 hover:border-gray-300 shadow-sm ml-2">
-            <svg className="fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+            <svg className="fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
               <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
             </svg>
           </button>

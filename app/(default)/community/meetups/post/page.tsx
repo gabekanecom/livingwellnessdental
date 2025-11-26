@@ -30,7 +30,7 @@ export default function MeetupPost() {
         {/* Content */}
         <div>
           <div className="mb-6">
-            <Link className="btn-sm px-3 bg-white border-gray-200 hover:border-gray-300 text-gray-800 href="/community/meetups">
+            <Link className="btn-sm px-3 bg-white border-gray-200 hover:border-gray-300 text-gray-800" href="/community/meetups">
               <svg className="fill-current text-gray-400 mr-2" width="7" height="12" viewBox="0 0 7 12">
                 <path d="M5.4.6 6.8 2l-4 4 4 4-1.4 1.4L0 6z" />
               </svg>
@@ -53,7 +53,7 @@ export default function MeetupPost() {
               </a>
               <div className="text-sm whitespace-nowrap">
                 Hosted by{' '}
-                <a className="font-semibold text-gray-800 href="#0">
+                <a className="font-semibold text-gray-800" href="#0">
                   Monica Fishkin
                 </a>
               </div>
@@ -94,7 +94,7 @@ export default function MeetupPost() {
               and revisit old ones.
             </p>
           </div>
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Photos */}
           <div>
@@ -112,7 +112,7 @@ export default function MeetupPost() {
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Comments */}
           <div>
@@ -160,7 +160,7 @@ export default function MeetupPost() {
             </ul>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Similar Meetups */}
           <div>
@@ -192,7 +192,7 @@ export default function MeetupPost() {
                   <div className='grow'>
                     <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Mon 27 Dec, 2024</div>
                     <a className="inline-flex mb-2" href="#0">
-                      <h3 className="className="text-lg font-bold text-gray-800 York &amp; New Jersey Virtual Retreat 2024</h3>">
+                      <h3 className="text-lg font-bold text-gray-800">New York &amp; New Jersey Virtual Retreat 2024</h3>
                     </a>
                     <div className="text-sm">
                       Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -228,13 +228,13 @@ export default function MeetupPost() {
           {/* 1st block */}
           <div className="bg-white p-5 shadow-sm rounded-xl lg:w-[18rem] xl:w-[20rem]">
             <div className="space-y-2">
-              <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 ">
+              <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">
                 <svg className="fill-current shrink-0" width="16" height="16" viewBox="0 0 16 16">
                   <path d="m2.457 8.516.969-.99 2.516 2.481 5.324-5.304.985.989-6.309 6.284z" />
                 </svg>
                 <span className="ml-1">Attending</span>
               </button>
-              <button className="className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800 ">
+              <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">
                 <svg className="fill-red-500 shrink-0" width="16" height="16" viewBox="0 0 16 16">
                   <path d="M14.682 2.318A4.485 4.485 0 0 0 11.5 1 4.377 4.377 0 0 0 8 2.707 4.383 4.383 0 0 0 4.5 1a4.5 4.5 0 0 0-3.182 7.682L8 15l6.682-6.318a4.5 4.5 0 0 0 0-6.364Zm-1.4 4.933L8 12.247l-5.285-5A2.5 2.5 0 0 1 4.5 3c1.437 0 2.312.681 3.5 2.625C9.187 3.681 10.062 3 11.5 3a2.5 2.5 0 0 1 1.785 4.251h-.003Z" />
                 </svg>
@@ -247,7 +247,7 @@ export default function MeetupPost() {
           <div className="bg-white p-5 shadow-sm rounded-xl lg:w-[18rem] xl:w-[20rem]">
             <div className="flex justify-between space-x-1 mb-5">
               <div className="text-sm text-gray-800 font-semibold">Attendees (127)</div>
-              <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">
+              <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">
                 View All
               </a>
             </div>
@@ -259,7 +259,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage08} width={32} height={32} alt="User 08" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 McNeail</span>">
+                      <span className="text-sm font-medium text-gray-800">Mary McNeail</span>
                     </div>
                   </div>
                   <button className="text-gray-400 hover:text-gray-500 rounded-full">
@@ -279,7 +279,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage01} width={32} height={32} alt="User 01" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Lamakani</span>">
+                      <span className="text-sm font-medium text-gray-800">Dominik Lamakani</span>
                     </div>
                   </div>
                   <button className="text-gray-400 hover:text-gray-500 rounded-full">
@@ -299,7 +299,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage03} width={32} height={32} alt="User 03" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Mesaros</span>">
+                      <span className="text-sm font-medium text-gray-800">Ivan Mesaros</span>
                     </div>
                   </div>
                   <button className="text-gray-400 hover:text-gray-500 rounded-full">
@@ -319,7 +319,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage05} width={32} height={32} alt="User 05" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Martinez</span>">
+                      <span className="text-sm font-medium text-gray-800">Maria Martinez</span>
                     </div>
                   </div>
                   <button className="text-gray-400 hover:text-gray-500 rounded-full">
@@ -339,7 +339,7 @@ export default function MeetupPost() {
           <div className="bg-white p-5 shadow-sm rounded-xl lg:w-[18rem] xl:w-[20rem]">
             <div className="flex justify-between space-x-1 mb-5">
               <div className="text-sm text-gray-800 font-semibold">Invite Friends</div>
-              <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">
+              <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">
                 View All
               </a>
             </div>
@@ -351,7 +351,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage02} width={32} height={32} alt="User 02" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Masuno</span>">
+                      <span className="text-sm font-medium text-gray-800">Tara Masuno</span>
                     </div>
                   </div>
                   <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -366,7 +366,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage04} width={32} height={32} alt="User 04" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Huang</span>">
+                      <span className="text-sm font-medium text-gray-800">Ashley Huang</span>
                     </div>
                   </div>
                   <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -381,7 +381,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage06} width={32} height={32} alt="User 06" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 McNeail</span>">
+                      <span className="text-sm font-medium text-gray-800">Mary McNeail</span>
                     </div>
                   </div>
                   <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -396,7 +396,7 @@ export default function MeetupPost() {
                       <Image className="w-8 h-8 rounded-full" src={UserImage08} width={32} height={32} alt="User 08" />
                     </div>
                     <div className="truncate">
-                      <span className="className="text-sm font-medium text-gray-800 Sitwala</span>">
+                      <span className="text-sm font-medium text-gray-800">Carol Sitwala</span>
                     </div>
                   </div>
                   <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">

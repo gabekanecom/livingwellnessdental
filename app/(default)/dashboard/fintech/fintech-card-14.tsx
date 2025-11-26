@@ -120,13 +120,13 @@ export default function FintechCard14() {
 
   return (
     <div className="col-span-full bg-white shadow-sm rounded-xl">
-      <header className="className="px-5 py-4 border-b border-gray-100 ">
-        <h2 className="className="font-semibold text-gray-800 Trends</h2>">
+      <header className="px-5 py-4 border-b border-gray-100 ">
+        <h2 className="font-semibold text-gray-800">Market Trends</h2>
       </header>
       <div className="p-3">
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="className="table-auto w-full ">
+          <table className="table-auto w-full ">
             {/* Table header */}
             <thead className="text-xs uppercase text-gray-400 bg-gray-50 rounded-xs">
               <tr>
@@ -148,7 +148,7 @@ export default function FintechCard14() {
               </tr>
             </thead>
             {/* Table body */}
-            <tbody className="className="text-sm font-medium divide-y divide-gray-100 ">
+            <tbody className="text-sm font-medium divide-y divide-gray-100 ">
               {/* Row */}
               <tr>
                 <td className="p-2 whitespace-nowrap md:w-1/2">

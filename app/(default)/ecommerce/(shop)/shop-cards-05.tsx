@@ -17,7 +17,7 @@ export default function ShopCards05() {
             <h3 className="text-lg text-gray-800 font-semibold mb-1">Merchandise</h3>
           </div>
           <div>
-            <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+            <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@ export default function ShopCards05() {
             <h3 className="text-lg text-gray-800 font-semibold mb-1">Audiobooks</h3>
           </div>
           <div>
-            <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+            <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function ShopCards05() {
             <h3 className="text-lg text-gray-800 font-semibold mb-1">Design & Tech</h3>
           </div>
           <div>
-            <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+            <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@ export default function ShopCards05() {
             <h3 className="text-lg text-gray-800 font-semibold mb-1">Apps & Software</h3>
           </div>
           <div>
-            <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+            <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
           </div>
         </div>
       </div>

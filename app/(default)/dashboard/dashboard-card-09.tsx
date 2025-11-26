@@ -44,7 +44,7 @@ export default function DashboardCard09() {
   return(
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 VS Refunds</h2>">
+        <h2 className="font-semibold text-gray-800">Sales VS Refunds</h2>
         <Tooltip className="ml-2" size="lg">
           <div className="text-sm">Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</div>
         </Tooltip>

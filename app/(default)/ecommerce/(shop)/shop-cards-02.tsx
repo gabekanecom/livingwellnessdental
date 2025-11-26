@@ -41,7 +41,7 @@ export default function ShopCards02() {
                   </svg>
                   {/* Rate */}
                   <div className="text-sm font-medium whitespace-nowrap">
-                    <span>4.7</span> <span className="className="text-gray-400 ">
+                    <span>4.7</span> <span className="text-gray-400">(140 reviews)</span>
                   </div>
                 </div>
                 {/* Price */}
@@ -52,7 +52,7 @@ export default function ShopCards02() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function ShopCards02() {
                   </svg>
                   {/* Rate */}
                   <div className="text-sm font-medium whitespace-nowrap">
-                    <span>4.7</span> <span className="className="text-gray-400 ">
+                    <span>4.7</span> <span className="text-gray-400">(140 reviews)</span>
                   </div>
                 </div>
                 {/* Price */}
@@ -94,7 +94,7 @@ export default function ShopCards02() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@ export default function ShopCards02() {
                   </svg>
                   {/* Rate */}
                   <div className="text-sm font-medium whitespace-nowrap">
-                    <span>4.7</span> <span className="className="text-gray-400 ">
+                    <span>4.7</span> <span className="text-gray-400">(140 reviews)</span>
                   </div>
                 </div>
                 {/* Price */}
@@ -137,7 +137,7 @@ export default function ShopCards02() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ export default function ShopCards02() {
                   </svg>
                   {/* Rate */}
                   <div className="text-sm font-medium whitespace-nowrap">
-                    <span>4.7</span> <span className="className="text-gray-400 ">
+                    <span>4.7</span> <span className="text-gray-400">(140 reviews)</span>
                   </div>
                 </div>
                 {/* Price */}
@@ -178,7 +178,7 @@ export default function ShopCards02() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>

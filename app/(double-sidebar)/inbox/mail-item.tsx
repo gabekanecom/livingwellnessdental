@@ -22,7 +22,7 @@ export default function MailItem({ mail }: { mail: Mail }) {
               {open &&
                 <>
                   <div className="text-sm text-gray-400 hidden xl:block mx-1">·</div>
-                  <div className="className="text-xs ">
+                  <div className="text-xs text-gray-500">{mail.email}</div>
                 </>
               }
             </div>

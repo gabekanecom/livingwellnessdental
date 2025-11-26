@@ -38,8 +38,8 @@ export default function FintechCard03() {
 
   return(
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-sm rounded-xl">
-      <header className="className="px-5 py-4 border-b border-gray-100 ">
-        <h2 className="className="font-semibold text-gray-800 Flow</h2>">
+      <header className="px-5 py-4 border-b border-gray-100 ">
+        <h2 className="font-semibold text-gray-800">Cash Flow</h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}

@@ -56,8 +56,8 @@ export default function AnalyticsCard02() {
 
   return(
     <div className="flex flex-col col-span-full xl:col-span-4 bg-white shadow-sm rounded-xl">
-      <header className="className="px-5 py-4 border-b border-gray-100 ">
-        <h2 className="className="font-semibold text-gray-800 Users Right Now</h2>">
+      <header className="px-5 py-4 border-b border-gray-100 ">
+        <h2 className="font-semibold text-gray-800">Active Users Right Now</h2>
       </header>
       {/* Card content */}
       <div className="flex flex-col h-full">
@@ -72,7 +72,7 @@ export default function AnalyticsCard02() {
             {/* Vistors number */}
             <div>
               <div className="text-3xl font-bold text-gray-800 mr-2">347</div>
-              <div className="className="text-sm text-gray-500 visitors</div>">
+              <div className="text-sm text-gray-500">Live visitors</div>
             </div>
           </div>
         </div>
@@ -86,9 +86,9 @@ export default function AnalyticsCard02() {
         {/* Table */}
         <div className="grow px-5 pt-3 pb-1">
           <div className="overflow-x-auto">
-            <table className="className="table-auto w-full ">
+            <table className="table-auto w-full ">
               {/* Table header */}
-              <thead className="className="text-xs uppercase text-gray-400 ">
+              <thead className="text-xs uppercase text-gray-400">
                 <tr>
                   <th className="py-2">
                     <div className="font-semibold text-left">Top pages</div>
@@ -99,7 +99,7 @@ export default function AnalyticsCard02() {
                 </tr>
               </thead>
               {/* Table body */}
-              <tbody className="className="text-sm divide-y divide-gray-100 ">
+              <tbody className="text-sm divide-y divide-gray-100 ">
                 {/* Row */}
                 <tr>
                   <td className="py-2">
@@ -143,7 +143,7 @@ export default function AnalyticsCard02() {
 
         {/* Card footer */}
         <div className="text-right px-5 pb-4">
-          <Link className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Real-Time Report -&gt;</Link>
+          <Link className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Real-Time Report -&gt;</Link>
         </div>
       </div>
     </div>

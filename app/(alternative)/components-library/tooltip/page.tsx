@@ -32,7 +32,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 White</div>">
+                    <div className="text-sm font-medium text-gray-500">White</div>
                   </div>
                 </div>
 
@@ -43,7 +43,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs text-gray-200 whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 Dark</div>">
+                    <div className="text-sm font-medium text-gray-500">Dark</div>
                   </div>
                 </div>
 
@@ -54,7 +54,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs">Excepteur sint occaecat cupidata non proident, sunt in.</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 White</div>">
+                    <div className="text-sm font-medium text-gray-500">White</div>
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs text-gray-200">Excepteur sint occaecat cupidata non proident, sunt in.</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 Dark</div>">
+                    <div className="text-sm font-medium text-gray-500">Dark</div>
                   </div>
                 </div>
 
@@ -73,10 +73,10 @@ export default function TooltipLibrary() {
                   <div className="flex items-center space-x-2">
                     {/* Start */}
                     <Tooltip size="lg" bg="light">
-                      <div className="className="text-sm font-medium text-gray-500 sint occaecat cupidata non proident, sunt in.</div>">
+                      <div className="text-sm font-medium text-gray-500">Excepteur sint occaecat cupidata non proident, sunt in.</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 White</div>">
+                    <div className="text-sm font-medium text-gray-500">White</div>
                   </div>
                 </div>
 
@@ -87,7 +87,7 @@ export default function TooltipLibrary() {
                       <div className="text-sm font-medium text-gray-200">Excepteur sint occaecat cupidata non proident, sunt in.</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 Dark</div>">
+                    <div className="text-sm font-medium text-gray-500">Dark</div>
                   </div>
                 </div>
 
@@ -115,7 +115,7 @@ export default function TooltipLibrary() {
                       </div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 Dark</div>">
+                    <div className="text-sm font-medium text-gray-500">Dark</div>
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 ">
+                    <div className="text-sm font-medium text-gray-500">Top</div>
                   </div>
                 </div>
 
@@ -145,7 +145,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 ">
+                    <div className="text-sm font-medium text-gray-500">Bottom</div>
                   </div>
                 </div>
 
@@ -156,7 +156,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-500 ">
+                    <div className="text-sm font-medium text-gray-500">Left</div>
                   </div>
                 </div>
 
@@ -167,7 +167,7 @@ export default function TooltipLibrary() {
                       <div className="text-xs whitespace-nowrap">Just a tip</div>
                     </Tooltip>
                     {/* End */}
-                    <div className="className="text-sm font-medium text-gray-600 ">
+                    <div className="text-sm font-medium text-gray-600">Right</div>
                   </div>
                 </div>
 

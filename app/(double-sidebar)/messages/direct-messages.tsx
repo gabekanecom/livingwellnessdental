@@ -19,7 +19,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage01} width={32} height={32} alt="User 01" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Lamakani</span>">
+                <span className="text-sm font-medium text-gray-800">Dominik Lamakani</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -32,7 +32,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage02} width={32} height={32} alt="User 02" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Yanchev</span>">
+                <span className="text-sm font-medium text-gray-800">Tisha Yanchev</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -45,7 +45,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage03} width={32} height={32} alt="User 03" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Wierzy</span>">
+                <span className="text-sm font-medium text-gray-800">Jerzy Wierzy</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -58,7 +58,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage04} width={32} height={32} alt="User 04" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Przetocki</span>">
+                <span className="text-sm font-medium text-gray-800">Adrian Przetocki</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -73,7 +73,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage05} width={32} height={32} alt="User 05" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Lürwer</span>">
+                <span className="text-sm font-medium text-gray-800">Simona Lürwer</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -88,7 +88,7 @@ export default function DirectMessages() {
             <div className="flex items-center truncate">
               <Image className="w-8 h-8 rounded-full mr-2" src={UserImage06} width={32} height={32} alt="User 06" />
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Roszczewski</span>">
+                <span className="text-sm font-medium text-gray-800">Mary Roszczewski</span>
               </div>
             </div>
             <div className="flex items-center ml-2">

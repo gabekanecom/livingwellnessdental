@@ -25,7 +25,7 @@ export default function PaginationLibrary() {
             {/* Option 1 */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">Option 1</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <PaginationNumeric />
               </div>
             </div>
@@ -33,7 +33,7 @@ export default function PaginationLibrary() {
             {/* Option 2 */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">Option 2</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <PaginationClassic />
               </div>
             </div>
@@ -41,7 +41,7 @@ export default function PaginationLibrary() {
             {/* Option 3 */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">Option 3</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <PaginationNumeric02 />
               </div>
             </div>

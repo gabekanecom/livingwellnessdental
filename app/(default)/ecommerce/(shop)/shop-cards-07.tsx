@@ -83,7 +83,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -159,7 +159,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -244,7 +244,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -320,7 +320,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -396,7 +396,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -481,7 +481,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -557,7 +557,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -633,7 +633,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -709,7 +709,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -796,7 +796,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -872,7 +872,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -948,7 +948,7 @@ export default function ShopCards07() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>

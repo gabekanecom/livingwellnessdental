@@ -52,7 +52,7 @@ export default function ShopCards01() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -66,7 +66,7 @@ export default function ShopCards01() {
                 </div>
               </div>
               {/* Features list */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M7 11.674A1 1 0 0 1 7.739 10H8a1 1 0 0 1 1 1v1.699L14.034 8 9 3.302v1.699a1 1 0 0 1-1 1H2V8.27a1 1 0 1 1-2 0V6a2 2 0 0 1 2-2h5V2.153C7 .84 8.563.16 9.523 1.055l6.268 5.849a1.5 1.5 0 0 1 0 2.193l-6.267 5.849C8.565 15.84 7 15.16 7 13.849v-2.175Zm-1.278.878a.498.498 0 0 1 0 .896L4.2 14.2l-.752 1.521a.5.5 0 0 1-.896 0l-.752-1.52-1.521-.753a.498.498 0 0 1 0-.896l1.521-.752.752-1.52c.167-.342.728-.342.896 0L4.2 11.8l1.521.752ZM3.75 3a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z" />
@@ -95,7 +95,7 @@ export default function ShopCards01() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@ export default function ShopCards01() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -160,7 +160,7 @@ export default function ShopCards01() {
                 </div>
               </div>
               {/* Features list */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M7 11.674A1 1 0 0 1 7.739 10H8a1 1 0 0 1 1 1v1.699L14.034 8 9 3.302v1.699a1 1 0 0 1-1 1H2V8.27a1 1 0 1 1-2 0V6a2 2 0 0 1 2-2h5V2.153C7 .84 8.563.16 9.523 1.055l6.268 5.849a1.5 1.5 0 0 1 0 2.193l-6.267 5.849C8.565 15.84 7 15.16 7 13.849v-2.175Zm-1.278.878a.498.498 0 0 1 0 .896L4.2 14.2l-.752 1.521a.5.5 0 0 1-.896 0l-.752-1.52-1.521-.753a.498.498 0 0 1 0-.896l1.521-.752.752-1.52c.167-.342.728-.342.896 0L4.2 11.8l1.521.752ZM3.75 3a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z" />
@@ -189,7 +189,7 @@ export default function ShopCards01() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -240,7 +240,7 @@ export default function ShopCards01() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -254,7 +254,7 @@ export default function ShopCards01() {
                 </div>
               </div>
               {/* Features list */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M7 11.674A1 1 0 0 1 7.739 10H8a1 1 0 0 1 1 1v1.699L14.034 8 9 3.302v1.699a1 1 0 0 1-1 1H2V8.27a1 1 0 1 1-2 0V6a2 2 0 0 1 2-2h5V2.153C7 .84 8.563.16 9.523 1.055l6.268 5.849a1.5 1.5 0 0 1 0 2.193l-6.267 5.849C8.565 15.84 7 15.16 7 13.849v-2.175Zm-1.278.878a.498.498 0 0 1 0 .896L4.2 14.2l-.752 1.521a.5.5 0 0 1-.896 0l-.752-1.52-1.521-.753a.498.498 0 0 1 0-.896l1.521-.752.752-1.52c.167-.342.728-.342.896 0L4.2 11.8l1.521.752ZM3.75 3a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z" />
@@ -283,7 +283,7 @@ export default function ShopCards01() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>
@@ -334,7 +334,7 @@ export default function ShopCards01() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -348,7 +348,7 @@ export default function ShopCards01() {
                 </div>
               </div>
               {/* Features list */}
-              <ul className="className="text-sm space-y-2 mb-5 ">
+              <ul className="text-sm space-y-2 mb-5 ">
                 <li className="flex items-center">
                   <svg className="fill-current text-gray-400 shrink-0 mr-3" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M7 11.674A1 1 0 0 1 7.739 10H8a1 1 0 0 1 1 1v1.699L14.034 8 9 3.302v1.699a1 1 0 0 1-1 1H2V8.27a1 1 0 1 1-2 0V6a2 2 0 0 1 2-2h5V2.153C7 .84 8.563.16 9.523 1.055l6.268 5.849a1.5 1.5 0 0 1 0 2.193l-6.267 5.849C8.565 15.84 7 15.16 7 13.849v-2.175Zm-1.278.878a.498.498 0 0 1 0 .896L4.2 14.2l-.752 1.521a.5.5 0 0 1-.896 0l-.752-1.52-1.521-.753a.498.498 0 0 1 0-.896l1.521-.752.752-1.52c.167-.342.728-.342.896 0L4.2 11.8l1.521.752ZM3.75 3a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5Z" />
@@ -377,7 +377,7 @@ export default function ShopCards01() {
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now</a>
             </div>
           </div>
         </div>

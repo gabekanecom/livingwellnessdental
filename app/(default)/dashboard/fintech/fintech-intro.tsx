@@ -18,7 +18,7 @@ export default function FintechIntro() {
             {/* User info */}
             <div>
               <div className="mb-2">
-                Hey <strong className="className="font-medium text-gray-800 👋, this is your current balance:">
+                Hey <strong className="font-medium text-gray-800">Mark 👋</strong>, this is your current balance:
               </div>
               <div className="text-3xl font-bold text-green-500">$47,347.09</div>
             </div>

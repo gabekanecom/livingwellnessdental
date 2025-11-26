@@ -33,7 +33,7 @@ export default function ProfileSidebar() {
                   <div className="grow flex items-center truncate">
                     <Image className="w-8 h-8 rounded-full mr-2" src={ProfileImage} width={32} height={32} alt="Group 01" />
                     <div className="truncate">
-                      <span className="className="font-semibold text-gray-800 Inc.</span>">
+                      <span className="font-semibold text-gray-800">Acme Inc.</span>
                     </div>
                   </div>
                 </div>
@@ -53,7 +53,7 @@ export default function ProfileSidebar() {
               <label htmlFor="profile-search" className="sr-only">
                 Search
               </label>
-              <input id="profile-search" className="form-input w-full pl-9 bg-white type="search" placeholder="Search…" />
+              <input id="profile-search" className="form-input w-full pl-9 bg-white" type="search" placeholder="Search…" />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg
                   className="shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-3 mr-2"
@@ -78,7 +78,7 @@ export default function ProfileSidebar() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage08} width={32} height={32} alt="User 08" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 McNeail</span>">
+                        <span className="text-sm font-medium text-gray-800">Mary McNeail</span>
                       </div>
                     </div>
                   </button>
@@ -90,7 +90,7 @@ export default function ProfileSidebar() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage06} width={32} height={32} alt="User 06" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Roszczewski</span>">
+                        <span className="text-sm font-medium text-gray-800">Mary Roszczewski</span>
                       </div>
                     </div>
                   </button>
@@ -102,7 +102,7 @@ export default function ProfileSidebar() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage03} width={32} height={32} alt="User 03" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Wierzy</span>">
+                        <span className="text-sm font-medium text-gray-800">Jerzy Wierzy</span>
                       </div>
                     </div>
                   </button>
@@ -115,7 +115,7 @@ export default function ProfileSidebar() {
                         <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Yanchev</span>">
+                        <span className="text-sm font-medium text-gray-800">Tisha Yanchev</span>
                       </div>
                     </div>
                   </button>
@@ -128,7 +128,7 @@ export default function ProfileSidebar() {
                         <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Lürwer</span>">
+                        <span className="text-sm font-medium text-gray-800">Simona Lürwer</span>
                       </div>
                     </div>
                   </button>
@@ -140,7 +140,7 @@ export default function ProfileSidebar() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage04} width={32} height={32} alt="User 04" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Przetocki</span>">
+                        <span className="text-sm font-medium text-gray-800">Adrian Przetocki</span>
                       </div>
                     </div>
                   </button>
@@ -153,7 +153,7 @@ export default function ProfileSidebar() {
                         <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Halligan</span>">
+                        <span className="text-sm font-medium text-gray-800">Brian Halligan</span>
                       </div>
                     </div>
                   </button>

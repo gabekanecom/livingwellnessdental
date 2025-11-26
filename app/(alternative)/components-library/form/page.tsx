@@ -290,7 +290,7 @@ export default function FormLibrary() {
                 <div className="m-3">
                   {/* Start */}
                   <label className="flex items-center">
-                    <input type="checkbox" className="className="form-checkbox disabled:border-gray-200 disabled:bg-gray-100 disabled />">
+                    <input type="checkbox" className="form-checkbox disabled:border-gray-200 disabled:bg-gray-100" disabled />
                     <span className="text-sm ml-2">Disabled</span>
                   </label>
                   {/* End */}
@@ -323,7 +323,7 @@ export default function FormLibrary() {
                 <div className="m-3">
                   {/* Start */}
                   <label className="flex items-center">
-                    <input type="radio" name="radio-buttons" className="className="form-radio disabled:border-gray-200 disabled:bg-gray-100 disabled />">
+                    <input type="radio" name="radio-buttons" className="form-radio disabled:border-gray-200 disabled:bg-gray-100" disabled />
                     <span className="text-sm ml-2">Disabled</span>
                   </label>
                   {/* End */}

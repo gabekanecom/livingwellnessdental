@@ -28,15 +28,15 @@ export default function CustomersTable({ customers }: { customers: Customer[]}) 
   return (
     <div className="bg-white shadow-sm rounded-xl relative">
       <header className="px-5 py-4">
-        <h2 className="font-semibold text-gray-800 Customers <span className="text-gray-400 font-medium">248</span></h2>
+        <h2 className="font-semibold text-gray-800">All Customers <span className="text-gray-400 font-medium">248</span></h2>
       </header>
       <div>
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="className="table-auto w-full ">
+          <table className="table-auto w-full ">
             {/* Table header */}
-            <thead className="className="text-xs font-semibold uppercase text-gray-500 bg-gray-50 border-t border-b border-gray-100 ">
+            <thead className="text-xs font-semibold uppercase text-gray-500 bg-gray-50 border-t border-b border-gray-100 ">
               <tr>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                   <div className="flex items-center">
@@ -76,7 +76,7 @@ export default function CustomersTable({ customers }: { customers: Customer[]}) 
               </tr>
             </thead>
             {/* Table body */}
-            <tbody className="className="text-sm divide-y divide-gray-100 ">
+            <tbody className="text-sm divide-y divide-gray-100 ">
               {customers.map(customer => (
                 <CustomersTableItem
                   key={customer.id}

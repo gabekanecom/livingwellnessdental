@@ -11,7 +11,7 @@ export default function Channels() {
           <button className="flex items-center justify-between w-full p-2 rounded-sm" onClick={() => setFlyoutOpen(false)}>
             <div className="flex items-center">
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Leads</span>">
+                <span className="text-sm font-medium text-gray-800">#Leads</span>
               </div>
             </div>
             <div className="flex items-center ml-2">
@@ -23,7 +23,7 @@ export default function Channels() {
           <button className="flex items-center justify-between w-full p-2 rounded-sm" onClick={() => setFlyoutOpen(false)}>
             <div className="flex items-center truncate">
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Team</span>">
+                <span className="text-sm font-medium text-gray-800">#Team</span>
               </div>
             </div>
           </button>
@@ -32,7 +32,7 @@ export default function Channels() {
           <button className="flex items-center justify-between w-full p-2 rounded-sm" onClick={() => setFlyoutOpen(false)}>
             <div className="flex items-center truncate">
               <div className="truncate">
-                <span className="className="text-sm font-medium text-gray-800 Tips</span>">
+                <span className="text-sm font-medium text-gray-800">#Tips</span>
               </div>
             </div>
           </button>

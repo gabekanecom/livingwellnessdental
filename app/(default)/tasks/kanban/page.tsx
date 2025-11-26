@@ -30,14 +30,14 @@ export default function Kanban() {
         {/* Right: Actions */}
         <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
           {/* Add board button */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 Board</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Add Board</button>
 
         </div>
 
       </div>
 
       {/* Filters */}
-      <div className="className="mb-4 border-b border-gray-200 ">
+      <div className="mb-4 border-b border-gray-200">
         <ul className="text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
           <li className="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
             <Link className="text-violet-500 whitespace-nowrap" href="#0">View All</Link>

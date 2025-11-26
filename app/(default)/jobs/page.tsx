@@ -143,7 +143,7 @@ export default function Jobs() {
         </div>
 
         {/* Post a job button */}
-        <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 A Job</button>">
+        <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Post A Job</button>
 
       </div>
 
@@ -160,7 +160,7 @@ export default function Jobs() {
           <div className="mb-5">
             <form className="relative">
               <label htmlFor="search" className="sr-only">Search</label>
-              <input id="search" className="form-input w-full pl-9 bg-white type="search" placeholder="Search job title or keyword…" />
+              <input id="search" className="form-input w-full pl-9 bg-white" type="search" placeholder="Search job title or keyword…" />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg className="shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-3 mr-2" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />

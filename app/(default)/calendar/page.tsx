@@ -185,7 +185,7 @@ export default function Calendar() {
             <hr className="w-px h-full bg-gray-200 border-none mx-1" />
 
             {/* Create event button */}
-            <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 Event</button>">
+            <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Add Event</button>
 
           </div>
 
@@ -198,31 +198,31 @@ export default function Calendar() {
           <div className="mb-4 sm:mb-0 mr-2">
             <ul className="flex flex-wrap items-center -m-1">
               <li className="m-1">
-                <button className="className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500 ">
+                <button className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500">
                   <div className="w-1 h-3.5 bg-sky-500 shrink-0"></div>
                   <span className="ml-1.5">Acme Inc.</span>
                 </button>
               </li>
               <li className="m-1">
-                <button className="className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500 ">
+                <button className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500">
                   <div className="w-1 h-3.5 bg-green-500 shrink-0"></div>
                   <span className="ml-1.5">Life & Family</span>
                 </button>
               </li>
               <li className="m-1">
-                <button className="className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500 ">
+                <button className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500">
                   <div className="w-1 h-3.5 bg-violet-500 shrink-0"></div>
                   <span className="ml-1.5">Reservations</span>
                 </button>
               </li>
               <li className="m-1">
-                <button className="className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500 ">
+                <button className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500">
                   <div className="w-1 h-3.5 bg-red-500 shrink-0"></div>
                   <span className="ml-1.5">Events</span>
                 </button>
               </li>
               <li className="m-1">
-                <button className="className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500 ">
+                <button className="btn-sm bg-white border-gray-200 hover:border-gray-300 text-gray-500">
                   <div className="w-1 h-3.5 bg-yellow-500 shrink-0"></div>
                   <span className="ml-1.5">Misc</span>
                 </button>

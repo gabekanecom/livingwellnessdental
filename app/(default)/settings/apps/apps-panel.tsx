@@ -9,7 +9,7 @@ export default function AppsPanel() {
         {/* General */}
         <div className="mb-6">
           {/* Filters */}
-          <div className="className="mb-4 border-b border-gray-200 ">
+          <div className="mb-4 border-b border-gray-200">
             <ul className="text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
               <li className="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                 <a className="text-violet-500 whitespace-nowrap" href="#0">View All</a>
@@ -28,7 +28,7 @@ export default function AppsPanel() {
         </div>
 
         {/* Connected Apps cards */}
-        <section className="className="pb-6 border-b border-gray-200 ">
+        <section className="pb-6 border-b border-gray-200">
           <div className="grid grid-cols-12 gap-6">
             {/* Card 1 */}
             <div className="col-span-full xl:col-span-6 2xl:col-span-4 bg-white border border-gray-200 shadow-sm rounded-lg">
@@ -50,11 +50,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -94,11 +94,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -138,11 +138,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -182,11 +182,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -226,11 +226,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -270,11 +270,11 @@ export default function AppsPanel() {
                   <div className="flex flex-wrap justify-between items-center">
                     {/* Left side */}
                     <div className="flex space-x-3">
-                      <div className="className="flex items-center text-gray-400 ">
+                      <div className="flex items-center text-gray-400">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
                           <path d="M14.14 9.585a2.5 2.5 0 00-3.522 3.194c-.845.63-1.87.97-2.924.971a4.979 4.979 0 01-1.113-.135 4.436 4.436 0 01-1.343 1.682 6.91 6.91 0 006.9-1.165 2.5 2.5 0 002-4.547h.002zM10.125 2.188a2.5 2.5 0 10-.4 2.014 5.027 5.027 0 012.723 3.078c.148-.018.297-.028.446-.03a4.5 4.5 0 011.7.334 7.023 7.023 0 00-4.469-5.396zM4.663 10.5a2.49 2.49 0 00-1.932-1.234 4.624 4.624 0 01-.037-.516 4.97 4.97 0 011.348-3.391 4.456 4.456 0 01-.788-2.016A6.989 6.989 0 00.694 8.75c.004.391.04.781.11 1.166a2.5 2.5 0 103.86.584z" />
                         </svg>
-                        <div className="className="text-sm text-gray-500 ">
+                        <div className="text-sm text-gray-500">4.2K</div>
                       </div>
                       <div className="flex items-center text-yellow-500">
                         <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
@@ -316,7 +316,7 @@ export default function AppsPanel() {
                     {/* Left side */}
                     <div className="text-sm text-gray-500 italic">400+ Apps</div>
                     {/* Right side */}
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
                   </div>
                 </footer>
               </div>
@@ -336,7 +336,7 @@ export default function AppsPanel() {
                     {/* Left side */}
                     <div className="text-sm text-gray-500 italic">320+ Apps</div>
                     {/* Right side */}
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
                   </div>
                 </footer>
               </div>
@@ -356,7 +356,7 @@ export default function AppsPanel() {
                     {/* Left side */}
                     <div className="text-sm text-gray-500 italic">270+ Apps</div>
                     {/* Right side */}
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Explore -&gt;</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Explore -&gt;</a>
                   </div>
                 </footer>
               </div>

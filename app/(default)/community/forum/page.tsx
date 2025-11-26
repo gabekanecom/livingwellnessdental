@@ -43,10 +43,10 @@ export default function Forum() {
                 <nav className="inline-flex" role="navigation" aria-label="Navigation">
                   <ul className="flex justify-center">
                     <li className="ml-3 first:ml-0">
-                      <span className="className="btn bg-white border-gray-200 text-gray-300 Previous</span>">
+                      <span className="btn bg-white border-gray-200 text-gray-300">&lt;- Previous</span>
                     </li>
                     <li className="ml-3 first:ml-0">
-                      <a className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800 href="#0">Next -&gt;</a>
+                      <a className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800" href="#0">Next -&gt;</a>
                     </li>
                   </ul>
                 </nav>

@@ -22,7 +22,7 @@ export default function Product() {
         {/* Content */}
         <div>
           <div className="mb-3">
-            <Link className="text-sm font-medium text-violet-500 hover:text-violet-600 href="/ecommerce/shop/">&lt;- Back To Listing</Link>
+            <Link className="text-sm font-medium text-violet-500 hover:text-violet-600" href="/ecommerce/shop/">&lt;- Back To Listing</Link>
           </div>
           <header className="mb-4">
             {/* Title */}
@@ -80,7 +80,7 @@ export default function Product() {
                   </button>
                   <button>
                     <span className="sr-only">5 stars</span>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </button>
@@ -112,7 +112,7 @@ export default function Product() {
             </blockquote>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Reviews */}
           <div>
@@ -154,7 +154,7 @@ export default function Product() {
                         </button>
                         <button>
                           <span className="sr-only">5 stars</span>
-                          <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                          <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                             <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                           </svg>
                         </button>
@@ -250,7 +250,7 @@ export default function Product() {
                         </button>
                         <button>
                           <span className="sr-only">5 stars</span>
-                          <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                          <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                             <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                           </svg>
                         </button>
@@ -313,11 +313,11 @@ export default function Product() {
             </ul>
             {/* Load More */}
             <div className="text-center">
-              <button className="className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800 More Reviews</button>">
+              <button className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800">Load More Reviews</button>
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Related */}
           <div>
@@ -365,7 +365,7 @@ export default function Product() {
                         </button>
                         <button>
                           <span className="sr-only">5 stars</span>
-                          <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                          <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                             <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                           </svg>
                         </button>
@@ -373,7 +373,7 @@ export default function Product() {
                       {/* Rate */}
                       <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                     </div>
-                    <div className="className="text-gray-400 ">
+                    <div className="text-gray-400">·</div>
                     {/* Price */}
                     <div>
                       <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -423,7 +423,7 @@ export default function Product() {
                         </button>
                         <button>
                           <span className="sr-only">5 stars</span>
-                          <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                          <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                             <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                           </svg>
                         </button>
@@ -431,7 +431,7 @@ export default function Product() {
                       {/* Rate */}
                       <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                     </div>
-                    <div className="className="text-gray-400 ">
+                    <div className="text-gray-400">·</div>
                     {/* Price */}
                     <div>
                       <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -481,7 +481,7 @@ export default function Product() {
                         </button>
                         <button>
                           <span className="sr-only">5 stars</span>
-                          <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                          <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                             <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                           </svg>
                         </button>
@@ -489,7 +489,7 @@ export default function Product() {
                       {/* Rate */}
                       <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                     </div>
-                    <div className="className="text-gray-400 ">
+                    <div className="text-gray-400">·</div>
                     {/* Price */}
                     <div>
                       <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -500,11 +500,11 @@ export default function Product() {
             </ul>
             {/* Load More */}
             <div className="text-center">
-              <button className="className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800 More Stuff</button>">
+              <button className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800">Load More Stuff</button>
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
         </div>
 
@@ -516,7 +516,7 @@ export default function Product() {
               <li>
                 <button className="w-full h-full text-left py-3 px-4 rounded-lg bg-white border border-gray-200 hover:border-gray-300 shadow-sm transition">
                   <div className="flex flex-wrap items-center justify-between mb-0.5">
-                    <span className="className="font-semibold text-gray-800 ">
+                    <span className="font-semibold text-gray-800">Standard</span>
                     <span className="font-medium text-green-600">$39.00</span>
                   </div>
                   <div className="text-sm">Lorem ipsum dolor sit amet elit sed do eiusmod.</div>
@@ -525,7 +525,7 @@ export default function Product() {
               <li>
                 <button className="w-full h-full text-left py-3 px-4 rounded-lg bg-white border-2 border-violet-400 shadow-sm transition">
                   <div className="flex flex-wrap items-center justify-between mb-0.5">
-                    <span className="font-semibold text-gray-800 <span className="text-xs italic text-violet-500 align-top">Best Value</span></span>
+                    <span className="font-semibold text-gray-800">Premium <span className="text-xs italic text-violet-500 align-top">Best Value</span></span>
                     <span className="font-medium text-green-600">$69.00</span>
                   </div>
                   <div className="text-sm">Lorem ipsum dolor sit amet elit sed do eiusmod.</div>
@@ -534,7 +534,7 @@ export default function Product() {
               <li>
                 <button className="w-full h-full text-left py-3 px-4 rounded-lg bg-white border border-gray-200 hover:border-gray-300 shadow-sm transition">
                   <div className="flex flex-wrap items-center justify-between mb-0.5">
-                    <span className="className="font-semibold text-gray-800 ">
+                    <span className="font-semibold text-gray-800">Enterprise</span>
                     <span className="font-medium text-green-600">$89.00</span>
                   </div>
                   <div className="text-sm">Lorem ipsum dolor sit amet elit sed do eiusmod.</div>
@@ -542,7 +542,7 @@ export default function Product() {
               </li>
             </ul>
             <div className="mb-4">
-              <a className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Buy Now - $69.00</a>
+              <a className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Buy Now - $69.00</a>
             </div>
             <div className="text-xs text-gray-500 italic text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do <a className="underline hover:no-underline" href="#0">Terms</a>.</div>
           </div>

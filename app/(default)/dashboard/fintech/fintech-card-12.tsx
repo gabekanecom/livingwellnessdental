@@ -58,7 +58,7 @@ export default function FintechCard12() {
       <div className="px-5 pt-5">
         <header>
           <h3 className="text-xs font-semibold text-gray-500 uppercase mb-1">
-            <span className="className="text-gray-800 - Twitter Inc.">
+            <span className="text-gray-800">TWTR - Twitter Inc.</span>
           </h3>
           <div className="text-2xl font-bold text-gray-800 mb-1">$43.07</div>
           <div className="text-sm">

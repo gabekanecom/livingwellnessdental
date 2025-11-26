@@ -19,7 +19,7 @@ export default function NotificationsPanel() {
         <section>
           <h3 className="text-xl leading-snug text-gray-800 font-bold mb-1">General</h3>
           <ul>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Comments and replies</div>
@@ -37,7 +37,7 @@ export default function NotificationsPanel() {
                 </div>
               </div>
             </li>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Messages</div>
@@ -55,7 +55,7 @@ export default function NotificationsPanel() {
                 </div>
               </div>
             </li>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Mentions</div>
@@ -80,7 +80,7 @@ export default function NotificationsPanel() {
         <section>
           <h3 className="text-xl leading-snug text-gray-800 font-bold mb-1">Shares</h3>
           <ul>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Shares of my content</div>
@@ -91,7 +91,7 @@ export default function NotificationsPanel() {
                 <button className="btn-sm border-gray-200 hover:border-gray-300 shadow-sm">Manage</button>
               </div>
             </li>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Team invites</div>
@@ -102,7 +102,7 @@ export default function NotificationsPanel() {
                 <button className="btn-sm border-gray-200 hover:border-gray-300 shadow-sm">Manage</button>
               </div>
             </li>
-            <li className="className="flex justify-between items-center py-3 border-b border-gray-200 ">
+            <li className="flex justify-between items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div>
                 <div className="text-gray-800 font-semibold">Smart connection</div>
@@ -120,9 +120,9 @@ export default function NotificationsPanel() {
 
       {/* Panel footer */}
       <footer>
-        <div className="className="flex flex-col px-6 py-5 border-t border-gray-200 ">
+        <div className="flex flex-col px-6 py-5 border-t border-gray-200">
           <div className="flex self-end">
-            <button className="className="btn border-gray-200 hover:border-gray-300 text-gray-800 ">
+            <button className="btn border-gray-200 hover:border-gray-300 text-gray-800">Cancel</button>
             <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 ml-3">Save Changes</button>
           </div>
         </div>

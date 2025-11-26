@@ -29,7 +29,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   <div className="flex items-center">
                     <svg className="mr-2 fill-current" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.686 5.708 10.291.313c-.4-.4-.999-.4-1.399 0s-.4 1 0 1.399l.6.6-6.794 3.696-1-1C1.299 4.61.7 4.61.3 5.009c-.4.4-.4 1 0 1.4l1.498 1.498 2.398 2.398L.6 14.001 2 15.4l3.696-3.697L9.692 15.7c.5.5 1.199.2 1.398 0 .4-.4.4-1 0-1.4l-.999-.998 3.697-6.695.6.6c.599.6 1.199.2 1.398 0 .3-.4.3-1.1-.1-1.499Zm-7.193 6.095L4.196 7.507l6.695-3.697 1.298 1.299-3.696 6.694Z" />
@@ -74,7 +74,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   ekuplu89
                 </a>
               </div>
@@ -114,7 +114,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   katemerlu
                 </a>
               </div>
@@ -156,7 +156,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   markusj
                 </a>
               </div>
@@ -198,7 +198,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   davidp1
                 </a>
               </div>
@@ -240,7 +240,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   crypto.io
                 </a>
               </div>
@@ -268,7 +268,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   sophiestar
                 </a>
               </div>
@@ -310,7 +310,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   molliehacks
                 </a>
               </div>
@@ -350,7 +350,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   davidp1
                 </a>
               </div>
@@ -390,7 +390,7 @@ export default function ForumEntries() {
             {/* Footer */}
             <footer className="flex flex-wrap text-sm">
               <div className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                   elenmisk
                 </a>
               </div>

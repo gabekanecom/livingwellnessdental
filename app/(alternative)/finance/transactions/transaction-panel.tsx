@@ -91,11 +91,11 @@ export default function TransactionPanel() {
                 </div>
                 {/* Divider */}
                 <div className="flex justify-between items-center" aria-hidden="true">
-                  <svg className="fill-white width="20" height="20"xmlns="http://www.w3.org/2000/svg">
+                  <svg className="fill-white" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 20c5.523 0 10-4.477 10-10S5.523 0 0 0h20v20H0Z" />
                   </svg>
                   <div className="grow w-full h-5 bg-white flex flex-col justify-center">
-                    <div className="className="h-px w-full border-t border-dashed border-gray-200 />">
+                    <div className="h-px w-full border-t border-dashed border-gray-200" />
                   </div>
                   <svg className="fill-white rotate-180" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 20c5.523 0 10-4.477 10-10S5.523 0 0 0h20v20H0Z" />
@@ -147,7 +147,7 @@ export default function TransactionPanel() {
               {/* Download / Report */}
               <div className="flex items-center space-x-3 mt-6">
                 <div className="w-1/2">
-                  <button className="className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800 ">
+                  <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">
                     <svg className="fill-current text-gray-400 shrink-0 rotate-180" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8 4c-.3 0-.5.1-.7.3L1.6 10 3 11.4l4-4V16h2V7.4l4 4 1.4-1.4-5.7-5.7C8.5 4.1 8.3 4 8 4ZM1 2h14V0H1v2Z" />
                     </svg>

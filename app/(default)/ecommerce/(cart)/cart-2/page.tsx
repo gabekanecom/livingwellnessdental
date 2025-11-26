@@ -17,11 +17,11 @@ export default function Cart2() {
           <div className="mb-6 lg:mb-0">
             <div className="mb-3">
               <div className="flex text-sm font-medium text-gray-400 space-x-2">
-                <span className="className="text-gray-500 ">
+                <span className="text-gray-500">Cart</span>
                 <span>-&gt;</span>
                 <span className="text-violet-500">Payment</span>
                 <span>-&gt;</span>
-                <span className="className="text-gray-500 ">
+                <span className="text-gray-500">Confirm</span>
               </div>
             </div>
             <header className="mb-2">
@@ -46,11 +46,11 @@ export default function Cart2() {
                 <div>
                   <div className="text-gray-800 font-semibold mb-2">Order Summary</div>
                   <ul className="mb-4">
-                    <li className="className="text-sm w-full flex justify-between py-3 border-b border-gray-200 ">
+                    <li className="text-sm w-full flex justify-between py-3 border-b border-gray-200">
                       <div>Subtotal</div>
-                      <div className="className="font-medium text-gray-800 ">
+                      <div className="font-medium text-gray-800">$205</div>
                     </li>
-                    <li className="className="text-sm w-full flex justify-between py-3 border-b border-gray-200 ">
+                    <li className="text-sm w-full flex justify-between py-3 border-b border-gray-200">
                       <div>Total due (including taxes)</div>
                       <div className="font-medium text-green-600">$253</div>
                     </li>
@@ -108,7 +108,7 @@ export default function Cart2() {
 
                 <div className="mt-6">
                   <div className="mb-4">
-                    <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 $253.00</button>">
+                    <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">Pay - $253.00</button>
                   </div>
                   <div className="text-xs text-gray-500 italic text-center">You'll be charged $253, including $48 for VAT in Italy</div>
                 </div>

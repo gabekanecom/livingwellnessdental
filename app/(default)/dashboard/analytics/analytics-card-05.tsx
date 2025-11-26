@@ -3,8 +3,8 @@ import Link from 'next/link'
 export default function AnalyticsCard05() {
   return(
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-sm rounded-xl">
-      <header className="className="px-5 py-4 border-b border-gray-100 ">
-        <h2 className="className="font-semibold text-gray-800 Channels</h2>">
+      <header className="px-5 py-4 border-b border-gray-100 ">
+        <h2 className="font-semibold text-gray-800">Top Channels</h2>
       </header>
       <div className="grow p-3">
         <div className="flex flex-col h-full">
@@ -83,8 +83,8 @@ export default function AnalyticsCard05() {
             </ul>
           </div>
           {/* Card footer */}
-          <div className="className="text-center pt-4 pb-1 border-t border-gray-100 ">
-            <Link className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Channels Report -&gt;</Link>
+          <div className="text-center pt-4 pb-1 border-t border-gray-100 ">
+            <Link className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Channels Report -&gt;</Link>
           </div>
         </div>
       </div>

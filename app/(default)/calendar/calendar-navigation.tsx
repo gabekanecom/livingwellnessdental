@@ -27,7 +27,7 @@ export default function CalendarNavigation() {
         onClick={() => { setCurrentMonth(currentMonth - 1); renderDays(); }}
       >
         <span className="sr-only">Previous month</span><wbr />
-        <svg className="fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+        <svg className="fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
           <path d="M9.4 13.4l1.4-1.4-4-4 4-4-1.4-1.4L4 8z" />
         </svg>
       </button>
@@ -39,7 +39,7 @@ export default function CalendarNavigation() {
         onClick={() => { setCurrentMonth(currentMonth + 1); renderDays(); }}
       >
         <span className="sr-only">Next month</span><wbr />
-        <svg className="fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+        <svg className="fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
           <path d="M6.6 13.4L5.2 12l4-4-4-4 1.4-1.4L12 8z" />
         </svg>
       </button>    

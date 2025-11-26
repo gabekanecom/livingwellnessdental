@@ -30,7 +30,7 @@ export default function InboxSidebar() {
                 <ChannelMenu />
                 {/* Edit button */}
                 <button className="p-1.5 shrink-0 rounded-lg border border-gray-200 hover:border-gray-300 shadow-sm ml-2">
-                  <svg className="fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+                  <svg className="fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M11.7.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM4.6 14H2v-2.6l6-6L10.6 8l-6 6zM12 6.6L9.4 4 11 2.4 13.6 5 12 6.6z" />
                   </svg>
                 </button>
@@ -44,7 +44,7 @@ export default function InboxSidebar() {
               <label htmlFor="inbox-search" className="sr-only">
                 Search
               </label>
-              <input id="inbox-search" className="form-input w-full pl-9 bg-white type="search" placeholder="Search…" />
+              <input id="inbox-search" className="form-input w-full pl-9 bg-white" type="search" placeholder="Search…" />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg
                   className="shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-3 mr-2"
@@ -60,7 +60,7 @@ export default function InboxSidebar() {
             </form>
             {/* Tabs */}
             <div className="relative mt-4">
-              <div className="absolute bottom-0 w-full h-px bg-gray-200 aria-hidden="true"></div>
+              <div className="absolute bottom-0 w-full h-px bg-gray-200" aria-hidden="true"></div>
               <ul className="relative text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
                 <li className="mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                   <a className="block pb-3 text-violet-500 whitespace-nowrap border-b-2 border-violet-500" href="#0">
@@ -89,7 +89,7 @@ export default function InboxSidebar() {
                     <div className="grow truncate">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="truncate">
-                          <span className="className="text-sm font-semibold text-gray-800 Lamakani</span>">
+                          <span className="text-sm font-semibold text-gray-800">Dominik Lamakani</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium">4 Aug</div>
                       </div>
@@ -104,7 +104,7 @@ export default function InboxSidebar() {
                     <div className="grow truncate">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="truncate">
-                          <span className="className="text-sm font-semibold text-gray-800 Lürwer</span>">
+                          <span className="text-sm font-semibold text-gray-800">Simona Lürwer</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium">4 Aug</div>
                       </div>
@@ -119,7 +119,7 @@ export default function InboxSidebar() {
                     <div className="grow truncate">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="truncate">
-                          <span className="className="text-sm font-semibold text-gray-800 Roszczewski</span>">
+                          <span className="text-sm font-semibold text-gray-800">Mary Roszczewski</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium">1 Aug</div>
                       </div>
@@ -134,7 +134,7 @@ export default function InboxSidebar() {
                     <div className="grow truncate">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="truncate">
-                          <span className="className="text-sm font-semibold text-gray-800 Przetocki</span>">
+                          <span className="text-sm font-semibold text-gray-800">Adrian Przetocki</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium">1 Aug</div>
                       </div>
@@ -149,7 +149,7 @@ export default function InboxSidebar() {
                     <div className="grow truncate">
                       <div className="flex items-center justify-between mb-1.5">
                         <div className="truncate">
-                          <span className="className="text-sm font-semibold text-gray-800 Yanchev</span>">
+                          <span className="text-sm font-semibold text-gray-800">Tisha Yanchev</span>
                         </div>
                         <div className="text-xs text-gray-500 font-medium">1 Aug</div>
                       </div>

@@ -30,11 +30,11 @@ export default function Task02() {
             <div className="text-sm text-yellow-600">Mar 27</div>
           </div>
           {/* Replies button */}
-          <button className="flex items-center text-gray-400 hover:text-violet-500  ml-3">
+          <button className="flex items-center text-gray-400 hover:text-violet-500 ml-3">
             <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
               <path d="M8 0C3.6 0 0 3.1 0 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L8.9 12H8c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z" />
             </svg>
-            <div className="className="text-sm text-gray-500 ">
+            <div className="text-sm text-gray-500">12</div>
           </button>
           {/* Attach button */}
           <button className="text-gray-400 hover:text-violet-500  ml-3">

@@ -39,7 +39,7 @@ export default function InvoicesTableItem({ invoice, onCheckboxChange, isSelecte
         <div className={`inline-flex font-medium rounded-full text-center px-2.5 py-0.5 ${statusColor(invoice.status)}`}>{invoice.status}</div>
       </td >
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-        <div className="className="font-medium text-gray-800 ">
+        <div className="font-medium text-gray-800">{invoice.customer}</div>
       </td>
       <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
         <div>{invoice.issueddate}</div>

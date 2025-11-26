@@ -45,7 +45,7 @@ export default function OrdersTableItem({ order, onCheckboxChange, isSelected }:
           <div>{order.date}</div>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
-          <div className="className="font-medium text-gray-800 ">
+          <div className="font-medium text-gray-800">{order.customer}</div>
         </td>
         <td className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
           <div className="text-left font-medium text-green-600">{order.total}</div>

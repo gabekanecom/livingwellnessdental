@@ -1,0 +1,498 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model
+model User {
+  id                   String               @id @default(cuid())
+  name                 String
+  email                String               @unique
+  password             String?
+  avatar               String?
+  phone                String?
+  jobTitle             String?
+  isActive             Boolean              @default(true)
+  emailVerified        DateTime?
+  lastLoginAt          DateTime?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  wikiArticles         WikiArticle[]
+  wikiArticleVersions  WikiArticleVersion[]
+  createdCourses       Course[]             @relation("CourseCreator")
+  enrollments          Enrollment[]
+  locations            UserLocation[]
+  userRoles            UserRole[]
+  userPermissions      UserPermission[]
+  assignedRoles        UserRole[]           @relation("RoleAssigner")
+  grantedPermissions   UserPermission[]     @relation("PermissionGranter")
+}
+
+// Dental Locations
+model Location {
+  id          String         @id @default(cuid())
+  name        String
+  code        String         @unique
+  address     String?
+  city        String?
+  state       String?
+  zipCode     String?
+  phone       String?
+  email       String?
+  timezone    String         @default("America/New_York")
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  users       UserLocation[]
+  userRoles   UserRole[]
+
+  @@index([isActive])
+}
+
+// User-Location Assignment (users can work at multiple locations)
+model UserLocation {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  locationId String
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  isPrimary  Boolean  @default(false)
+  isActive   Boolean  @default(true)
+  startDate  DateTime @default(now())
+  endDate    DateTime?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([userId, locationId])
+  @@index([userId])
+  @@index([locationId])
+}
+
+// User Types (Super Admin, Corporate, Location Staff)
+model UserType {
+  id           String   @id
+  name         String
+  description  String?
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  roles        Role[]
+}
+
+// Roles within User Types
+model Role {
+  id           String           @id
+  name         String
+  description  String?
+  userTypeId   String
+  userType     UserType         @relation(fields: [userTypeId], references: [id])
+  dataScope    DataScope        @default(LOCATION)
+  isDefault    Boolean          @default(false)
+  isProtected  Boolean          @default(false)
+  isActive     Boolean          @default(true)
+  displayOrder Int              @default(0)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  permissions  RolePermission[]
+  userRoles    UserRole[]
+
+  @@index([userTypeId])
+  @@index([isActive])
+}
+
+// Permissions
+model Permission {
+  id              String           @id
+  name            String
+  description     String?
+  category        String?
+  isActive        Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  rolePermissions RolePermission[]
+  userPermissions UserPermission[]
+
+  @@index([category])
+}
+
+// Role-Permission Assignment
+model RolePermission {
+  id           String     @id @default(cuid())
+  roleId       String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  granted      Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+
+  @@unique([roleId, permissionId])
+  @@index([roleId])
+  @@index([permissionId])
+}
+
+// User Role Assignment (can be location-specific)
+model UserRole {
+  id           String    @id @default(cuid())
+  userId       String
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  roleId       String
+  role         Role      @relation(fields: [roleId], references: [id])
+  locationId   String?
+  location     Location? @relation(fields: [locationId], references: [id])
+  isActive     Boolean   @default(true)
+  expiresAt    DateTime?
+  assignedById String?
+  assignedBy   User?     @relation("RoleAssigner", fields: [assignedById], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([userId, roleId, locationId])
+  @@index([userId])
+  @@index([roleId])
+  @@index([locationId])
+}
+
+// User Permission Overrides
+model UserPermission {
+  id           String     @id @default(cuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  granted      Boolean
+  reason       String?
+  grantedById  String?
+  grantedBy    User?      @relation("PermissionGranter", fields: [grantedById], references: [id])
+  expiresAt    DateTime?
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, permissionId])
+  @@index([userId])
+  @@index([permissionId])
+}
+
+// Data Scope Enum
+enum DataScope {
+  SELF
+  LOCATION
+  ALL_LOCATIONS
+  GLOBAL
+}
+
+// Wiki Models
+model WikiCategory {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String?
+  icon        String?
+  parentId    String?
+  parent      WikiCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    WikiCategory[] @relation("CategoryHierarchy")
+  articles    WikiArticle[]
+  order       Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model WikiArticle {
+  id           String              @id @default(cuid())
+  title        String
+  slug         String              @unique
+  content      String              @db.Text
+  contentPlain String              @db.Text
+  excerpt      String?
+  coverImage   String?
+  status       ArticleStatus       @default(DRAFT)
+  categoryId   String
+  category     WikiCategory        @relation(fields: [categoryId], references: [id])
+  authorId     String
+  author       User                @relation(fields: [authorId], references: [id])
+  tags         WikiTag[]
+  versions     WikiArticleVersion[]
+  views        Int                 @default(0)
+  order        Int                 @default(0)
+  publishedAt  DateTime?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  @@index([categoryId])
+  @@index([authorId])
+  @@index([status])
+}
+
+model WikiArticleVersion {
+  id         String      @id @default(cuid())
+  articleId  String
+  article    WikiArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  title      String
+  content    String      @db.Text
+  authorId   String
+  author     User        @relation(fields: [authorId], references: [id])
+  createdAt  DateTime    @default(now())
+
+  @@index([articleId])
+}
+
+model WikiTag {
+  id       String        @id @default(cuid())
+  name     String        @unique
+  slug     String        @unique
+  articles WikiArticle[]
+}
+
+// WikiEmbedding model - requires pgvector extension (uncomment when using production DB with pgvector)
+// model WikiEmbedding {
+//   id         String   @id @default(cuid())
+//   articleId  String   @unique
+//   embedding  Unsupported("vector(1536)")
+//   chunkIndex Int      @default(0)
+//   chunkText  String   @db.Text
+//   createdAt  DateTime @default(now())
+//   updatedAt  DateTime @updatedAt
+//
+//   @@index([articleId])
+// }
+
+model WikiSearchLog {
+  id        String   @id @default(cuid())
+  query     String
+  userId    String?
+  results   Int
+  createdAt DateTime @default(now())
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+// LMS Models
+model CourseCategory {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  description String?
+  icon        String?
+  color       String   @default("#6366f1")
+  courses     Course[]
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Course {
+  id                 String         @id @default(cuid())
+  title              String
+  slug               String         @unique
+  description        String?        @db.Text
+  shortDescription   String?
+  coverImage         String?
+  difficulty         CourseDifficulty @default(BEGINNER)
+  duration           Int?
+  learningObjectives String[]
+  prerequisites      String[]
+  tags               String[]
+  categoryId         String?
+  category           CourseCategory? @relation(fields: [categoryId], references: [id])
+  modules            CourseModule[]
+  enrollments        Enrollment[]
+  isPublished        Boolean        @default(false)
+  isFeatured         Boolean        @default(false)
+  rating             Float          @default(0)
+  ratingCount        Int            @default(0)
+  createdById        String?
+  createdBy          User?          @relation("CourseCreator", fields: [createdById], references: [id])
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+
+  @@index([categoryId])
+  @@index([isPublished])
+  @@index([createdById])
+}
+
+model CourseModule {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  order       Int      @default(0)
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons     Lesson[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([courseId])
+}
+
+model Lesson {
+  id             String           @id @default(cuid())
+  title          String
+  content        String?          @db.Text
+  lessonType     LessonType       @default(TEXT)
+  duration       Int?
+  order          Int              @default(0)
+  moduleId       String
+  module         CourseModule     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  quizzes        Quiz[]
+  lessonProgress LessonProgress[]
+  videoUrl       String?
+  attachments    String[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([moduleId])
+}
+
+model Enrollment {
+  id              String           @id @default(cuid())
+  userId          String
+  user            User             @relation(fields: [userId], references: [id])
+  courseId        String
+  course          Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  status          EnrollmentStatus @default(ACTIVE)
+  progress        Float            @default(0)
+  completedAt     DateTime?
+  lastAccessedAt  DateTime?
+  lessonProgress  LessonProgress[]
+  quizAttempts    QuizAttempt[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@unique([userId, courseId])
+  @@index([userId])
+  @@index([courseId])
+}
+
+model LessonProgress {
+  id           String     @id @default(cuid())
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  lessonId     String
+  lesson       Lesson     @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  isCompleted  Boolean    @default(false)
+  completedAt  DateTime?
+  timeSpent    Int        @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([enrollmentId, lessonId])
+  @@index([enrollmentId])
+  @@index([lessonId])
+}
+
+model Quiz {
+  id            String        @id @default(cuid())
+  title         String
+  description   String?
+  lessonId      String
+  lesson        Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions     QuizQuestion[]
+  passingScore  Float         @default(70)
+  timeLimit     Int?
+  attempts      QuizAttempt[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([lessonId])
+}
+
+model QuizQuestion {
+  id           String             @id @default(cuid())
+  quizId       String
+  quiz         Quiz               @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  question     String             @db.Text
+  questionType QuestionType       @default(MULTIPLE_CHOICE)
+  explanation  String?            @db.Text
+  order        Int                @default(0)
+  points       Int                @default(1)
+  answers      QuizAnswer[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  @@index([quizId])
+}
+
+model QuizAnswer {
+  id         String       @id @default(cuid())
+  questionId String
+  question   QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  text       String
+  isCorrect  Boolean      @default(false)
+  order      Int          @default(0)
+  createdAt  DateTime     @default(now())
+
+  @@index([questionId])
+}
+
+model QuizAttempt {
+  id           String     @id @default(cuid())
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  quizId       String
+  quiz         Quiz       @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  score        Float
+  passed       Boolean
+  answers      Json
+  startedAt    DateTime   @default(now())
+  completedAt  DateTime?
+  createdAt    DateTime   @default(now())
+
+  @@index([enrollmentId])
+  @@index([quizId])
+}
+
+model AICourseGeneration {
+  id            String   @id @default(cuid())
+  courseId      String?
+  generationType String
+  inputData     Json?
+  outputData    Json?
+  tokensUsed    Int      @default(0)
+  model         String?
+  status        String   @default("pending")
+  error         String?
+  userId        String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum CourseDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum LessonType {
+  TEXT
+  VIDEO
+  INTERACTIVE
+  QUIZ
+  ASSIGNMENT
+  DOCUMENT
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  PAUSED
+  CANCELLED
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+  ESSAY
+}

@@ -30,7 +30,7 @@ export default function Faqs() {
           </div>
 
           {/* Filters */}
-          <div className="className="mb-8 border-b border-gray-200 ">
+          <div className="mb-8 border-b border-gray-200">
             <ul className="text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
               <li className="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                 <a className="text-violet-500 whitespace-nowrap" href="#0">Popular</a>
@@ -54,7 +54,7 @@ export default function Faqs() {
           <div>
             <h2 className="text-2xl text-gray-800 font-bold mb-4">Popular Questions</h2>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -68,16 +68,16 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">General</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">General</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Marketing</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Marketing</a>
                   </li>
                 </ul>
               </div>
             </article>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -91,16 +91,16 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Development</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Development</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Acessibility</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Acessibility</a>
                   </li>
                 </ul>
               </div>
             </article>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -114,16 +114,16 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Development</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Development</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Plans</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Plans</a>
                   </li>
                 </ul>
               </div>
             </article>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -137,16 +137,16 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Development</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Development</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Account</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Account</a>
                   </li>
                 </ul>
               </div>
             </article>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -160,16 +160,16 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">General</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">General</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Accessibility</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Accessibility</a>
                   </li>
                 </ul>
               </div>
             </article>
             {/* Post */}
-            <article className="className="py-4 border-b border-gray-200 ">
+            <article className="py-4 border-b border-gray-200">
               <header className="flex items-start mb-2">
                 <div className="mt-2 mr-3">
                   <svg className="shrink-0 fill-current" width="16" height="16" viewBox="0 0 16 16">
@@ -183,10 +183,10 @@ export default function Faqs() {
                 <div className="mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam, quis nostrud exercitation ullamco.</div>
                 <ul className="flex flex-wrap">
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Marketing</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Marketing</a>
                   </li>
                   <li className="flex items-center after:block after:content-['·'] last:after:content-[''] after:text-sm after:text-gray-400 after:px-2">
-                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600 href="#0">Plans</a>
+                    <a className="text-sm font-medium text-violet-500 hover:text-violet-600" href="#0">Plans</a>
                   </li>
                 </ul>
               </div>
@@ -196,7 +196,7 @@ export default function Faqs() {
           {/* Pagination */}
           <div className="mt-6">
             <div className="flex justify-end">
-              <a className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800 href="#0">See All Questions -&gt;</a>
+              <a className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800" href="#0">See All Questions -&gt;</a>
             </div>
           </div>
 

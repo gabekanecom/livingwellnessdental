@@ -54,7 +54,7 @@ export default function MessagesChat() {
             <Image className="rounded-lg shadow-sm mb-1" src={ChatImage} width={240} height={180} alt="Chat" />
             <button className="p-1.5 rounded-full border border-gray-200 ml-4 hover:bg-white transition">
               <span className="sr-only">Download</span>
-              <svg className="shrink-0 fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+              <svg className="shrink-0 fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
                 <path d="M15 15H1a1 1 0 01-1-1V2a1 1 0 011-1h4v2H2v10h12V3h-3V1h4a1 1 0 011 1v12a1 1 0 01-1 1zM9 7h3l-4 4-4-4h3V1h2v6z" />
               </svg>
             </button>
@@ -118,7 +118,7 @@ export default function MessagesChat() {
         <Image className="rounded-full mr-4" src={User01} width={40} height={40} alt="User 01" />
         <div>
           <div className="text-sm bg-gray-200 text-gray-800 p-3 rounded-lg rounded-tl-none mb-1">
-            <svg className="fill-current text-gray-400 viewBox="0 0 15 3" width="15" height="3">
+            <svg className="fill-current text-gray-400" viewBox="0 0 15 3" width="15" height="3">
               <circle cx="1.5" cy="1.5" r="1.5">
                 <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" />
               </circle>

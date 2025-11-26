@@ -24,7 +24,7 @@ export const InvoicesProperties = () => {
       case 'Overdue':
         return 'bg-red-500/20 text-red-700';
       default:
-        return 'bg-gray-100 text-gray-500 
+        return 'bg-gray-100 text-gray-500';
     }
   };
 

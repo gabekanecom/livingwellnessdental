@@ -11,19 +11,19 @@ export default function ShopSidebar() {
                 <a className="text-violet-500" href="#0">View All</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-700 href="#0">Apps / Software</a>
+                <a className="text-gray-600 hover:text-gray-700" href="#0">Apps / Software</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-700 href="#0">Design / Tech Products</a>
+                <a className="text-gray-600 hover:text-gray-700" href="#0">Design / Tech Products</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-700 href="#0">Books & Writing</a>
+                <a className="text-gray-600 hover:text-gray-700" href="#0">Books & Writing</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-700 href="#0">Education</a>
+                <a className="text-gray-600 hover:text-gray-700" href="#0">Education</a>
               </li>
               <li>
-                <a className="text-gray-600 hover:text-gray-700 href="#0">Drawing / Painting</a>
+                <a className="text-gray-600 hover:text-gray-700" href="#0">Drawing / Painting</a>
               </li>
             </ul>
           </div>
@@ -89,7 +89,7 @@ export default function ShopSidebar() {
                     <svg className="fill-current text-yellow-500" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </div>
@@ -110,10 +110,10 @@ export default function ShopSidebar() {
                     <svg className="fill-current text-yellow-500" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </div>
@@ -131,13 +131,13 @@ export default function ShopSidebar() {
                     <svg className="fill-current text-yellow-500" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </div>
@@ -152,16 +152,16 @@ export default function ShopSidebar() {
                     <svg className="fill-current text-yellow-500" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
-                    <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                    <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                     </svg>
                   </div>

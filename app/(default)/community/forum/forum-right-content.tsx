@@ -13,7 +13,7 @@ export default function ForumRightContent() {
         <div className="md:py-8">
           {/* Button */}
           <div className="mb-6">
-            <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 Post</button>">
+            <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">New Post</button>
           </div>
 
           {/* Blocks */}
@@ -28,7 +28,7 @@ export default function ForumRightContent() {
                   <div className="pl-6">
                     <div className="text-xs font-medium uppercase text-violet-600 mb-0.5">Mon 27 Dec</div>
                     <div className="text-sm mb-2">
-                      <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                      <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                         Silicon Valley Bootstrapper Breakfast Online for 2024
                       </a>
                     </div>
@@ -62,8 +62,8 @@ export default function ForumRightContent() {
                   </div>
                   {/* Timeline element */}
                   <div aria-hidden="true">
-                    <div className="className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200 />">
-                    <div className="className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white />">
+                    <div className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200" />
+                    <div className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white" />
                   </div>
                 </li>
                 {/* Event 2 */}
@@ -71,7 +71,7 @@ export default function ForumRightContent() {
                   <div className="pl-6">
                     <div className="text-xs font-medium uppercase text-violet-600 mb-0.5">Mon 27 Dec</div>
                     <div className="text-sm mb-2">
-                      <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                      <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                         New York &amp; New Jersey Virtual Retreat
                       </a>
                     </div>
@@ -105,8 +105,8 @@ export default function ForumRightContent() {
                   </div>
                   {/* Timeline element */}
                   <div aria-hidden="true">
-                    <div className="className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200 />">
-                    <div className="className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white />">
+                    <div className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200" />
+                    <div className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white" />
                   </div>
                 </li>
                 {/* Event 3 */}
@@ -114,7 +114,7 @@ export default function ForumRightContent() {
                   <div className="pl-6">
                     <div className="text-xs font-medium uppercase text-violet-600 mb-0.5">Mon 29 Dec</div>
                     <div className="text-sm mb-2">
-                      <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                      <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                         The World of AI and Machine Learning - Open Chat
                       </a>
                     </div>
@@ -148,8 +148,8 @@ export default function ForumRightContent() {
                   </div>
                   {/* Timeline element */}
                   <div aria-hidden="true">
-                    <div className="className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200 />">
-                    <div className="className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white />">
+                    <div className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200" />
+                    <div className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white" />
                   </div>
                 </li>
                 {/* Event 4 */}
@@ -157,7 +157,7 @@ export default function ForumRightContent() {
                   <div className="pl-6">
                     <div className="text-xs font-medium uppercase text-violet-600 mb-0.5">Mon 29 Dec</div>
                     <div className="text-sm mb-2">
-                      <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                      <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                         NYC Code &amp; Coffee 2.0 @ Freehold Brooklyn
                       </a>
                     </div>
@@ -191,13 +191,13 @@ export default function ForumRightContent() {
                   </div>
                   {/* Timeline element */}
                   <div aria-hidden="true">
-                    <div className="className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200 />">
-                    <div className="className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white />">
+                    <div className="absolute top-0.5 -bottom-1 left-0.5 ml-px w-0.5 bg-gray-200" />
+                    <div className="absolute top-0.5 left-0 -ml-0.5 w-3 h-3 rounded-full bg-gray-400 border-2 border-white" />
                   </div>
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
 
@@ -207,12 +207,12 @@ export default function ForumRightContent() {
               <ul className="space-y-3">
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       I built and sold 2 small SaaS products and quit my job in the last two years — AMA
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       markusj
                     </a>{' '}
                     · 2d · 312 comments
@@ -220,12 +220,12 @@ export default function ForumRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Besides Product Hunt, where else should I promote my new project? 🤔
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       katemerlu
                     </a>{' '}
                     · 2h · 7 comments
@@ -233,12 +233,12 @@ export default function ForumRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Which are the main channels you use to drive traffic to your website? 📈
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       sophiestar
                     </a>{' '}
                     · 3d · 66 comments
@@ -246,12 +246,12 @@ export default function ForumRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Failed for the past 12 years as a tech entrepreneur. My key takeaways.
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       ekuplu89
                     </a>{' '}
                     · 4h · 14 comments
@@ -259,12 +259,12 @@ export default function ForumRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       How to build a following on Twitter as a founder - A guide to growing your audience 🚀
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       molliehacks
                     </a>{' '}
                     · 3d · 32 comments
@@ -272,7 +272,7 @@ export default function ForumRightContent() {
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
           </div>

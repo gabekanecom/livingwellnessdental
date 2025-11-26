@@ -14,7 +14,7 @@ export default function Roadmap() {
     <div className="relative bg-white h-full">
 
       {/* Page header */}
-      <div className="className="sm:flex sm:justify-between sm:items-center px-4 sm:px-6 py-8 border-b border-gray-200 ">
+      <div className="sm:flex sm:justify-between sm:items-center px-4 sm:px-6 py-8 border-b border-gray-200">
 
         {/* Left: Title */}
         <div className="mb-4 sm:mb-0">
@@ -25,7 +25,7 @@ export default function Roadmap() {
         <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
           {/* Add entry button */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 Entry</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Add Entry</button>
 
         </div>
 
@@ -63,7 +63,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <div className="text-xs font-semibold uppercase text-gray-400 xl:leading-8">8 July, 2024</div>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <h2 className="text-2xl text-gray-800 font-bold mb-3">Released version 2.0</h2>
                     <div className="flex flex-nowrap items-center space-x-2 mb-4">
@@ -71,11 +71,11 @@ export default function Roadmap() {
                         <a className="block mr-2 shrink-0" href="#0">
                           <Image className="rounded-full border-2 border-white box-content" src={User07} width={32} height={32} alt="User 04" />
                         </a>
-                        <a className="block text-sm font-semibold text-gray-800 href="#0">
+                        <a className="block text-sm font-semibold text-gray-800" href="#0">
                           Simona Lürwer
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2.5 py-1">Product</div>
                       </div>
@@ -94,7 +94,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <div className="text-xs font-semibold uppercase text-gray-400 xl:leading-8">6 July, 2024</div>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <h2 className="text-2xl text-gray-800 font-bold mb-3">Feature Name is now public 🎉</h2>
                     <div className="flex flex-nowrap items-center space-x-2 mb-4">
@@ -102,11 +102,11 @@ export default function Roadmap() {
                         <a className="block mr-2 shrink-0" href="#0">
                           <Image className="rounded-full border-2 border-white box-content" src={User02} width={32} height={32} alt="User 04" />
                         </a>
-                        <a className="block text-sm font-semibold text-gray-800 href="#0">
+                        <a className="block text-sm font-semibold text-gray-800" href="#0">
                           Danielle Cohen
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-yellow-500/20 text-yellow-700 rounded-full text-center px-2.5 py-1">Announcement</div>
                       </div>
@@ -125,7 +125,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <div className="text-xs font-semibold uppercase text-gray-400 xl:leading-8">4 July, 2024</div>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <h2 className="text-2xl text-gray-800 font-bold mb-3">Bugs fixed, issues, and more</h2>
                     <div className="flex flex-nowrap items-center space-x-2 mb-4">
@@ -133,11 +133,11 @@ export default function Roadmap() {
                         <a className="block mr-2 shrink-0" href="#0">
                           <Image className="rounded-full border-2 border-white box-content" src={User01} width={32} height={32} alt="User 04" />
                         </a>
-                        <a className="block text-sm font-semibold text-gray-800 href="#0">
+                        <a className="block text-sm font-semibold text-gray-800" href="#0">
                           Patrick Kumar
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-red-500/20 text-red-700 rounded-full text-center px-2.5 py-1">Bug Fix</div>
                       </div>
@@ -162,7 +162,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <div className="text-xs font-semibold uppercase text-gray-400 xl:leading-8">2 July, 2024</div>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <h2 className="text-2xl text-gray-800 font-bold mb-3">Thanks, everyone 🙌</h2>
                     <div className="flex flex-nowrap items-center space-x-2 mb-4">
@@ -170,11 +170,11 @@ export default function Roadmap() {
                         <a className="block mr-2 shrink-0" href="#0">
                           <Image className="rounded-full border-2 border-white box-content" src={User02} width={32} height={32} alt="User 04" />
                         </a>
-                        <a className="block text-sm font-semibold text-gray-800 href="#0">
+                        <a className="block text-sm font-semibold text-gray-800" href="#0">
                           Danielle Cohen
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-sky-500/20 text-sky-700 rounded-full text-center px-2.5 py-1">Exciting News</div>
                       </div>

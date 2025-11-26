@@ -53,13 +53,13 @@ export default function CampaignCard({ campaign }: { campaign: Campaign }) {
           <div className="text-sm">{campaign.content}</div>
         </div>
         <footer className="mt-5">
-          <div className="text-sm font-medium text-gray-500 mb-2">{campaign.dates.from} <span className="className="text-gray-400 {campaign.dates.to}</div>">
+          <div className="text-sm font-medium text-gray-500 mb-2">{campaign.dates.from} <span className="text-gray-400">-</span> {campaign.dates.to}</div>
           <div className="flex justify-between items-center">
             <div>
               <div className={`text-xs inline-flex font-medium rounded-full text-center px-2.5 py-1 ${typeColor(campaign.type)}`}>{campaign.type}</div>
             </div>
             <div>
-              <Link className="className="text-sm font-medium text-violet-500 hover:text-violet-600 href={campaign.link}>View -&gt;</Link>">
+              <Link className="text-sm font-medium text-violet-500 hover:text-violet-600" href={campaign.link}>View -&gt;</Link>
             </div>
           </div>
         </footer>

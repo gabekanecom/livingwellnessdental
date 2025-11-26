@@ -71,7 +71,7 @@ export default function FintechCard06() {
   return(
     <div className="flex flex-col col-span-full sm:col-span-12 xl:col-span-4 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 Returns</h2>">
+        <h2 className="font-semibold text-gray-800">Total Returns</h2>
       </header>
       <div className="px-5 py-3">
         <div className="text-sm italic mb-2">Hey Mark, you're very close to your goal:</div>
@@ -79,7 +79,7 @@ export default function FintechCard06() {
           <div className="text-3xl font-bold text-gray-800 mr-2">$5,247.09</div>
           <div className="text-sm"><span className="font-medium text-yellow-600">97.4%</span></div>
         </div>
-        <div className="className="text-sm text-gray-500 of $6,000</div>">
+        <div className="text-sm text-gray-500">97.4% of $6,000</div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className="grow">

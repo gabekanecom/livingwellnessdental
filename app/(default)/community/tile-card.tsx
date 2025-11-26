@@ -30,7 +30,7 @@ export default function TileCard({ user }: { user: User}) {
                   <Image className="rounded-full" src={user.image} width={64} height={64} alt={user.name} />
                 </Link>
                 <div className="mt-1 pr-1">
-                  <Link className="className="inline-flex text-gray-800 hover:text-gray-900 href={user.link}>">
+                  <Link className="inline-flex text-gray-800 hover:text-gray-900" href={user.link}>
                     <h2 className="text-xl leading-snug justify-center font-semibold">{user.name}</h2>
                   </Link>
                   <div className="flex items-center"><span className="text-sm font-medium text-gray-400 -mt-0.5 mr-1">-&gt;</span> <span>{user.location}</span></div>
@@ -46,8 +46,8 @@ export default function TileCard({ user }: { user: User}) {
           </div>
         </div>
         {/* Card footer */}
-        <div className="className="border-t border-gray-100 ">
-          <div className="className="flex divide-x divide-gray-100 ">
+        <div className="border-t border-gray-100 ">
+          <div className="flex divide-x divide-gray-100 ">
             <Link className="block flex-1 text-center text-sm text-violet-500 hover:text-violet-600 font-medium px-3 py-4" href="/messages">
               <div className="flex items-center justify-center">
                 <svg className="fill-current shrink-0 mr-2" width="16" height="16" viewBox="0 0 16 16">

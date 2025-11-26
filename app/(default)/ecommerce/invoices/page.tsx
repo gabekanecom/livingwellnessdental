@@ -132,7 +132,7 @@ function InvoicesContent() {
           {/* Search form */}
           <SearchForm placeholder="Search by invoice ID…" />
           {/* Create invoice button */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 ">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">
             <svg className="fill-current shrink-0 xs:hidden" width="16" height="16" viewBox="0 0 16 16">
               <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
             </svg>
@@ -149,16 +149,16 @@ function InvoicesContent() {
         <div className="mb-4 sm:mb-0">
           <ul className="flex flex-wrap -m-1">
             <li className="m-1">
-              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-gray-900 text-white transition">All <span className="className="ml-1 text-gray-400 ">
+              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-gray-900 text-white transition">All <span className="ml-1 text-gray-400">67</span></button>
             </li>
             <li className="m-1">
-              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Paid <span className="className="ml-1 text-gray-400 ">
+              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Paid <span className="ml-1 text-gray-400">14</span></button>
             </li>
             <li className="m-1">
-              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Due <span className="className="ml-1 text-gray-400 ">
+              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Due <span className="ml-1 text-gray-400">34</span></button>
             </li>
             <li className="m-1">
-              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Overdue <span className="className="ml-1 text-gray-400 ">
+              <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Overdue <span className="ml-1 text-gray-400">19</span></button>
             </li>
           </ul>
         </div>

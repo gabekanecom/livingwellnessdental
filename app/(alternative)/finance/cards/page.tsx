@@ -19,7 +19,7 @@ export default function CreditCards() {
           </div>
 
           {/* Add card button */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 Card</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Add Card</button>
         </div>
 
         {/* Filters */}
@@ -215,11 +215,11 @@ export default function CreditCards() {
               <div className="mt-6">
                 <div className="text-sm font-semibold text-gray-800 mb-1">Details</div>
                 <ul>
-                  <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                  <li className="flex items-center justify-between py-3 border-b border-gray-200">
                     <div className="text-sm">Card Name</div>
                     <div className="text-sm font-medium text-gray-800 ml-2">Physical Metal Card</div>
                   </li>
-                  <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                  <li className="flex items-center justify-between py-3 border-b border-gray-200">
                     <div className="text-sm">Status</div>
                     <div className="flex items-center whitespace-nowrap">
                       <div className="w-2 h-2 rounded-full bg-green-500 mr-2" />
@@ -232,11 +232,11 @@ export default function CreditCards() {
               {/* Payment Limits */}
               <div className="mt-6">
                 <div className="text-sm font-semibold text-gray-800 mb-4">Payment Limits</div>
-                <div className="className="pb-4 border-b border-gray-200 ">
+                <div className="pb-4 border-b border-gray-200">
                   <div className="flex justify-between text-sm mb-2">
                     <div>Spent This Month</div>
                     <div className="italic">
-                      $750,00 <span className="className="text-gray-400 $1,500.00">
+                      $750,00 <span className="text-gray-400">/ $1,500.00</span>
                     </div>
                   </div>
                   <div className="relative w-full h-2 bg-gray-200 rounded-full">
@@ -248,11 +248,11 @@ export default function CreditCards() {
               {/* Withdrawal Limits */}
               <div className="mt-6">
                 <div className="text-sm font-semibold text-gray-800 mb-4">Withdrawal Limits</div>
-                <div className="className="pb-4 border-b border-gray-200 ">
+                <div className="pb-4 border-b border-gray-200">
                   <div className="flex justify-between text-sm mb-2">
                     <div>Withdrawn This Month</div>
                     <div className="italic">
-                      $100,00 <span className="className="text-gray-400 $1,500.00">
+                      $100,00 <span className="text-gray-400">/ $1,500.00</span>
                     </div>
                   </div>
                   <div className="relative w-full h-2 bg-gray-200 rounded-full">
@@ -264,7 +264,7 @@ export default function CreditCards() {
               {/* Edit / Delete */}
               <div className="flex items-center space-x-3 mt-6">
                 <div className="w-1/2">
-                  <button className="className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800 ">
+                  <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">
                     <svg className="fill-current text-gray-400 shrink-0" width="16" height="16" viewBox="0 0 16 16">
                       <path d="M11.7.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM4.6 14H2v-2.6l6-6L10.6 8l-6 6zM12 6.6L9.4 4 11 2.4 13.6 5 12 6.6z" />
                     </svg>

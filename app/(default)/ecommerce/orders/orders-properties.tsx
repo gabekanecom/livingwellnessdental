@@ -12,7 +12,7 @@ export const OrdersProperties = () => {
       case 'Refunded':
         return 'bg-yellow-500/20 text-yellow-700'
       default:
-        return 'bg-gray-100 text-gray-500 
+        return 'bg-gray-100 text-gray-500';
     }
   }
 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Living Wellness Dental - Test Widget</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+      p {
+        color: #666;
+        line-height: 1.6;
+      }
+      .info-box {
+        background: #f0f4ff;
+        border-left: 4px solid #7c3aed;
+        padding: 20px;
+        margin: 30px 0;
+        border-radius: 8px;
+      }
+      .info-box h3 {
+        margin-top: 0;
+        color: #7c3aed;
+      }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+      .feature {
+        padding: 20px;
+        background: #f9fafb;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+      }
+      .feature h4 {
+        margin-top: 0;
+        color: #7c3aed;
+      }
+      .note {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 15px;
+        margin: 20px 0;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🦷 Living Wellness Dental</h1>
+      <p>Welcome to our practice! We're dedicated to providing exceptional dental care in a comfortable environment.</p>
+
+      <div class="info-box">
+        <h3>✨ Try Our AI Chat Assistant</h3>
+        <p>
+          Look for the purple chat button in the bottom-right corner! Our AI assistant can answer questions about our
+          services, hours, and general dental care.
+        </p>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <h4>💬 Instant Answers</h4>
+          <p>Get quick responses to common questions about our practice and dental procedures.</p>
+        </div>
+        <div class="feature">
+          <h4>📚 Knowledge Base</h4>
+          <p>Our assistant draws from our comprehensive training wiki to provide accurate information.</p>
+        </div>
+        <div class="feature">
+          <h4>🎨 Customizable</h4>
+          <p>The widget can be themed to match your website's colors and style.</p>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>📝 Note:</strong> This is a test page for the embeddable chat widget. The widget is loaded via a
+        script tag and runs in an isolated iframe for security. Try asking questions like "What are your hours?" or
+        "Do you accept insurance?"
+      </div>
+
+      <h2>About Our Practice</h2>
+      <p>
+        At Living Wellness Dental, we believe in comprehensive care that addresses not just your teeth, but your
+        overall oral health. Our experienced team uses the latest technology to provide comfortable, effective
+        treatment.
+      </p>
+
+      <h3>Our Services</h3>
+      <ul>
+        <li>Preventive Care & Cleanings</li>
+        <li>Restorative Dentistry</li>
+        <li>Cosmetic Procedures</li>
+        <li>Emergency Dental Care</li>
+        <li>Pediatric Dentistry</li>
+      </ul>
+
+      <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; color: #999; font-size: 14px">
+        This is a demonstration page. The chat widget below is fully functional and connects to the Living Wellness
+        Dental wiki knowledge base.
+      </p>
+    </div>
+
+    <!-- Embeddable Chat Widget -->
+    <script
+      src="http://localhost:3000/widget/chat.js"
+      data-base-url="http://localhost:3000"
+      data-theme="light"
+      data-accent="7c3aed"
+      data-position="right"
+      data-greeting="Welcome to Living Wellness Dental! How can I help you today?"
+      defer
+    ></script>
+  </body>
+</html>

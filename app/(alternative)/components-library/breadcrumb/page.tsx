@@ -21,18 +21,18 @@ export default function BreadcrumbLibrary() {
             {/* With Slashes */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">With Slashes</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <div className="text-center">
                   {/* Start */}
                   <ul className="inline-flex flex-wrap text-sm font-medium">
                     <li className="after:content-['/'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Home</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Home</a>
                     </li>
                     <li className="after:content-['/'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Settings</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Settings</a>
                     </li>
                     <li className="after:content-['/'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Notifications</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Notifications</a>
                     </li>
                   </ul>
                   {/* End */}
@@ -43,18 +43,18 @@ export default function BreadcrumbLibrary() {
             {/* With Dots */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">With Dots</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <div className="text-center">
                   {/* Start */}
                   <ul className="inline-flex flex-wrap text-sm font-medium">
                     <li className="after:content-['·'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Home</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Home</a>
                     </li>
                     <li className="after:content-['·'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Settings</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Settings</a>
                     </li>
                     <li className="after:content-['·'] last:after:hidden after:text-gray-400 after:px-2">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Notifications</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Notifications</a>
                     </li>
                   </ul>
                   {/* End */}
@@ -65,24 +65,24 @@ export default function BreadcrumbLibrary() {
             {/* With Chevrons */}
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">With Chevrons</h2>
-              <div className="px-6 py-8 bg-gray-100> rounded-lg">
+              <div className="px-6 py-8 bg-gray-100 rounded-lg">
                 <div className="text-center">
                   {/* Start */}
                   <ul className="inline-flex flex-wrap text-sm font-medium">
                     <li className="flex items-center">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Home</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Home</a>
                       <svg className="fill-current text-gray-400 mx-3" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M6.6 13.4L5.2 12l4-4-4-4 1.4-1.4L12 8z" />
                       </svg>
                     </li>
                     <li className="flex items-center">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Settings</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Settings</a>
                       <svg className="fill-current text-gray-400 mx-3" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M6.6 13.4L5.2 12l4-4-4-4 1.4-1.4L12 8z" />
                       </svg>
                     </li>
                     <li className="flex items-center">
-                      <a className="text-gray-500 hover:text-violet-500 href="#0">Notifications</a>
+                      <a className="text-gray-500 hover:text-violet-500" href="#0">Notifications</a>
                     </li>
                   </ul>
                   {/* End */}

@@ -17,11 +17,11 @@ export default function FeedbackExamples() {
         {/* Success Modal */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setSuccessModalOpen(true) }}>Success Modal</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setSuccessModalOpen(true) }}>Success Modal</button>
           <ModalBlank isOpen={successModalOpen} setIsOpen={setSuccessModalOpen}>
             <div className="p-5 flex space-x-4">
               {/* Icon */}
-              <div className="className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100 ">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100">
                 <svg className="shrink-0 fill-current text-green-500" width="16" height="16" viewBox="0 0 16 16">
                   <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zM7 11.4L3.6 8 5 6.6l2 2 4-4L12.4 6 7 11.4z" />
                 </svg>
@@ -40,8 +40,8 @@ export default function FeedbackExamples() {
                 </div>
                 {/* Modal footer */}
                 <div className="flex flex-wrap justify-end space-x-2">
-                  <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setSuccessModalOpen(false) }}>Cancel</button>">
-                  <button className="className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setSuccessModalOpen(false) }}>Yes, Upgrade it</button>">
+                  <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setSuccessModalOpen(false) }}>Cancel</button>
+                  <button className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setSuccessModalOpen(false) }}>Yes, Upgrade it</button>
                 </div>
               </div>
             </div>
@@ -52,11 +52,11 @@ export default function FeedbackExamples() {
         {/* Danger Modal */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setDangerModalOpen(true) }}>Danger Modal</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setDangerModalOpen(true) }}>Danger Modal</button>
           <ModalBlank isOpen={dangerModalOpen} setIsOpen={setDangerModalOpen}>
             <div className="p-5 flex space-x-4">
               {/* Icon */}
-              <div className="className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100 ">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100">
                 <svg className="shrink-0 fill-current text-red-500" width="16" height="16" viewBox="0 0 16 16">
                   <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
                 </svg>
@@ -75,7 +75,7 @@ export default function FeedbackExamples() {
                 </div>
                 {/* Modal footer */}
                 <div className="flex flex-wrap justify-end space-x-2">
-                  <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setDangerModalOpen(false) }}>Cancel</button>">
+                  <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setDangerModalOpen(false) }}>Cancel</button>
                   <button className="btn-sm bg-red-500 hover:bg-red-600 text-white" onClick={() => { setDangerModalOpen(false) }}>Yes, Delete it</button>
                 </div>
               </div>
@@ -87,11 +87,11 @@ export default function FeedbackExamples() {
         {/* Info Modal */}
         <div className="m-1.5">
           {/* Start */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setInfoModalOpen(true) }}>Info Modal</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setInfoModalOpen(true) }}>Info Modal</button>
           <ModalBlank isOpen={infoModalOpen} setIsOpen={setInfoModalOpen}>
             <div className="p-5 flex space-x-4">
               {/* Icon */}
-              <div className="className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100 ">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-gray-100">
                 <svg className="shrink-0 fill-current text-violet-500" width="16" height="16" viewBox="0 0 16 16">
                   <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm1 12H7V7h2v5zM8 6c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" />
                 </svg>
@@ -110,8 +110,8 @@ export default function FeedbackExamples() {
                 </div>
                 {/* Modal footer */}
                 <div className="flex flex-wrap justify-end space-x-2">
-                  <button className="className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800 onClick={() => { setInfoModalOpen(false) }}>Cancel</button>">
-                  <button className="className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800 onClick={() => { setInfoModalOpen(false) }}>Yes, Create it</button>">
+                  <button className="btn-sm border-gray-200 hover:border-gray-300 text-gray-800" onClick={() => { setInfoModalOpen(false) }}>Cancel</button>
+                  <button className="btn-sm bg-gray-900 text-gray-100 hover:bg-gray-800" onClick={() => { setInfoModalOpen(false) }}>Yes, Create it</button>
                 </div>
               </div>
             </div>

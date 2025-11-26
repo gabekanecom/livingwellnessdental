@@ -36,7 +36,7 @@ export default function CalendarTable({ events }: { events: Event[] }) {
     <div className="bg-white rounded-xl shadow overflow-hidden">
 
       {/* Days of the week */}
-      <div className="className="grid grid-cols-7 gap-px border-b border-gray-200 ">
+      <div className="grid grid-cols-7 gap-px border-b border-gray-200">
         {
           dayNames.map(day => {
             return (
@@ -50,7 +50,7 @@ export default function CalendarTable({ events }: { events: Event[] }) {
       </div>
 
       {/* Day cells */}
-      <div className="className="grid grid-cols-7 gap-px bg-gray-200 ">
+      <div className="grid grid-cols-7 gap-px bg-gray-200 ">
         {/* Diagonal stripes pattern */}
         <svg className="sr-only">
           <defs>

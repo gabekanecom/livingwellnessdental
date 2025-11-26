@@ -58,12 +58,12 @@ export default function FintechCard08() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 Portfolio</h2>">
+        <h2 className="font-semibold text-gray-800">My Portfolio</h2>
       </header>
       <div className="px-5 py-3">
         <div className="text-sm italic mb-2">Hey Mark, by age 65 you could have:</div>
-        <div className="className="text-3xl font-bold text-gray-800 - $3.5M</div>">
-        <div className="className="text-sm text-gray-500 level 8</div>">
+        <div className="text-3xl font-bold text-gray-800">$2.3M - $3.5M</div>
+        <div className="text-sm text-gray-500">Risk level 8</div>
       </div>
       {/* Chart built with Chart.js 3 */}
       <div className="grow">

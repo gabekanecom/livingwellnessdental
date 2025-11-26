@@ -26,7 +26,7 @@ export default function MessagesSidebar() {
                 <ChannelMenu />
                 {/* Edit button */}
                 <button className="p-1.5 shrink-0 rounded-lg border border-gray-200 hover:border-gray-300 shadow-sm ml-2">
-                  <svg className="fill-current text-gray-400 width="16" height="16" viewBox="0 0 16 16">
+                  <svg className="fill-current text-gray-400" width="16" height="16" viewBox="0 0 16 16">
                     <path d="M11.7.3c-.4-.4-1-.4-1.4 0l-10 10c-.2.2-.3.4-.3.7v4c0 .6.4 1 1 1h4c.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4l-4-4zM4.6 14H2v-2.6l6-6L10.6 8l-6 6zM12 6.6L9.4 4 11 2.4 13.6 5 12 6.6z" />
                   </svg>
                 </button>
@@ -40,7 +40,7 @@ export default function MessagesSidebar() {
               <label htmlFor="msg-search" className="sr-only">
                 Search
               </label>
-              <input id="msg-search" className="form-input w-full pl-9 bg-white type="search" placeholder="Search…" />
+              <input id="msg-search" className="form-input w-full pl-9 bg-white" type="search" placeholder="Search…" />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg
                   className="shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-3 mr-2"

@@ -77,7 +77,7 @@ export default function AnalyticsCard01() {
   return(
     <div className="flex flex-col col-span-full xl:col-span-8 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 ">
+        <h2 className="font-semibold text-gray-800">Analytics</h2>
       </header>
       <div className="px-5 py-1">
         <div className="flex flex-wrap max-sm:*:w-1/2">
@@ -88,7 +88,7 @@ export default function AnalyticsCard01() {
                 <div className="text-3xl font-bold text-gray-800 mr-2">24.7K</div>
                 <div className="text-sm font-medium text-green-600">+49%</div>
               </div>
-              <div className="className="text-sm text-gray-500 Visitors</div>">
+              <div className="text-sm text-gray-500">Unique Visitors</div>
             </div>
             <div className="hidden md:block w-px h-8 bg-gray-200 mr-5" aria-hidden="true"></div>
           </div>
@@ -99,7 +99,7 @@ export default function AnalyticsCard01() {
                 <div className="text-3xl font-bold text-gray-800 mr-2">56.9K</div>
                 <div className="text-sm font-medium text-green-600">+7%</div>
               </div>
-              <div className="className="text-sm text-gray-500 Pageviews</div>">
+              <div className="text-sm text-gray-500">Total Pageviews</div>
             </div>
             <div className="hidden md:block w-px h-8 bg-gray-200 mr-5" aria-hidden="true"></div>
           </div>
@@ -110,7 +110,7 @@ export default function AnalyticsCard01() {
                 <div className="text-3xl font-bold text-gray-800 mr-2">54%</div>
                 <div className="text-sm font-medium text-red-500">-7%</div>
               </div>
-              <div className="className="text-sm text-gray-500 Rate</div>">
+              <div className="text-sm text-gray-500">Bounce Rate</div>
             </div>
             <div className="hidden md:block w-px h-8 bg-gray-200 mr-5" aria-hidden="true"></div>
           </div>
@@ -121,7 +121,7 @@ export default function AnalyticsCard01() {
                 <div className="text-3xl font-bold text-gray-800 mr-2">2m 56s</div>
                 <div className="text-sm font-medium text-red-500">+7%</div>
               </div>
-              <div className="className="text-sm text-gray-500 Duration</div>">
+              <div className="text-sm text-gray-500">Visit Duration</div>
             </div>
           </div>
         </div>

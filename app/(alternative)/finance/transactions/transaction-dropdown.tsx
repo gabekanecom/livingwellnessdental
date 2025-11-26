@@ -12,7 +12,7 @@ export default function TransactionDropdown({
     <Menu as="div" className="relative inline-flex">
       <MenuButton className="inline-flex justify-center items-center group">
         <div className="flex items-center truncate">
-          <span className="className="truncate font-medium text-violet-500 group-hover:text-violet-600 Personal Account</span>">
+          <span className="truncate font-medium text-violet-500 group-hover:text-violet-600">Personal Account</span>
           <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-violet-400" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
@@ -33,14 +33,14 @@ export default function TransactionDropdown({
         <MenuItems as="ul" className="focus:outline-hidden">
           <MenuItem as="li">
             {({ active }) => (
-              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800 : 'text-gray-600 href="#0">
+              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800' : 'text-gray-600'}`} href="#0">
                 Business Account
               </Link>
             )}
           </MenuItem>
           <MenuItem as="li">
             {({ active }) => (
-              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800 : 'text-gray-600 href="#0">
+              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800' : 'text-gray-600'}`} href="#0">
                 Family Account
               </Link>
             )}

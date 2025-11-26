@@ -22,7 +22,7 @@ export default function TabsLibrary() {
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">Simple</h2>
               {/* Start */}
-              <div className="className="mb-8 border-b border-gray-200 ">
+              <div className="mb-8 border-b border-gray-200">
                 <ul className="text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
                   <li className="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                     <a className="text-violet-500 whitespace-nowrap" href="#0">Account</a>
@@ -49,7 +49,7 @@ export default function TabsLibrary() {
               <h2 className="text-2xl text-gray-800 font-bold mb-6">With Underline</h2>
               {/* Start */}
               <div className="relative mb-8">
-                <div className="absolute bottom-0 w-full h-px bg-gray-200 aria-hidden="true"></div>
+                <div className="absolute bottom-0 w-full h-px bg-gray-200" aria-hidden="true"></div>
                 <ul className="relative text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
                   <li className="mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                     <a className="block pb-3 text-violet-500 whitespace-nowrap border-b-2 border-violet-500" href="#0">Account</a>
@@ -75,7 +75,7 @@ export default function TabsLibrary() {
             <div>
               <h2 className="text-2xl text-gray-800 font-bold mb-6">With Icons</h2>
               {/* Start */}
-              <div className="className="mb-8 border-b border-gray-200 ">
+              <div className="mb-8 border-b border-gray-200">
                 <ul className="text-sm font-medium flex flex-nowrap -mx-4 sm:-mx-6 lg:-mx-8 overflow-x-scroll no-scrollbar">
                   <li className="pb-3 mr-6 last:mr-0 first:pl-4 sm:first:pl-6 lg:first:pl-8 last:pr-4 sm:last:pr-6 lg:last:pr-8">
                     <a className="text-violet-500 whitespace-nowrap flex items-center" href="#0">
@@ -131,16 +131,16 @@ export default function TabsLibrary() {
                   <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-transparent shadow-sm bg-gray-900 text-white transition">Account</button>
                 </li>
                 <li className="m-1">
-                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white> text-gray-500 transition">Notifications</button>
+                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Notifications</button>
                 </li>
                 <li className="m-1">
-                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white> text-gray-500 transition">Integrations</button>
+                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Integrations</button>
                 </li>
                 <li className="m-1">
-                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white> text-gray-500 transition">Plans</button>
+                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Plans</button>
                 </li>
                 <li className="m-1">
-                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white> text-gray-500 transition">Billing</button>
+                  <button className="inline-flex items-center justify-center text-sm font-medium leading-5 rounded-full px-3 py-1 border border-gray-200 hover:border-gray-300 shadow-sm bg-white text-gray-500 transition">Billing</button>
                 </li>
               </ul>
               {/* End */}

@@ -68,7 +68,7 @@ export default function FintechCard02() {
               <div className="flex justify-between text-sm mb-2">
                 <div className="text-gray-300">Payment Limits</div>
                 <div className="text-gray-400 italic">
-                  $780,00 <span className="className="text-gray-500 $1,500.00">
+                  $780,00 <span className="text-gray-500">/ $1,500.00</span>
                 </div>
               </div>
               <div className="relative w-full h-2 bg-gray-600 rounded-sm">
@@ -79,7 +79,7 @@ export default function FintechCard02() {
               <div className="flex justify-between text-sm mb-2">
                 <div className="text-gray-300">ATM Limits</div>
                 <div className="text-gray-400 italic">
-                  $179,00 <span className="className="text-gray-500 $1,000.00">
+                  $179,00 <span className="text-gray-500">/ $1,000.00</span>
                 </div>
               </div>
               <div className="relative w-full h-2 bg-gray-600 rounded-sm">

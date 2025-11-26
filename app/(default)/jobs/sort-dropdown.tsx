@@ -12,8 +12,8 @@ export default function SortDropdown({
     <Menu as="div" className="relative inline-flex">
       <MenuButton className="inline-flex justify-center items-center group">
         <div className="flex items-center truncate">
-          <span className="className="truncate font-medium text-violet-500 group-hover:text-violet-600 ">
-          <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 viewBox="0 0 12 12">
+          <span className="truncate font-medium text-violet-500 group-hover:text-violet-600">Sort</span>
+          <svg className="w-3 h-3 shrink-0 ml-1 fill-current text-gray-400" viewBox="0 0 12 12">
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
         </div>
@@ -32,14 +32,14 @@ export default function SortDropdown({
         <MenuItems as="ul" className="focus:outline-hidden">
           <MenuItem as="li">
             {({ active }) => (
-              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800 : 'text-gray-600 href="#0">
+              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800' : 'text-gray-600'}`} href="#0">
                 Oldest
               </Link>
             )}
           </MenuItem>
           <MenuItem as="li">
             {({ active }) => (
-              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800 : 'text-gray-600 href="#0">
+              <Link className={`font-medium text-sm flex py-1 px-3 ${active ? 'text-gray-800' : 'text-gray-600'}`} href="#0">
                 Popular
               </Link>
             )}

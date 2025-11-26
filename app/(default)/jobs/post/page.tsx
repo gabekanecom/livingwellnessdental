@@ -57,7 +57,7 @@ export default function Jobs() {
         {/* Content */}
         <div>
           <div className="mb-6">
-            <Link className="btn-sm px-3 bg-white border-gray-200 hover:border-gray-300 text-gray-800 href="/jobs">
+            <Link className="btn-sm px-3 bg-white border-gray-200 hover:border-gray-300 text-gray-800" href="/jobs">
               <svg className="fill-current text-gray-400 mr-2" width="7" height="12" viewBox="0 0 7 12">
                 <path d="M5.4.6 6.8 2l-4 4 4 4-1.4 1.4L0 6z" />
               </svg>
@@ -80,8 +80,8 @@ export default function Jobs() {
               <div className="text-sm text-gray-500 italic">179 Jobs Posted</div>
             </div>
             <div className="space-y-2 sm:flex sm:space-y-0 sm:space-x-2">
-              <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 Today -&gt;</button>">
-              <button className="className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800 Profile</button>">
+              <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">Apply Today -&gt;</button>
+              <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">View Profile</button>
             </div>
           </div>
 
@@ -106,7 +106,7 @@ export default function Jobs() {
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* The Role */}
           <div>
@@ -127,7 +127,7 @@ export default function Jobs() {
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* About You */}
           <div>
@@ -152,7 +152,7 @@ export default function Jobs() {
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Things You Might Do */}
           <div>
@@ -187,19 +187,19 @@ export default function Jobs() {
               <div className="flex items-center">
                 <div className="text-sm text-gray-500 italic mr-4">Share:</div>
                 <div className="flex items-center space-x-3">
-                  <button className="className="text-gray-400 hover:text-violet-500 ">
+                  <button className="text-gray-400 hover:text-violet-500 ">
                     <span className="sr-only">Share on X</span>
                     <svg className="fill-current" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M16 15h-4.938l-3.865-4.892L2.77 15H.316L6.05 8.658 0 1h5.063l3.496 4.476L12.601 1h2.454L9.697 6.932 16 15Zm-4.26-1.421h1.36L4.323 2.347H2.865l8.875 11.232Z" />
                     </svg>
                   </button>
-                  <button className="className="text-gray-400 hover:text-violet-500 ">
+                  <button className="text-gray-400 hover:text-violet-500 ">
                     <span className="sr-only">Share on Facebook</span>
                     <svg className="fill-current" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M6.023 16 6 9H3V6h3V4c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V6H13l-1 3H9.28v7H6.023Z" />
                     </svg>
                   </button>
-                  <button className="className="text-gray-400 hover:text-violet-500 ">
+                  <button className="text-gray-400 hover:text-violet-500 ">
                     <span className="sr-only">Share on Linkedin</span>
                     <svg className="fill-current" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 1.146C0 .514.53 0 1.182 0h13.635C15.471 0 16 .513 16 1.146v13.708c0 .633-.53 1.146-1.183 1.146H1.182C.53 16 0 15.487 0 14.854V1.146ZM4.862 13.39V6.187H2.468v7.203h2.394ZM3.666 5.203c.834 0 1.354-.553 1.354-1.244-.016-.707-.52-1.245-1.338-1.245-.82 0-1.355.538-1.355 1.245 0 .691.52 1.244 1.323 1.244h.015Zm2.522 8.187h2.394V9.368c0-.215.015-.43.078-.584.173-.43.567-.876 1.229-.876.866 0 1.213.66 1.213 1.629v3.853h2.394V9.26c0-2.213-1.181-3.242-2.756-3.242-1.292 0-1.86.722-2.174 1.213h.016V6.187H6.188c.03.676 0 7.203 0 7.203Z" />
@@ -210,7 +210,7 @@ export default function Jobs() {
             </div>
           </div>
 
-          <hr className="className="my-6 border-t border-gray-100 />">
+          <hr className="my-6 border-t border-gray-100" />
 
           {/* Related Jobs */}
           <div>
@@ -238,8 +238,8 @@ export default function Jobs() {
               <div className="text-sm text-gray-500 italic">179 Jobs Posted</div>
             </div>
             <div className="space-y-2">
-              <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 Today -&gt;</button>">
-              <button className="className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800 Profile</button>">
+              <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">Apply Today -&gt;</button>
+              <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">View Profile</button>
             </div>
           </div>
 

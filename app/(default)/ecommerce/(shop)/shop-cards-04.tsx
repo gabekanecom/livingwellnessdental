@@ -36,19 +36,19 @@ export default function ShopCards04() {
               {/* Info */}
               <div className="mb-5">
                 <div className="flex justify-between text-sm space-x-2 mb-2">
-                  <div><span className="font-semibold text-gray-800 <span className="italic">raised</span></div>
-                  <div className="className="text-gray-500 ">
+                  <div><span className="font-semibold text-gray-800">$3,299</span> <span className="italic">raised</span></div>
+                  <div className="text-gray-500">$5,000 goal</div>
                 </div>
                 {/* Bar */}
                 <div className="relative w-full h-2 rounded-full bg-gray-200 mb-2">
                   <div className="absolute left-0 top-0 bottom-0 bg-green-500 rounded-full" style={{width: '55%'}}></div>
                 </div>
-                <div className="className="font-medium text-xs text-gray-500 Days Left</div>">
+                <div className="font-medium text-xs text-gray-500">14 Days Left</div>
               </div>
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Back It</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Back It</a>
             </div>
           </div>
         </div>
@@ -83,19 +83,19 @@ export default function ShopCards04() {
               {/* Info */}
               <div className="mb-5">
                 <div className="flex justify-between text-sm space-x-2 mb-2">
-                  <div><span className="font-semibold text-gray-800 <span className="italic">raised</span></div>
-                  <div className="className="text-gray-500 ">
+                  <div><span className="font-semibold text-gray-800">$3,299</span> <span className="italic">raised</span></div>
+                  <div className="text-gray-500">$5,000 goal</div>
                 </div>
                 {/* Bar */}
                 <div className="relative w-full h-2 rounded-full bg-gray-200 mb-2">
                   <div className="absolute left-0 top-0 bottom-0 bg-green-500 rounded-full" style={{width: '55%'}}></div>
                 </div>
-                <div className="className="font-medium text-xs text-gray-500 Days Left</div>">
+                <div className="font-medium text-xs text-gray-500">14 Days Left</div>
               </div>
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Back It</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Back It</a>
             </div>
           </div>
         </div>
@@ -130,19 +130,19 @@ export default function ShopCards04() {
               {/* Info */}
               <div className="mb-5">
                 <div className="flex justify-between text-sm space-x-2 mb-2">
-                  <div><span className="font-semibold text-gray-800 <span className="italic">raised</span></div>
-                  <div className="className="text-gray-500 ">
+                  <div><span className="font-semibold text-gray-800">$3,299</span> <span className="italic">raised</span></div>
+                  <div className="text-gray-500">$5,000 goal</div>
                 </div>
                 {/* Bar */}
                 <div className="relative w-full h-2 rounded-full bg-gray-200 mb-2">
                   <div className="absolute left-0 top-0 bottom-0 bg-green-500 rounded-full" style={{width: '55%'}}></div>
                 </div>
-                <div className="className="font-medium text-xs text-gray-500 Days Left</div>">
+                <div className="font-medium text-xs text-gray-500">14 Days Left</div>
               </div>
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Back It</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Back It</a>
             </div>
           </div>
         </div>
@@ -177,19 +177,19 @@ export default function ShopCards04() {
               {/* Info */}
               <div className="mb-5">
                 <div className="flex justify-between text-sm space-x-2 mb-2">
-                  <div><span className="font-semibold text-gray-800 <span className="italic">raised</span></div>
-                  <div className="className="text-gray-500 ">
+                  <div><span className="font-semibold text-gray-800">$3,299</span> <span className="italic">raised</span></div>
+                  <div className="text-gray-500">$5,000 goal</div>
                 </div>
                 {/* Bar */}
                 <div className="relative w-full h-2 rounded-full bg-gray-200 mb-2">
                   <div className="absolute left-0 top-0 bottom-0 bg-green-500 rounded-full" style={{width: '55%'}}></div>
                 </div>
-                <div className="className="font-medium text-xs text-gray-500 Days Left</div>">
+                <div className="font-medium text-xs text-gray-500">14 Days Left</div>
               </div>
             </div>
             {/* Card footer */}
             <div>
-              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800 href="#0">Back It</a>
+              <a className="btn-sm w-full bg-gray-900 text-gray-100 hover:bg-gray-800" href="#0">Back It</a>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function CartItems() {
     <>
       <ul>
         {/* Cart item */}
-        <li className="className="sm:flex items-center py-6 border-b border-gray-200 ">
+        <li className="sm:flex items-center py-6 border-b border-gray-200">
           <a className="block mb-4 sm:mb-0 mr-5 md:w-32 xl:w-auto shrink-0" href="#0">
             <Image className="rounded-xs" src={Related01} width={200} height={142} alt="Product 01" />
           </a>
@@ -52,7 +52,7 @@ export default function CartItems() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -60,7 +60,7 @@ export default function CartItems() {
                   {/* Rate */}
                   <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                 </div>
-                <div className="className="text-gray-400 ">
+                <div className="text-gray-400">·</div>
                 {/* Price */}
                 <div>
                   <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -71,7 +71,7 @@ export default function CartItems() {
           </div>
         </li>
         {/* Cart item */}
-        <li className="className="sm:flex items-center py-6 border-b border-gray-200 ">
+        <li className="sm:flex items-center py-6 border-b border-gray-200">
           <a className="block mb-4 sm:mb-0 mr-5 md:w-32 xl:w-auto shrink-0" href="#0">
             <Image className="rounded-xs" src={Related02} width={200} height={142} alt="Product 02" />
           </a>
@@ -114,7 +114,7 @@ export default function CartItems() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -122,7 +122,7 @@ export default function CartItems() {
                   {/* Rate */}
                   <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                 </div>
-                <div className="className="text-gray-400 ">
+                <div className="text-gray-400">·</div>
                 {/* Price */}
                 <div>
                   <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -133,7 +133,7 @@ export default function CartItems() {
           </div>
         </li>
         {/* Cart item */}
-        <li className="className="sm:flex items-center py-6 border-b border-gray-200 ">
+        <li className="sm:flex items-center py-6 border-b border-gray-200">
           <a className="block mb-4 sm:mb-0 mr-5 md:w-32 xl:w-auto shrink-0" href="#0">
             <Image className="rounded-xs" src={Related03} width={200} height={142} alt="Product 03" />
           </a>
@@ -176,7 +176,7 @@ export default function CartItems() {
                     </button>
                     <button>
                       <span className="sr-only">5 stars</span>
-                      <svg className="fill-current text-gray-300 width="16" height="16" viewBox="0 0 16 16">
+                      <svg className="fill-current text-gray-300" width="16" height="16" viewBox="0 0 16 16">
                         <path d="M10 5.934L8 0 6 5.934H0l4.89 3.954L2.968 16 8 12.223 13.032 16 11.11 9.888 16 5.934z" />
                       </svg>
                     </button>
@@ -184,7 +184,7 @@ export default function CartItems() {
                   {/* Rate */}
                   <div className="inline-flex text-sm font-medium text-yellow-600">4.2</div>
                 </div>
-                <div className="className="text-gray-400 ">
+                <div className="text-gray-400">·</div>
                 {/* Price */}
                 <div>
                   <div className="inline-flex text-sm font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2 py-0.5">$89.00</div>
@@ -197,7 +197,7 @@ export default function CartItems() {
       </ul>
 
       <div className="mt-6">
-        <Link className="text-sm font-medium text-violet-500 hover:text-violet-600 href="/ecommerce/shop">&lt;- Back To Shopping</Link>
+        <Link className="text-sm font-medium text-violet-500 hover:text-violet-600" href="/ecommerce/shop">&lt;- Back To Shopping</Link>
       </div>
     </>
   )

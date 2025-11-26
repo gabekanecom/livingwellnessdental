@@ -13,49 +13,49 @@ export default function BillingPanel() {
         <section>
           <h3 className="text-xl leading-snug text-gray-800 font-bold mb-1">Billing Information</h3>
           <ul>
-            <li className="className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200 ">
+            <li className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div className="text-sm text-gray-800 font-medium">Payment Method</div>
               {/* Right */}
               <div className="text-sm text-gray-600 ml-4">
                 <span className="mr-3">Mastercard ending 9282</span>
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">Edit</a>
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">Edit</a>
               </div>
             </li>
-            <li className="className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200 ">
+            <li className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div className="text-sm text-gray-800 font-medium">Billing Interval</div>
               {/* Right */}
               <div className="text-sm text-gray-600 ml-4">
                 <span className="mr-3">Annually</span>
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">Edit</a>
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">Edit</a>
               </div>
             </li>
-            <li className="className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200 ">
+            <li className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div className="text-sm text-gray-800 font-medium">VAT/GST Number</div>
               {/* Right */}
               <div className="text-sm text-gray-600 ml-4">
                 <span className="mr-3">UK849700927</span>
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">Edit</a>
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">Edit</a>
               </div>
             </li>
-            <li className="className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200 ">
+            <li className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div className="text-sm text-gray-800 font-medium">Your Address</div>
               {/* Right */}
               <div className="text-sm text-gray-600 ml-4">
                 <span className="mr-3">34 Savoy Street, London, UK, 24E8X</span>
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">Edit</a>
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">Edit</a>
               </div>
             </li>
-            <li className="className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200 ">
+            <li className="md:flex md:justify-between md:items-center py-3 border-b border-gray-200">
               {/* Left */}
               <div className="text-sm text-gray-800 font-medium">Billing Address</div>
               {/* Right */}
               <div className="text-sm text-gray-600 ml-4">
                 <span className="mr-3">hello@cruip.com</span>
-                <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">Edit</a>
+                <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">Edit</a>
               </div>
             </li>
           </ul>
@@ -65,9 +65,9 @@ export default function BillingPanel() {
         <section>
           <h3 className="text-xl leading-snug text-gray-800 font-bold mb-1">Invoices</h3>
           {/* Table */}
-          <table className="className="table-auto w-full ">
+          <table className="table-auto w-full ">
             {/* Table header */}
-            <thead className="className="text-xs uppercase text-gray-400 ">
+            <thead className="text-xs uppercase text-gray-400">
               <tr className="flex flex-wrap md:table-row md:flex-no-wrap">
                 <th className="w-full block md:w-auto md:table-cell py-2">
                   <div className="font-semibold text-left">Year</div>
@@ -88,7 +88,7 @@ export default function BillingPanel() {
               {/* Row */}
               <tr className="flex flex-wrap md:table-row md:flex-no-wrap border-b border-gray-200 py-2 md:py-0">
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div className="className="text-left font-medium text-gray-800 ">
+                  <div className="text-left font-medium text-gray-800">2024</div>
                 </td>
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
                   <div className="text-left">Basic Plan - Annualy</div>
@@ -98,16 +98,16 @@ export default function BillingPanel() {
                 </td>
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
                   <div className="text-right flex items-center md:justify-end">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">HTML</a>
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">HTML</a>
                     <span className="block w-px h-4 bg-gray-200 mx-2" aria-hidden="true"></span>
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">PDF</a>
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">PDF</a>
                   </div>
                 </td>
               </tr>
               {/* Row */}
               <tr className="flex flex-wrap md:table-row md:flex-no-wrap border-b border-gray-200 py-2 md:py-0">
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
-                  <div className="className="text-left font-medium text-gray-800 ">
+                  <div className="text-left font-medium text-gray-800">2023</div>
                 </td>
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
                   <div className="text-left">Basic Plan - Annualy</div>
@@ -117,9 +117,9 @@ export default function BillingPanel() {
                 </td>
                 <td className="w-full block md:w-auto md:table-cell py-0.5 md:py-2">
                   <div className="text-right flex items-center md:justify-end">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">HTML</a>
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">HTML</a>
                     <span className="block w-px h-4 bg-gray-200 mx-2" aria-hidden="true"></span>
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">PDF</a>
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">PDF</a>
                   </div>
                 </td>
               </tr>
@@ -130,9 +130,9 @@ export default function BillingPanel() {
 
       {/* Panel footer */}
       <footer>
-        <div className="className="flex flex-col px-6 py-5 border-t border-gray-200 ">
+        <div className="flex flex-col px-6 py-5 border-t border-gray-200">
           <div className="flex self-end">
-            <button className="className="btn border-gray-200 hover:border-gray-300 text-gray-800 ">
+            <button className="btn border-gray-200 hover:border-gray-300 text-gray-800">Cancel</button>
             <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 ml-3">Save Changes</button>
           </div>
         </div>

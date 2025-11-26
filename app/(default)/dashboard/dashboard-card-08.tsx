@@ -89,7 +89,7 @@ export default function DashboardCard08() {
   return(
     <div className="flex flex-col col-span-full sm:col-span-6 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 Over Time (all stores)</h2>">
+        <h2 className="font-semibold text-gray-800">Sales Over Time (all stores)</h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}

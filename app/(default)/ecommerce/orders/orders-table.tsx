@@ -29,15 +29,15 @@ export default function OrdersTable({ orders }: { orders: Order[]}) {
   return (
     <div className="bg-white shadow-sm rounded-xl relative">
       <header className="px-5 py-4">
-        <h2 className="font-semibold text-gray-800 Orders <span className="text-gray-400 font-medium">442</span></h2>
+        <h2 className="font-semibold text-gray-800">All Orders <span className="text-gray-400 font-medium">442</span></h2>
       </header>
       <div>
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="className="table-auto w-full divide-y divide-gray-100 ">
+          <table className="table-auto w-full divide-y divide-gray-100 ">
             {/* Table header */}
-            <thead className="className="text-xs uppercase text-gray-500 bg-gray-50 border-t border-gray-100 ">
+            <thead className="text-xs uppercase text-gray-500 bg-gray-50 border-t border-gray-100 ">
               <tr>
                 <th className="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
                   <div className="flex items-center">

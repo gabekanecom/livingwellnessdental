@@ -8,7 +8,7 @@ export default function ForumPostRightContent() {
         <div className="md:py-8">
           {/* Button */}
           <div className="mb-6">
-            <button className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 Post</button>">
+            <button className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">New Post</button>
           </div>
 
           {/* Blocks */}
@@ -22,7 +22,7 @@ export default function ForumPostRightContent() {
                   <Image className="rounded-full" src={UserImage} width={40} height={40} alt="User 04" />
                 </div>
                 <div>
-                  <div className="className="font-semibold text-gray-800 Merlu</div>">
+                  <div className="font-semibold text-gray-800">Kate Merlu</div>
                   <div className="text-sm text-gray-500 italic">Building SquareApp 🚀</div>
                 </div>
               </div>
@@ -32,7 +32,7 @@ export default function ForumPostRightContent() {
                 <li>✍️ <span className="font-medium">299</span> Comments</li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 ">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">Follow</button>
               </div>
             </div>
 
@@ -42,12 +42,12 @@ export default function ForumPostRightContent() {
               <ul className="space-y-3">
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       I built and sold 2 small SaaS products and quit my job in the last two years — AMA
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       markusj
                     </a>{' '}
                     · 2d · 312 comments
@@ -55,12 +55,12 @@ export default function ForumPostRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Besides Product Hunt, where else should I promote my new project? 🤔
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       katemerlu
                     </a>{' '}
                     · 2h · 7 comments
@@ -68,12 +68,12 @@ export default function ForumPostRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Which are the main channels you use to drive traffic to your website? 📈
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       sophiestar
                     </a>{' '}
                     · 3d · 66 comments
@@ -81,12 +81,12 @@ export default function ForumPostRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Failed for the past 12 years as a tech entrepreneur. My key takeaways.
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       ekuplu89
                     </a>{' '}
                     · 4h · 14 comments
@@ -94,12 +94,12 @@ export default function ForumPostRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       How to build a following on Twitter as a founder - A guide to growing your audience 🚀
                     </a>
                   </div>
                   <div className="text-xs text-gray-500">
-                    <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">
+                    <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">
                       molliehacks
                     </a>{' '}
                     · 3d · 32 comments
@@ -107,7 +107,7 @@ export default function ForumPostRightContent() {
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
           </div>

@@ -45,7 +45,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Mon 27 Dec, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 Valley Bootstrapper Breakfast Online for 2024</h3>">
+              <h3 className="text-lg font-bold text-gray-800">Silicon Valley Bootstrapper Breakfast Online for 2024</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -117,7 +117,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Mon 27 Dec, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 York &amp; New Jersey Virtual Retreat 2024</h3>">
+              <h3 className="text-lg font-bold text-gray-800">New York &amp; New Jersey Virtual Retreat 2024</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -189,7 +189,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Wed 29 Dec, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 World of AI and Machine Learning — Open Chat</h3>">
+              <h3 className="text-lg font-bold text-gray-800">The World of AI and Machine Learning — Open Chat</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -261,7 +261,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Wed 29 Dec, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 Code &amp; Coffee 2.0 @ Freehold Brooklyn</h3>">
+              <h3 className="text-lg font-bold text-gray-800">NYC Code &amp; Coffee 2.0 @ Freehold Brooklyn</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -326,7 +326,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Mon 3 Jan, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 Inc. London Meetup: Women in Tech Night</h3>">
+              <h3 className="text-lg font-bold text-gray-800">Tech Inc. London Meetup: Women in Tech Night</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -391,7 +391,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Thu 6 Jan, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 Worldwide - First Meetup of 2022!</h3>">
+              <h3 className="text-lg font-bold text-gray-800">Devs Worldwide - First Meetup of 2022!</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -463,7 +463,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Thu 6 Jan, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 Blockchain Network - Monthly 3rd Thursday Meetup</h3>">
+              <h3 className="text-lg font-bold text-gray-800">Blockchain Network - Monthly 3rd Thursday Meetup</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.
@@ -528,7 +528,7 @@ export default function MeetupsPosts() {
           <div className="grow">
             <div className="text-sm font-semibold text-violet-500 uppercase mb-2">Fri 7 Jan, 2024</div>
             <Link className="inline-flex mb-2" href="/community/meetups/post">
-              <h3 className="className="text-lg font-bold text-gray-800 a Personal Brand and Boost Your Career in AI!</h3>">
+              <h3 className="text-lg font-bold text-gray-800">Build a Personal Brand and Boost Your Career in AI!</h3>
             </Link>
             <div className="text-sm">
               Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts.

@@ -36,7 +36,7 @@ export default function TabCard({ user }: { user: User}) {
               </Link>
             </div>
             <div className="text-center">
-              <Link className="className="inline-flex text-gray-800 hover:text-gray-900 href={user.link}>">
+              <Link className="inline-flex text-gray-800 hover:text-gray-900" href={user.link}>
                 <h2 className="text-xl leading-snug justify-center font-semibold">{user.name}</h2>
               </Link>
             </div>
@@ -48,7 +48,7 @@ export default function TabCard({ user }: { user: User}) {
           </div>
         </div>
         {/* Card footer */}
-        <div className="className="border-t border-gray-100 ">
+        <div className="border-t border-gray-100 ">
           <Link className="block text-center text-sm text-violet-500 hover:text-violet-600 font-medium px-3 py-4" href="/messages">
             <div className="flex items-center justify-center">
               <svg className="fill-current shrink-0 mr-2" width="16" height="16" viewBox="0 0 16 16">

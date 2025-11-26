@@ -146,6 +146,72 @@ export default function Sidebar({
                   )
                 }}
               </SidebarLinkGroup>
+              {/* LMS */}
+              <SidebarLinkGroup open={segments.includes('lms')}>
+                {(handleClick, open) => {
+                  return (
+                    <>
+                      <a
+                        href="#0"
+                        className={`block text-gray-800 truncate transition ${segments.includes('lms') ? '' : 'hover:text-gray-900'
+                          }`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          expandOnly ? setSidebarExpanded(true) : handleClick()
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className={`shrink-0 fill-current ${segments.includes('lms') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                              <path d="M8 0L0 3.5v2L8 9l8-3.5v-2L8 0zm0 10L1 6.5v2L8 12l7-3.5v-2L8 10zm0 3L1 9.5v2L8 15l7-3.5v-2L8 13z"/>
+                            </svg>
+                            <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                              Learning
+                            </span>
+                          </div>
+                          <div className="flex shrink-0 ml-2">
+                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-8 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/lms">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Overview
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/lms/catalog">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Course Catalog
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/lms/dashboard">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                My Learning
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/lms/ai-builder">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                AI Course Builder
+                              </span>
+                            </SidebarLink>
+                          </li>
+                        </ul>
+                      </div>
+                    </>
+                  )
+                }}
+              </SidebarLinkGroup>
               {/* E-Commerce */}
               <SidebarLinkGroup open={segments.includes('ecommerce')}>
                 {(handleClick, open) => {
@@ -590,6 +656,83 @@ export default function Sidebar({
                   </div>
                 </SidebarLink>
               </li>
+              {/* Admin */}
+              <SidebarLinkGroup open={segments.includes('admin')}>
+                {(handleClick, open) => {
+                  return (
+                    <>
+                      <a
+                        href="#0"
+                        className={`block text-gray-800 truncate transition ${segments.includes('admin') ? '' : 'hover:text-gray-900'
+                          }`}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          expandOnly ? setSidebarExpanded(true) : handleClick()
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <svg className={`shrink-0 fill-current ${segments.includes('admin') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                              <path d="M8 0a8 8 0 1 0 8 8 8 8 0 0 0-8-8Zm0 14a6 6 0 1 1 6-6 6 6 0 0 1-6 6Z"/>
+                              <path d="M8 3a1 1 0 0 0-1 1v3.586L5.707 8.879a1 1 0 1 0 1.414 1.414l1.586-1.586A1 1 0 0 0 9 8V4a1 1 0 0 0-1-1Z"/>
+                            </svg>
+                            <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                              Admin
+                            </span>
+                          </div>
+                          <div className="flex shrink-0 ml-2">
+                            <svg
+                              className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`}
+                              viewBox="0 0 12 12"
+                            >
+                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                      <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
+                        <ul className={`pl-8 mt-1 ${!open && 'hidden'}`}>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/admin">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Overview
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/admin/users">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Users
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/admin/locations">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Locations
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/admin/user-types">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                User Types & Roles
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/admin/permissions">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Permissions
+                              </span>
+                            </SidebarLink>
+                          </li>
+                        </ul>
+                      </div>
+                    </>
+                  )
+                }}
+              </SidebarLinkGroup>
               {/* Settings */}
               <SidebarLinkGroup open={segments.includes('settings')}>
                 {(handleClick, open) => {

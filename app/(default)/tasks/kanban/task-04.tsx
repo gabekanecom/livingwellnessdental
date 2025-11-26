@@ -24,7 +24,7 @@ export default function Task04() {
             <svg className="shrink-0 fill-current mr-1.5" width="16" height="16" viewBox="0 0 16 16">
               <path d="M6.974 14c-.3 0-.7-.2-.9-.5l-2.2-3.7-2.1 2.8c-.3.4-1 .5-1.4.2-.4-.3-.5-1-.2-1.4l3-4c.2-.3.5-.4.9-.4.3 0 .6.2.8.5l2 3.3 3.3-8.1c0-.4.4-.7.8-.7s.8.2.9.6l4 8c.2.5 0 1.1-.4 1.3-.5.2-1.1 0-1.3-.4l-3-6-3.2 7.9c-.2.4-.6.6-1 .6z" />
             </svg>
-            <div className="className="text-sm text-gray-500 ">
+            <div className="text-sm text-gray-500">1/3</div>
           </div>
           {/* Attach button */}
           <button className="text-gray-400 hover:text-violet-500  ml-3">

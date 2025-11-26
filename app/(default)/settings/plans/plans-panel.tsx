@@ -53,7 +53,7 @@ export default function PlansPanel() {
                     <span className="text-2xl">$</span><span className="text-3xl">{annual ? '14' : '19'}</span><span className="text-gray-500 font-medium text-sm">/mo</span>
                   </div>
                   {/* CTA */}
-                  <button className="btn border-gray-200 hover:border-gray-300 text-gray-800">Cancel</button>w-full">Downgrade</button>
+                  <button className="btn w-full border-gray-200 hover:border-gray-300 text-gray-800">Downgrade</button>
                 </div>
                 <div className="px-5 pt-4 pb-5">
                   <div className="text-xs text-gray-800 font-semibold uppercase mb-4">What's included</div>
@@ -250,7 +250,7 @@ export default function PlansPanel() {
                 Got more questions?
               </div>
               <div className="text-sm">
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum in voluptate velit esse cillum dolore eu fugiat <a className="font-medium text-violet-500 hover:text-violet-600 href="#0">contact us</a>.
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum in voluptate velit esse cillum dolore eu fugiat <a className="font-medium text-violet-500 hover:text-violet-600" href="#0">contact us</a>.
               </div>
             </li>
           </ul>

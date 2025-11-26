@@ -107,7 +107,7 @@ export default function FintechCard01() {
   return(
     <div className="flex flex-col col-span-full xl:col-span-8 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 Returns</h2>">
+        <h2 className="font-semibold text-gray-800">Total Returns</h2>
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}

@@ -25,7 +25,7 @@ export default function JobsItem({ job }: { job: Job }) {
             <Image className="w-9 h-9 rounded-full" src={job.image} width={36} height={36} alt={job.company} />
           </div>
           <div>
-            <Link className="className="inline-flex font-semibold text-gray-800 href={job.link}>">
+            <Link className="inline-flex font-semibold text-gray-800" href={job.link}>
               {job.role}
             </Link>
             <div className="text-sm">{job.details}</div>
@@ -43,7 +43,7 @@ export default function JobsItem({ job }: { job: Job }) {
               {job.type}
             </div>
           )}
-          <button className={`${job.fav ? 'text-yellow-500' : 'text-gray-300 hover:text-gray-400 
+          <button className={`${job.fav ? 'text-yellow-500' : 'text-gray-300 hover:text-gray-400'}`}>
             <span className="sr-only">Bookmark</span>
             <svg className="w-3 h-4 fill-current" width="12" height="16" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 0C.9 0 0 .9 0 2v14l6-3 6 3V2c0-1.1-.9-2-2-2H2Z" />

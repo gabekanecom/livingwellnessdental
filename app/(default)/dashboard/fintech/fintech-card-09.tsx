@@ -33,11 +33,11 @@ export default function FintechCard09() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-100 flex items-center">
-        <h2 className="className="font-semibold text-gray-800 Value</h2>">
+        <h2 className="font-semibold text-gray-800">Total Value</h2>
       </header>
       <div className="px-5 py-3">
         <div className="text-sm italic mb-2">Hey Mark, here is the value of your portfolio:</div>
-        <div className="className="text-3xl font-bold text-gray-800 ">
+        <div className="text-3xl font-bold text-gray-800">$24,529.41</div>
       </div>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}

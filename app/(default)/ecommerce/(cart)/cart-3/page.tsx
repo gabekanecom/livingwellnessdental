@@ -21,9 +21,9 @@ export default function Cart3() {
           <div className="mb-6 lg:mb-0">
             <div className="mb-3">
               <div className="flex text-sm font-medium text-gray-400 space-x-2">
-                <span className="className="text-gray-500 ">
+                <span className="text-gray-500">Cart</span>
                 <span>-&gt;</span>
-                <span className="className="text-gray-500 ">
+                <span className="text-gray-500">Payment</span>
                 <span>-&gt;</span>
                 <span className="text-violet-500">Confirm</span>
               </div>
@@ -103,7 +103,7 @@ export default function Cart3() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <button type="submit" className="className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800 ">
+                    <button type="submit" className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-800">
                       Download Invoice
                     </button>
                   </div>
@@ -111,12 +111,12 @@ export default function Cart3() {
               </form>
             </div>
             {/* Divider */}
-            <hr className="className="my-6 border-t border-gray-100 />">
+            <hr className="my-6 border-t border-gray-100" />
             {/* Billing footer */}
             <div className="bg-gray-50 rounded-sm border border-gray-200 p-4">
               <div className="text-center md:text-left md:flex md:items-center md:justify-between space-y-2 md:space-y-0 md:space-x-2">
                 <div className="text-sm">
-                  Enjoy a <span className="className="font-medium text-gray-800 OFF</span> discount on your next order 🎉">
+                  Enjoy a <span className="font-medium text-gray-800">10% OFF</span> discount on your next order 🎉
                 </div>
                 <div className="relative inline-flex text-center px-3 py-1 rounded-sm bg-green-500">
                   <div
@@ -150,7 +150,7 @@ export default function Cart3() {
                   {/* Cart items */}
                   <ul>
                     {/* Cart item */}
-                    <li className="className="flex items-center py-3 border-b border-gray-200 ">
+                    <li className="flex items-center py-3 border-b border-gray-200">
                       <a className="block mr-2 xl:mr-4 shrink-0" href="#0">
                         <Image className="w-16 xl:w-20" src={ProductImage01} width={200} height={142} alt="Product 01" />
                       </a>
@@ -162,7 +162,7 @@ export default function Cart3() {
                       <div className="text-sm font-medium text-gray-800 ml-2">$69</div>
                     </li>
                     {/* Cart item */}
-                    <li className="className="flex items-center py-3 border-b border-gray-200 ">
+                    <li className="flex items-center py-3 border-b border-gray-200">
                       <a className="block mr-2 xl:mr-4 shrink-0" href="#0">
                         <Image className="w-16 xl:w-20" src={ProductImage02} width={200} height={142} alt="Product 02" />
                       </a>
@@ -174,7 +174,7 @@ export default function Cart3() {
                       <div className="text-sm font-medium text-gray-800 ml-2">$69</div>
                     </li>
                     {/* Cart item */}
-                    <li className="className="flex items-center py-3 border-b border-gray-200 ">
+                    <li className="flex items-center py-3 border-b border-gray-200">
                       <a className="block mr-2 xl:mr-4 shrink-0" href="#0">
                         <Image className="w-16 xl:w-20" src={ProductImage03} width={200} height={142} alt="Product 03" />
                       </a>
@@ -188,15 +188,15 @@ export default function Cart3() {
                   </ul>
                   {/* Fees, discount and total */}
                   <ul>
-                    <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                    <li className="flex items-center justify-between py-3 border-b border-gray-200">
                       <div className="text-sm">Subtotal</div>
                       <div className="text-sm font-medium text-gray-800 ml-2">$205</div>
                     </li>
-                    <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                    <li className="flex items-center justify-between py-3 border-b border-gray-200">
                       <div className="text-sm">Taxes</div>
                       <div className="text-sm font-medium text-gray-800 ml-2">$48</div>
                     </li>
-                    <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                    <li className="flex items-center justify-between py-3 border-b border-gray-200">
                       <div className="flex items-center">
                         <span className="text-sm mr-2">Discount</span>
                         <span className="text-xs inline-flex whitespace-nowrap font-medium uppercase bg-gray-200 text-gray-500 rounded-full text-center px-2.5 py-1">
@@ -205,7 +205,7 @@ export default function Cart3() {
                       </div>
                       <div className="text-sm font-medium text-gray-800 ml-2">-$25</div>
                     </li>
-                    <li className="className="flex items-center justify-between py-3 border-b border-gray-200 ">
+                    <li className="flex items-center justify-between py-3 border-b border-gray-200">
                       <div className="text-sm">Total</div>
                       <div className="text-sm font-medium text-green-600 ml-2">$205</div>
                     </li>
@@ -230,7 +230,7 @@ export default function Cart3() {
                           />
                         </svg>
                         <div>
-                          Ending with <span className="className="text-gray-800 ">
+                          Ending with <span className="text-gray-800">2478</span>
                         </div>
                       </div>
                       {/* Expiry */}
@@ -241,7 +241,7 @@ export default function Cart3() {
 
                 <div className="mt-6">
                   <div className="mb-4">
-                    <Link href="/ecommerce/pay" className="className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800 ">
+                    <Link href="/ecommerce/pay" className="btn w-full bg-gray-900 text-gray-100 hover:bg-gray-800">
                       View Your Order
                     </Link>
                   </div>

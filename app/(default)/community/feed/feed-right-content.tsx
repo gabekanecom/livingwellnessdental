@@ -20,7 +20,7 @@ export default function FeedRightContent() {
               <label htmlFor="feed-search-desktop" className="sr-only">
                 Search
               </label>
-              <input id="feed-search-desktop" className="form-input w-full pl-9 bg-white type="search" placeholder="Search…" />
+              <input id="feed-search-desktop" className="form-input w-full pl-9 bg-white" type="search" placeholder="Search…" />
               <button className="absolute inset-0 right-auto group" type="submit" aria-label="Search">
                 <svg
                   className="shrink-0 fill-current text-gray-400 group-hover:text-gray-500 ml-3 mr-2"
@@ -50,7 +50,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={GroupAvatar01} width={32} height={32} alt="Group 01" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 ">
+                        <span className="text-sm font-medium text-gray-800">Group Name</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -65,7 +65,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={GroupAvatar02} width={32} height={32} alt="Group 02" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 ">
+                        <span className="text-sm font-medium text-gray-800">Group Name</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -80,7 +80,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={GroupAvatar03} width={32} height={32} alt="Group 03" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 ">
+                        <span className="text-sm font-medium text-gray-800">Group Name</span>
                       </div>
                     </div>
                     <button className="text-xs inline-flex font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2.5 py-1">
@@ -97,7 +97,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={GroupAvatar04} width={32} height={32} alt="Group 04" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 ">
+                        <span className="text-sm font-medium text-gray-800">Group Name</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -107,7 +107,7 @@ export default function FeedRightContent() {
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
             
@@ -122,7 +122,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage02} width={32} height={32} alt="User 02" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Boutin</span>">
+                        <span className="text-sm font-medium text-gray-800">Tisha Boutin</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -137,7 +137,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage04} width={32} height={32} alt="User 04" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Harris</span>">
+                        <span className="text-sm font-medium text-gray-800">Mary Harris</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -152,7 +152,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage05} width={32} height={32} alt="User 05" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Porzio</span>">
+                        <span className="text-sm font-medium text-gray-800">John Porzio</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -167,7 +167,7 @@ export default function FeedRightContent() {
                         <Image className="w-8 h-8 rounded-full" src={UserImage01} width={32} height={32} alt="User 01" />
                       </div>
                       <div className="truncate">
-                        <span className="className="text-sm font-medium text-gray-800 Lovin</span>">
+                        <span className="text-sm font-medium text-gray-800">Brian Lovin</span>
                       </div>
                     </div>
                     <button className="btn-xs text-xs border-gray-200 hover:border-gray-300 text-gray-800 px-2.5 py-1 rounded-full shadow-none">
@@ -177,7 +177,7 @@ export default function FeedRightContent() {
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
             
@@ -187,7 +187,7 @@ export default function FeedRightContent() {
               <ul className="space-y-3">
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Tracking your website traffic on launch day 📈
                     </a>
                   </div>
@@ -195,7 +195,7 @@ export default function FeedRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Freemium model questions
                     </a>
                   </div>
@@ -203,7 +203,7 @@ export default function FeedRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Slack and Community
                     </a>
                   </div>
@@ -211,7 +211,7 @@ export default function FeedRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Who owns user onboarding in your company?
                     </a>
                   </div>
@@ -219,7 +219,7 @@ export default function FeedRightContent() {
                 </li>
                 <li>
                   <div className="text-sm mb-1">
-                    <a className="font-medium text-gray-800 hover:text-gray-900 href="#0">
+                    <a className="font-medium text-gray-800 hover:text-gray-900" href="#0">
                       Questions from a very confused Web3 startup founder 🤔
                     </a>
                   </div>
@@ -227,7 +227,7 @@ export default function FeedRightContent() {
                 </li>
               </ul>
               <div className="mt-4">
-                <button className="className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800 All</button>">
+                <button className="btn-sm w-full bg-white border-gray-200 hover:border-gray-300 text-gray-800">View All</button>
               </div>
             </div>
 

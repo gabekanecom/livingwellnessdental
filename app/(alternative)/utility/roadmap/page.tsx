@@ -17,7 +17,7 @@ export default function Roadmap() {
     <div className="relative bg-white h-full">
 
       {/* Page header */}
-      <div className="className="sm:flex sm:justify-between sm:items-center px-4 sm:px-6 py-8 border-b border-gray-200 ">
+      <div className="sm:flex sm:justify-between sm:items-center px-4 sm:px-6 py-8 border-b border-gray-200">
 
         {/* Left: Title */}
         <div className="mb-4 sm:mb-0">
@@ -28,7 +28,7 @@ export default function Roadmap() {
         <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
 
           {/* Add event button */}
-          <button className="className="btn bg-gray-900 text-gray-100 hover:bg-gray-800 Event</button>">
+          <button className="btn bg-gray-900 text-gray-100 hover:bg-gray-800">Add Event</button>
 
         </div>
 
@@ -46,7 +46,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <h2 className="text-xl leading-snug font-bold text-gray-800 xl:leading-7 mb-4 xl:mb-0">2024 Q1</h2>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <div className="flex flex-nowrap items-center space-x-2 mb-6">
                       {/* Avatars */}
@@ -64,7 +64,7 @@ export default function Roadmap() {
                           <Image className="rounded-full border-2 border-white box-content" src={User06} width={28} height={28} alt="User 06" />
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-green-500/20 text-green-700 rounded-full text-center px-2.5 py-1">Completed</div>
                       </div>
@@ -134,7 +134,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <h2 className="text-xl leading-snug font-bold text-gray-800 xl:leading-7 mb-4 xl:mb-0">2024 Q2</h2>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <div className="flex flex-nowrap items-center space-x-2 mb-6">
                       {/* Avatars */}
@@ -149,7 +149,7 @@ export default function Roadmap() {
                           <Image className="rounded-full border-2 border-white box-content" src={User01} width={28} height={28} alt="User 01" />
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="btn-xs text-xs bg-violet-500/20 text-violet-600 px-2.5 py-1 rounded-full shadow-none">Working on</div>
                       </div>
@@ -199,8 +199,8 @@ export default function Roadmap() {
                     {/* List item */}
                     <li className="relative py-2">
                       <div className="flex items-center mb-1">
-                        <div className="absolute left-0 rounded-full bg-white aria-hidden="true">
-                          <svg className="fill-current text-gray-200 width="20" height="20" viewBox="0 0 20 20">
+                        <div className="absolute left-0 rounded-full bg-white" aria-hidden="true">
+                          <svg className="fill-current text-gray-200" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" />
                           </svg>
                         </div>
@@ -219,7 +219,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <h2 className="text-xl leading-snug font-bold text-gray-800 xl:leading-7 mb-4 xl:mb-0">2024 Q3</h2>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <div className="flex flex-nowrap items-center space-x-2 mb-6">
                       {/* Avatars */}
@@ -234,7 +234,7 @@ export default function Roadmap() {
                           <Image className="rounded-full border-2 border-white box-content" src={User09} width={28} height={28} alt="User 01" />
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-yellow-500/20 text-yellow-700 rounded-full text-center px-2.5 py-1">Planned</div>
                       </div>
@@ -246,8 +246,8 @@ export default function Roadmap() {
                     <li className="relative py-2">
                       <div className="flex items-center mb-1">
                         <div className="absolute left-0 h-full w-0.5 bg-gray-200 self-start ml-2.5 -translate-x-1/2 translate-y-3" aria-hidden="true"></div>
-                        <div className="absolute left-0 rounded-full bg-white aria-hidden="true">
-                          <svg className="fill-current text-gray-200 width="20" height="20" viewBox="0 0 20 20">
+                        <div className="absolute left-0 rounded-full bg-white" aria-hidden="true">
+                          <svg className="fill-current text-gray-200" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" />
                           </svg>
                         </div>
@@ -258,8 +258,8 @@ export default function Roadmap() {
                     {/* List item */}
                     <li className="relative py-2">
                       <div className="flex items-center mb-1">
-                        <div className="absolute left-0 rounded-full bg-white aria-hidden="true">
-                          <svg className="fill-current text-gray-200 width="20" height="20" viewBox="0 0 20 20">
+                        <div className="absolute left-0 rounded-full bg-white" aria-hidden="true">
+                          <svg className="fill-current text-gray-200" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" />
                           </svg>
                         </div>
@@ -278,7 +278,7 @@ export default function Roadmap() {
                 <div className="w-32 shrink-0">
                   <h2 className="text-xl leading-snug font-bold text-gray-800 xl:leading-7 mb-4 xl:mb-0">2024 Q4</h2>
                 </div>
-                <div className="className="grow pb-6 border-b border-gray-200 ">
+                <div className="grow pb-6 border-b border-gray-200">
                   <header>
                     <div className="flex flex-nowrap items-center space-x-2 mb-6">
                       {/* Avatars */}
@@ -290,7 +290,7 @@ export default function Roadmap() {
                           <Image className="rounded-full border-2 border-white box-content" src={User02} width={28} height={28} alt="User 02" />
                         </a>
                       </div>
-                      <div className="className="text-gray-400 ">
+                      <div className="text-gray-400">·</div>
                       <div>
                         <div className="text-xs inline-flex font-medium bg-yellow-500/20 text-yellow-700 rounded-full text-center px-2.5 py-1">Planned</div>
                       </div>
@@ -302,8 +302,8 @@ export default function Roadmap() {
                     <li className="relative py-2">
                       <div className="flex items-center mb-1">
                         <div className="absolute left-0 h-full w-0.5 bg-gray-200 self-start ml-2.5 -translate-x-1/2 translate-y-3" aria-hidden="true"></div>
-                        <div className="absolute left-0 rounded-full bg-white aria-hidden="true">
-                          <svg className="fill-current text-gray-200 width="20" height="20" viewBox="0 0 20 20">
+                        <div className="absolute left-0 rounded-full bg-white" aria-hidden="true">
+                          <svg className="fill-current text-gray-200" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" />
                           </svg>
                         </div>
@@ -314,8 +314,8 @@ export default function Roadmap() {
                     {/* List item */}
                     <li className="relative py-2">
                       <div className="flex items-center mb-1">
-                        <div className="absolute left-0 rounded-full bg-white aria-hidden="true">
-                          <svg className="fill-current text-gray-200 width="20" height="20" viewBox="0 0 20 20">
+                        <div className="absolute left-0 rounded-full bg-white" aria-hidden="true">
+                          <svg className="fill-current text-gray-200" width="20" height="20" viewBox="0 0 20 20">
                             <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 2C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10z" />
                           </svg>
                         </div>

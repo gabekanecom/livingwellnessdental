@@ -58,7 +58,7 @@ export default function FintechCard10() {
       <div className="px-5 pt-5">
         <header>
           <h3 className="text-sm font-semibold text-gray-500 uppercase mb-1">
-            <span className="className="text-gray-800 - Alphabet">
+            <span className="text-gray-800">GOOG - Alphabet</span>
           </h3>
           <div className="text-2xl font-bold text-gray-800 mb-1">$2,860.96</div>
           <div className="text-sm">

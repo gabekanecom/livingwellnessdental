@@ -11,7 +11,7 @@ export const CampaignProperties = () => {
       case 'Off-Track':
         return 'bg-red-500/20 text-red-700'
       default:
-        return 'bg-gray-100 text-gray-500 
+        return 'bg-gray-100 text-gray-500';
     }
   }
 
