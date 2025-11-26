@@ -90,7 +90,7 @@ export default function ColorEditor({ settings, onUpdate, onHasChanges }: ColorE
 
     setNewColorName('');
     setNewColorBase('#6366f1');
-    setExpandedColors(new Set([...expandedColors, newColorName.trim()]));
+    setExpandedColors(new Set(Array.from(expandedColors).concat(newColorName.trim())));
     onHasChanges(true);
     toast.success(`Added ${newColorName} to brand colors`);
   };
