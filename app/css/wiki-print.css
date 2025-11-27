@@ -1,0 +1,164 @@
+@media print {
+  /* Hide non-essential elements */
+  header,
+  nav,
+  aside,
+  footer,
+  .no-print,
+  [data-widget],
+  button,
+  .reading-progress,
+  .article-navigation,
+  .related-articles,
+  .wiki-chat-widget,
+  .wiki-category-sidebar {
+    display: none !important;
+  }
+
+  /* Reset body and container styles */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Main content full width */
+  main,
+  article,
+  .article-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Article title styling */
+  article h1 {
+    font-size: 24pt !important;
+    margin-bottom: 12pt !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Heading styling */
+  h2 {
+    font-size: 18pt !important;
+    margin-top: 18pt !important;
+    page-break-after: avoid !important;
+  }
+
+  h3 {
+    font-size: 14pt !important;
+    margin-top: 14pt !important;
+    page-break-after: avoid !important;
+  }
+
+  h4, h5, h6 {
+    font-size: 12pt !important;
+    margin-top: 12pt !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Paragraph styling */
+  p {
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  /* Link styling - show URL after link text */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Don't show URL for internal links */
+  a[href^="/"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  /* Image styling */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Table styling */
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  th, td {
+    border: 1px solid #ccc !important;
+    padding: 8pt !important;
+  }
+
+  /* Code block styling */
+  pre, code {
+    font-size: 10pt !important;
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd !important;
+    page-break-inside: avoid !important;
+  }
+
+  pre {
+    padding: 10pt !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+  }
+
+  /* Blockquote styling */
+  blockquote {
+    border-left: 3pt solid #ccc !important;
+    padding-left: 10pt !important;
+    margin-left: 0 !important;
+    font-style: italic !important;
+  }
+
+  /* List styling */
+  ul, ol {
+    padding-left: 20pt !important;
+  }
+
+  /* Page break utilities */
+  .page-break-before {
+    page-break-before: always !important;
+  }
+
+  .page-break-after {
+    page-break-after: always !important;
+  }
+
+  .avoid-break {
+    page-break-inside: avoid !important;
+  }
+
+  /* Add article URL at the bottom */
+  article::after {
+    content: "Printed from: " attr(data-url);
+    display: block;
+    margin-top: 24pt;
+    padding-top: 12pt;
+    border-top: 1px solid #ccc;
+    font-size: 10pt;
+    color: #666;
+  }
+
+  /* Tags display for print */
+  .article-tags {
+    margin-top: 12pt !important;
+    padding-top: 12pt !important;
+    border-top: 1px solid #eee !important;
+  }
+
+  .article-tags span {
+    display: inline !important;
+    background: none !important;
+    border: 1px solid #ccc !important;
+    padding: 2pt 6pt !important;
+    margin-right: 4pt !important;
+    font-size: 10pt !important;
+  }
+}

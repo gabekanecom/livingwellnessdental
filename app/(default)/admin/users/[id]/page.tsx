@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, Fragment, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, CameraIcon } from "@heroicons/react/24/outline";
 import UserAvatarSimple from "@/components/user-avatar-simple";
+import ImageCropper from "@/components/ImageCropper";
 import { toast, Toaster } from "react-hot-toast";
 
 interface Location {
@@ -71,6 +72,10 @@ export default function UserProfilePage() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [confirmationText, setConfirmationText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchUser();
@@ -277,6 +282,61 @@ export default function UserProfilePage() {
     return user.userRoles[0].role;
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please select an image file');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image must be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCroppedImage = async (croppedBlob: Blob) => {
+    setIsUploadingImage(true);
+    try {
+      const fileName = `profile_${Date.now()}.jpg`;
+      const file = new File([croppedBlob], fileName, { type: "image/jpeg" });
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("userId", userId);
+
+      const response = await fetch("/api/upload/profile-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image");
+      }
+
+      const data = await response.json();
+      
+      setUser((prev) => prev ? { ...prev, avatar: data.url } : null);
+      toast.success("Profile image updated");
+      window.dispatchEvent(new CustomEvent('avatarUpdated'));
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Failed to upload image");
+    } finally {
+      setIsUploadingImage(false);
+      setSelectedImage(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="p-6">
@@ -334,18 +394,44 @@ export default function UserProfilePage() {
           <div className="w-full md:w-60 lg:w-72 md:shrink-0 md:border-r border-gray-200">
             <div className="p-6 space-y-6">
               <div className="flex flex-col items-center">
-                <div className="mb-3">
+                <div className="mb-3 relative group">
                   <UserAvatarSimple
                     src={user.avatar}
                     alt={user.name}
                     size={80}
                     className="w-20 h-20"
                   />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingImage}
+                    className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                  >
+                    {isUploadingImage ? (
+                      <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent" />
+                    ) : (
+                      <CameraIcon className="h-6 w-6 text-white" />
+                    )}
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                  />
                 </div>
                 <div className="text-center">
                   <p className="font-medium text-gray-800">{user.name}</p>
                   <p className="text-sm text-gray-500">{user.email}</p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="mt-2 text-xs text-violet-600 hover:text-violet-700"
+                >
+                  Change Photo
+                </button>
               </div>
 
               {getPrimaryRole() && (
@@ -692,6 +778,20 @@ export default function UserProfilePage() {
           </div>
         </Dialog>
       </Transition>
+
+      {selectedImage && (
+        <ImageCropper
+          image={selectedImage}
+          onCropComplete={handleCroppedImage}
+          onCancel={() => {
+            setSelectedImage(null);
+            if (fileInputRef.current) {
+              fileInputRef.current.value = "";
+            }
+          }}
+          aspectRatio={1}
+        />
+      )}
     </div>
   );
 }

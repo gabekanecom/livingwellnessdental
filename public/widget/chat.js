@@ -6,7 +6,7 @@
   const config = {
     baseUrl: script.getAttribute('data-base-url') || 'https://app.livingwellnessdental.com',
     theme: script.getAttribute('data-theme') || 'light',
-    accent: script.getAttribute('data-accent') || '7c3aed',
+    accent: script.getAttribute('data-accent') || '3ec972',
     position: script.getAttribute('data-position') || 'right',
     greeting: script.getAttribute('data-greeting') || 'Hi! How can I help you today?',
   };

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ClockIcon, UserGroupIcon, StarIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, UserGroupIcon, StarIcon, PencilSquareIcon, EyeIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 
 interface Course {
@@ -37,12 +37,14 @@ interface CourseCardProps {
   course: Course;
   showManagementActions?: boolean;
   showEnrollButton?: boolean;
+  onPreview?: (courseId: string) => void;
 }
 
 export default function CourseCard({ 
   course, 
   showManagementActions = false, 
-  showEnrollButton = true
+  showEnrollButton = true,
+  onPreview
 }: CourseCardProps) {
   
   const formatDuration = (minutes: number | null) => {
@@ -56,9 +58,9 @@ export default function CourseCard({
 
   const getDifficultyColor = (level: string) => {
     switch (level) {
-      case 'BEGINNER': return 'bg-emerald-100 text-emerald-800';
-      case 'INTERMEDIATE': return 'bg-yellow-100 text-yellow-800';
-      case 'ADVANCED': return 'bg-red-100 text-red-800';
+      case 'BEGINNER': return 'bg-success/10 text-success';
+      case 'INTERMEDIATE': return 'bg-warning/10 text-warning';
+      case 'ADVANCED': return 'bg-danger/10 text-danger';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -117,7 +119,7 @@ export default function CourseCard({
           
           <div className="absolute top-3 left-3 flex flex-wrap gap-2">
             {course.isFeatured && (
-              <span className="px-2 py-1 bg-yellow-500 text-white text-xs font-medium rounded">
+              <span className="px-2 py-1 bg-warning text-white text-xs font-medium rounded">
                 Featured
               </span>
             )}
@@ -149,7 +151,7 @@ export default function CourseCard({
         </div>
 
         <Link href={`/lms/courses/${course.id}`}>
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-blue-600 cursor-pointer transition-colors">
+          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-violet-600 cursor-pointer transition-colors">
             {course.title}
           </h3>
         </Link>
@@ -189,17 +191,40 @@ export default function CourseCard({
           {showEnrollButton && course.isPublished && !showManagementActions && (
             <Link
               href={`/lms/courses/${course.id}/take`}
-              className="flex-1 px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors text-center"
+              className="flex-1 px-4 py-2 bg-success text-white text-sm font-medium rounded-lg hover:opacity-90 transition-colors text-center"
             >
               Take Course
             </Link>
           )}
           
+          {showManagementActions && (
+            <Link
+              href={`/lms/courses/${course.id}/edit`}
+              className="px-3 py-2 bg-violet-100 text-violet-700 text-sm font-medium rounded-lg hover:bg-violet-200 transition-colors flex items-center justify-center"
+              title="Edit Course"
+            >
+              <PencilSquareIcon className="h-4 w-4" />
+            </Link>
+          )}
+
+          {onPreview && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                onPreview(course.id);
+              }}
+              className="px-3 py-2 bg-violet-50 text-violet-600 text-sm font-medium rounded-lg hover:bg-violet-100 transition-colors flex items-center justify-center"
+              title="Quick Preview"
+            >
+              <EyeIcon className="h-4 w-4" />
+            </button>
+          )}
+          
           <Link
-            href={showManagementActions ? `/lms/courses/${course.id}/edit` : `/lms/courses/${course.id}`}
+            href={`/lms/courses/${course.id}`}
             className="flex-1 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors text-center"
           >
-            {showManagementActions ? 'Manage' : 'View Course'}
+            View Course
           </Link>
         </div>
       </div>

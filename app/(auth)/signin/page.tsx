@@ -87,12 +87,7 @@ export default function SignIn() {
                   </button>
                 </div>
               </form>
-              <div className="pt-5 mt-6 border-t border-gray-100">
-                <div className="text-sm">
-                  Don't you have an account? <Link className="font-medium text-violet-500 hover:text-violet-600" href="/signup">Sign Up</Link>
-                </div>
-              </div>
-            </div>
+                          </div>
           </div>
         </div>
         <AuthImage />

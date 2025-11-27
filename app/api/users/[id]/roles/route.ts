@@ -91,6 +91,75 @@ export async function POST(
   }
 }
 
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const body = await request.json();
+    const { roleAssignments } = body;
+
+    if (!roleAssignments || !Array.isArray(roleAssignments)) {
+      return NextResponse.json(
+        { error: 'Role assignments array is required' },
+        { status: 400 }
+      );
+    }
+
+    await prisma.userRole.updateMany({
+      where: { userId: id },
+      data: { isActive: false }
+    });
+
+    for (const assignment of roleAssignments) {
+      const { roleId, locationId } = assignment;
+      
+      const existing = await prisma.userRole.findFirst({
+        where: {
+          userId: id,
+          roleId,
+          locationId: locationId || null
+        }
+      });
+
+      if (existing) {
+        await prisma.userRole.update({
+          where: { id: existing.id },
+          data: { isActive: true }
+        });
+      } else {
+        await prisma.userRole.create({
+          data: {
+            userId: id,
+            roleId,
+            locationId: locationId || null
+          }
+        });
+      }
+    }
+
+    const updatedRoles = await prisma.userRole.findMany({
+      where: { userId: id, isActive: true },
+      include: {
+        role: { include: { userType: true } },
+        location: true
+      }
+    });
+
+    return NextResponse.json({
+      data: updatedRoles,
+      message: 'Roles updated successfully'
+    });
+  } catch (error) {
+    console.error('Error updating roles:', error);
+    return NextResponse.json(
+      { error: 'Failed to update roles' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

@@ -83,6 +83,9 @@ importers:
       '@vercel/blob':
         specifier: ^2.0.0
         version: 2.0.0
+      canvas-confetti:
+        specifier: ^1.9.4
+        version: 1.9.4
       chart.js:
         specifier: ^4.4.7
         version: 4.4.7
@@ -128,6 +131,9 @@ importers:
       react-dropzone:
         specifier: ^14.3.8
         version: 14.3.8(react@19.0.0)
+      react-easy-crop:
+        specifier: ^5.5.5
+        version: 5.5.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-hot-toast:
         specifier: ^2.5.2
         version: 2.6.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -147,6 +153,9 @@ importers:
       '@tailwindcss/postcss':
         specifier: ^4.0.3
         version: 4.0.3
+      '@types/canvas-confetti':
+        specifier: ^1.9.0
+        version: 1.9.0
       '@types/marked':
         specifier: ^5.0.2
         version: 5.0.2
@@ -1152,6 +1161,9 @@ packages:
   '@tiptap/starter-kit@3.11.0':
     resolution: {integrity: sha512-8kMMYqVSZ2Oqji+mY1o9meTjCRWp4DplFegu7APqDEQRhlb6mBI0wNuazYb7FKJIHJTtf0F6cYglJrxpu9c/fA==}
 
+  '@types/canvas-confetti@1.9.0':
+    resolution: {integrity: sha512-aBGj/dULrimR1XDZLtG9JwxX1b4HPRF6CX9Yfwh3NvstZEm1ZL7RBnel4keCPSqs1ANRu1u2Aoz9R+VmtjYuTg==}
+
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
@@ -1225,6 +1237,9 @@ packages:
 
   caniuse-lite@1.0.30001696:
     resolution: {integrity: sha512-pDCPkvzfa39ehJtJ+OwGT/2yvT2SbjfHhiIW2LWOAcMQ7BzwxT/XuyUp4OTOd0XFWA6BKw0JalnBHgSi5DGJBQ==}
+
+  canvas-confetti@1.9.4:
+    resolution: {integrity: sha512-yxQbJkAVrFXWNbTUjPqjF7G+g6pDotOUHGbkZq2NELZUMDpiJ85rIEazVb8GTaAptNW2miJAXbs1BtioA251Pw==}
 
   chart.js@4.4.7:
     resolution: {integrity: sha512-pwkcKfdzTMAU/+jNosKhNL2bHtJc/sSmYgVbuGTEDhzkrhmyihmP7vUc/5ZK9WopidMDHNe3Wm7jOd/WhuHWuw==}
@@ -1563,6 +1578,9 @@ packages:
   node-fetch-native@1.6.7:
     resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
 
+  normalize-wheel@1.0.1:
+    resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==}
+
   nypm@0.6.2:
     resolution: {integrity: sha512-7eM+hpOtrKrBDCh7Ypu2lJ9Z7PNZBdi/8AT3AX8xoCj43BBVHD0hPSTEvMtkMpfs8FCqBGhxB+uToIQimA111g==}
     engines: {node: ^14.16.0 || >=16.10.0}
@@ -1707,6 +1725,12 @@ packages:
     engines: {node: '>= 10.13'}
     peerDependencies:
       react: '>= 16.8 || 18.0.0'
+
+  react-easy-crop@5.5.5:
+    resolution: {integrity: sha512-aRiY8CnsHir4cmoPaXbZW0Hpmy0Wd+7mxZbALx/+rxvAIIy0hesK48hCBjorAt9Kl9dA8IskWnhOq3ky44coLA==}
+    peerDependencies:
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
 
   react-hot-toast@2.6.0:
     resolution: {integrity: sha512-bH+2EBMZ4sdyou/DPrfgIouFpcRLCJ+HoCA32UoAYHn6T3Ur5yfcDCeSr5mwldl6pFOsiocmrXMuoCJ1vV8bWg==}
@@ -2761,6 +2785,8 @@ snapshots:
       '@tiptap/extensions': 3.11.0(@tiptap/core@3.11.0(@tiptap/pm@3.11.0))(@tiptap/pm@3.11.0)
       '@tiptap/pm': 3.11.0
 
+  '@types/canvas-confetti@1.9.0': {}
+
   '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -2842,6 +2868,8 @@ snapshots:
       rc9: 2.1.2
 
   caniuse-lite@1.0.30001696: {}
+
+  canvas-confetti@1.9.4: {}
 
   chart.js@4.4.7:
     dependencies:
@@ -3149,6 +3177,8 @@ snapshots:
 
   node-fetch-native@1.6.7: {}
 
+  normalize-wheel@1.0.1: {}
+
   nypm@0.6.2:
     dependencies:
       citty: 0.1.6
@@ -3336,6 +3366,13 @@ snapshots:
       file-selector: 2.1.2
       prop-types: 15.8.1
       react: 19.0.0
+
+  react-easy-crop@5.5.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      normalize-wheel: 1.0.1
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      tslib: 2.8.1
 
   react-hot-toast@2.6.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

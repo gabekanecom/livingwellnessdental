@@ -10,18 +10,18 @@
 @custom-variant sidebar-expanded (&:is(.sidebar-expanded *));
 
 :root {
-  --color-lwd-brand: #8470ff;
-  --color-lwd-brand-50: #f1eeff;
-  --color-lwd-brand-100: #e6e1ff;
-  --color-lwd-brand-200: #d2cbff;
-  --color-lwd-brand-300: #b7acff;
-  --color-lwd-brand-400: #9c8cff;
-  --color-lwd-brand-500: #8470ff;
-  --color-lwd-brand-600: #755ff8;
-  --color-lwd-brand-700: #5d47de;
-  --color-lwd-brand-800: #4634b1;
-  --color-lwd-brand-900: #2f227c;
-  --color-lwd-brand-950: #1c1357;
+  --color-lwd-brand: #7c98ab;
+  --color-lwd-brand-50: #f4f7f9;
+  --color-lwd-brand-100: #e8eff3;
+  --color-lwd-brand-200: #d1dfe7;
+  --color-lwd-brand-300: #b3c9d6;
+  --color-lwd-brand-400: #96b1c1;
+  --color-lwd-brand-500: #7c98ab;
+  --color-lwd-brand-600: #6a8599;
+  --color-lwd-brand-700: #576d7e;
+  --color-lwd-brand-800: #495a68;
+  --color-lwd-brand-900: #3d4b57;
+  --color-lwd-brand-950: #28323a;
 
   --color-success: #3ec972;
   --color-warning: #f0bb33;
@@ -39,6 +39,10 @@
 
 @theme {
   --shadow-sm: 0 1px 1px 0 rgb(0 0 0 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.02);
+
+  --color-success: #3ec972;
+  --color-warning: #f0bb33;
+  --color-danger: #ff5656;
 
   --color-gray-50: #f9fafb;
   --color-gray-100: #f3f4f6;

@@ -214,6 +214,7 @@ model WikiArticle {
   excerpt      String?
   coverImage   String?
   status       ArticleStatus       @default(DRAFT)
+  isFeatured   Boolean             @default(false)
   categoryId   String
   category     WikiCategory        @relation(fields: [categoryId], references: [id])
   authorId     String              @db.Uuid
@@ -229,6 +230,7 @@ model WikiArticle {
   @@index([categoryId])
   @@index([authorId])
   @@index([status])
+  @@index([isFeatured])
 }
 
 model WikiArticleVersion {
@@ -274,6 +276,7 @@ model WikiSearchLog {
 
 enum ArticleStatus {
   DRAFT
+  IN_REVIEW
   PUBLISHED
   ARCHIVED
 }
@@ -347,6 +350,8 @@ model Lesson {
   module         CourseModule     @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   quizzes        Quiz[]
   lessonProgress LessonProgress[]
+  bookmarks      LessonBookmark[]
+  notes          LessonNote[]
   videoUrl       String?
   attachments    String[]
   createdAt      DateTime         @default(now())
@@ -367,12 +372,24 @@ model Enrollment {
   lastAccessedAt  DateTime?
   lessonProgress  LessonProgress[]
   quizAttempts    QuizAttempt[]
+  certificate     Certificate?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 
   @@unique([userId, courseId])
   @@index([userId])
   @@index([courseId])
+}
+
+model Certificate {
+  id           String     @id @default(cuid())
+  enrollmentId String     @unique
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  certificateNumber String @unique
+  issuedAt     DateTime   @default(now())
+  pdfUrl       String?
+  
+  @@index([certificateNumber])
 }
 
 model LessonProgress {
@@ -389,6 +406,32 @@ model LessonProgress {
 
   @@unique([enrollmentId, lessonId])
   @@index([enrollmentId])
+  @@index([lessonId])
+}
+
+model LessonBookmark {
+  id        String   @id @default(cuid())
+  userId    String   @db.Uuid
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+}
+
+model LessonNote {
+  id        String   @id @default(cuid())
+  userId    String   @db.Uuid
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, lessonId])
+  @@index([userId])
   @@index([lessonId])
 }
 

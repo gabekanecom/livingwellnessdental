@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { useAppProvider } from '@/app/app-provider'
 import { useSelectedLayoutSegments } from 'next/navigation'
+import Link from 'next/link'
 import SidebarLinkGroup from './sidebar-link-group'
 import SidebarLink from './sidebar-link'
 import Logo from './logo'
@@ -78,30 +79,30 @@ export default function Sidebar({
                 {(handleClick, open) => {
                   return (
                     <>
-                      <a
-                        href="#0"
-                        className={`block text-gray-800 truncate transition ${segments.includes('wiki') ? '' : 'hover:text-gray-900'}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleClick()
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <svg className={`shrink-0 fill-current ${segments.includes('wiki') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                              <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM4 2h8v12H4V2Zm2 2a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6Zm0 3a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6Zm0 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H6Z"/>
-                            </svg>
-                            <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Wiki
-                            </span>
-                          </div>
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href="/wiki"
+                          className={`flex items-center text-gray-800 truncate transition ${segments.includes('wiki') ? '' : 'hover:text-gray-900'}`}
+                        >
+                          <svg className={`shrink-0 fill-current ${segments.includes('wiki') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM4 2h8v12H4V2Zm2 2a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6Zm0 3a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6Zm0 3a1 1 0 1 0 0 2h2a1 1 0 1 0 0-2H6Z"/>
+                          </svg>
+                          <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                            Wiki
+                          </span>
+                        </Link>
+                        <button
+                          className="flex shrink-0 ml-2 lg:hidden lg:sidebar-expanded:flex 2xl:flex"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleClick()
+                          }}
+                        >
+                          <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                          </svg>
+                        </button>
+                      </div>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-8 mt-1 ${!open && 'hidden'}`}>
                           <li className="mb-1 last:mb-0">
@@ -130,46 +131,32 @@ export default function Sidebar({
                 {(handleClick, open) => {
                   return (
                     <>
-                      <a
-                        href="#0"
-                        className={`block text-gray-800 truncate transition ${segments.includes('lms') ? '' : 'hover:text-gray-900'}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleClick()
-                        }}
-                      >
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center">
-                            <svg className={`shrink-0 fill-current ${segments.includes('lms') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                              <path d="M8 0L0 3.5v2L8 9l8-3.5v-2L8 0zm0 10L1 6.5v2L8 12l7-3.5v-2L8 10zm0 3L1 9.5v2L8 15l7-3.5v-2L8 13z"/>
-                            </svg>
-                            <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                              Learning
-                            </span>
-                          </div>
-                          <div className="flex shrink-0 ml-2">
-                            <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
-                              <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
+                      <div className="flex items-center justify-between">
+                        <Link
+                          href="/lms/dashboard"
+                          className={`flex items-center text-gray-800 truncate transition ${segments.includes('lms') ? '' : 'hover:text-gray-900'}`}
+                        >
+                          <svg className={`shrink-0 fill-current ${segments.includes('lms') ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                            <path d="M8 0L0 3.5v2L8 9l8-3.5v-2L8 0zm0 10L1 6.5v2L8 12l7-3.5v-2L8 10zm0 3L1 9.5v2L8 15l7-3.5v-2L8 13z"/>
+                          </svg>
+                          <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                            Learning
+                          </span>
+                        </Link>
+                        <button
+                          className="flex shrink-0 ml-2 lg:hidden lg:sidebar-expanded:flex 2xl:flex"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleClick()
+                          }}
+                        >
+                          <svg className={`w-3 h-3 shrink-0 ml-1 fill-current text-gray-400 ${open && 'rotate-180'}`} viewBox="0 0 12 12">
+                            <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                          </svg>
+                        </button>
+                      </div>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-8 mt-1 ${!open && 'hidden'}`}>
-                          <li className="mb-1 last:mb-0">
-                            <SidebarLink href="/lms">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Dashboard
-                              </span>
-                            </SidebarLink>
-                          </li>
-                          <li className="mb-1 last:mb-0">
-                            <SidebarLink href="/lms/catalog">
-                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Courses
-                              </span>
-                            </SidebarLink>
-                          </li>
                           <li className="mb-1 last:mb-0">
                             <SidebarLink href="/lms/dashboard">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
@@ -178,9 +165,9 @@ export default function Sidebar({
                             </SidebarLink>
                           </li>
                           <li className="mb-1 last:mb-0">
-                            <SidebarLink href="/lms/ai-builder">
+                            <SidebarLink href="/lms/catalog">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                AI Course Builder
+                                Courses
                               </span>
                             </SidebarLink>
                           </li>

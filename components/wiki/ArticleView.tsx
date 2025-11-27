@@ -1,7 +1,18 @@
 'use client';
 
-import { formatDistanceToNow } from 'date-fns';
-import { ClockIcon, EyeIcon, UserCircleIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import Link from 'next/link';
+import { formatDistanceToNow, format } from 'date-fns';
+import { 
+  ClockIcon, 
+  EyeIcon, 
+  UserCircleIcon,
+  HandThumbUpIcon,
+  HandThumbDownIcon,
+  LinkIcon,
+  CheckIcon
+} from '@heroicons/react/24/outline';
+import { HandThumbUpIcon as ThumbUpSolid, HandThumbDownIcon as ThumbDownSolid } from '@heroicons/react/24/solid';
 import { WikiArticle } from '@/lib/wiki/types';
 import { calculateReadingTime } from '@/lib/wiki/utils';
 
@@ -11,9 +22,26 @@ interface ArticleViewProps {
 
 export default function ArticleView({ article }: ArticleViewProps) {
   const readingTime = calculateReadingTime(article.content);
+  const [feedback, setFeedback] = useState<'helpful' | 'not-helpful' | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy link');
+    }
+  };
+
+  const handleFeedback = (type: 'helpful' | 'not-helpful') => {
+    setFeedback(type);
+  };
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-8">
+
       {article.coverImage && (
         <img
           src={article.coverImage}
@@ -63,17 +91,86 @@ export default function ArticleView({ article }: ArticleViewProps) {
         <div className="mt-8 pt-8 border-t border-gray-200">
           <div className="flex flex-wrap gap-2">
             {article.tags.map((tag) => (
-              <a
+              <Link
                 key={tag.id}
-                href={`/wiki/search?tag=${tag.slug}`}
-                className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors"
+                href={`/wiki/tags/${encodeURIComponent(tag.name)}`}
+                className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-full hover:bg-violet-100 hover:text-violet-700 transition-colors"
               >
                 {tag.name}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
       )}
+
+      <div className="mt-8 pt-8 border-t border-gray-200">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-gray-600">Was this helpful?</span>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleFeedback('helpful')}
+                className={`p-2 rounded-lg transition-colors ${
+                  feedback === 'helpful'
+                    ? 'bg-green-100 text-green-600'
+                    : 'hover:bg-gray-100 text-gray-500'
+                }`}
+                title="Yes, this was helpful"
+              >
+                {feedback === 'helpful' ? (
+                  <ThumbUpSolid className="h-5 w-5" />
+                ) : (
+                  <HandThumbUpIcon className="h-5 w-5" />
+                )}
+              </button>
+              <button
+                onClick={() => handleFeedback('not-helpful')}
+                className={`p-2 rounded-lg transition-colors ${
+                  feedback === 'not-helpful'
+                    ? 'bg-red-100 text-red-600'
+                    : 'hover:bg-gray-100 text-gray-500'
+                }`}
+                title="No, this was not helpful"
+              >
+                {feedback === 'not-helpful' ? (
+                  <ThumbDownSolid className="h-5 w-5" />
+                ) : (
+                  <HandThumbDownIcon className="h-5 w-5" />
+                )}
+              </button>
+            </div>
+            {feedback && (
+              <span className="text-sm text-gray-500">Thanks for your feedback!</span>
+            )}
+          </div>
+
+          <button
+            onClick={handleCopyLink}
+            className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-violet-700 hover:bg-violet-50 rounded-lg transition-colors"
+          >
+            {copied ? (
+              <>
+                <CheckIcon className="h-4 w-4 text-green-600" />
+                <span className="text-green-600">Copied!</span>
+              </>
+            ) : (
+              <>
+                <LinkIcon className="h-4 w-4" />
+                <span>Copy link</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {article.updatedAt && article.createdAt && (
+          <div className="mt-4 text-xs text-gray-400">
+            Created {format(new Date(article.createdAt), 'MMM d, yyyy')}
+            {article.updatedAt !== article.createdAt && (
+              <> · Last updated {format(new Date(article.updatedAt), 'MMM d, yyyy')}</>
+            )}
+          </div>
+        )}
+      </div>
     </article>
   );
 }

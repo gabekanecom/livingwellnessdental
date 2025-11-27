@@ -8,8 +8,11 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const article = await prisma.wikiArticle.findUnique({
-      where: { id },
+    
+    const isCuid = /^c[a-z0-9]{24}$/.test(id);
+    
+    const article = await prisma.wikiArticle.findFirst({
+      where: isCuid ? { id } : { slug: id },
       include: {
         author: true,
         category: true,
@@ -28,12 +31,6 @@ export async function GET(
         { status: 404 }
       );
     }
-
-    // Increment view count
-    await prisma.wikiArticle.update({
-      where: { id },
-      data: { views: { increment: 1 } },
-    });
 
     return NextResponse.json(article);
   } catch (error) {

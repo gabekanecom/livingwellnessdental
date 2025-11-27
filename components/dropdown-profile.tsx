@@ -20,40 +20,47 @@ export default function DropdownProfile({ align }: {
   })
   const [loading, setLoading] = useState(true)
   
-  useEffect(() => {
-    async function fetchUserData() {
-      try {
-        const supabase = createClient()
-        const { data: { user } } = await supabase.auth.getUser()
-        
-        if (!user) return
-        
-        const response = await fetch(`/api/users/${user.id}`)
-        if (response.ok) {
-          const data = await response.json()
-          const profile = data.user
-          setUserData({
-            name: profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-            email: profile?.email || user.email || '',
-            role: profile?.userRoles?.[0]?.role?.name || 'User',
-            avatarUrl: profile?.avatar
-          })
-        } else {
-          setUserData({
-            name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-            email: user.email || '',
-            role: 'User',
-            avatarUrl: null
-          })
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error)
-      } finally {
-        setLoading(false)
+  const fetchUserData = async () => {
+    try {
+      const supabase = createClient()
+      const { data: { user } } = await supabase.auth.getUser()
+      
+      if (!user) return
+      
+      const response = await fetch(`/api/users/${user.id}`)
+      if (response.ok) {
+        const data = await response.json()
+        const profile = data.user
+        setUserData({
+          name: profile?.name || user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
+          email: profile?.email || user.email || '',
+          role: profile?.userRoles?.[0]?.role?.name || 'User',
+          avatarUrl: profile?.avatar
+        })
+      } else {
+        setUserData({
+          name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
+          email: user.email || '',
+          role: 'User',
+          avatarUrl: null
+        })
       }
+    } catch (error) {
+      console.error('Error fetching user data:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+  useEffect(() => {
+    fetchUserData()
+    
+    const handleAvatarUpdate = () => {
+      fetchUserData()
     }
     
-    fetchUserData()
+    window.addEventListener('avatarUpdated', handleAvatarUpdate)
+    return () => window.removeEventListener('avatarUpdated', handleAvatarUpdate)
   }, [])
   
   const handleSignOut = async () => {

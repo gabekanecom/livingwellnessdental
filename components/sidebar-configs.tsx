@@ -20,6 +20,11 @@ export const wikiLinks: SidebarLink[] = [
     matchPattern: "^/wiki$",
   },
   {
+    href: "/wiki/categories",
+    label: "Categories",
+    icon: <FolderIcon className="h-5 w-5" />,
+  },
+  {
     href: "/wiki/article/new",
     label: "New Article",
     icon: <PlusCircleIcon className="h-5 w-5" />,

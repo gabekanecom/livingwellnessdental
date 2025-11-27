@@ -5,7 +5,9 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
     const query = searchParams.get('q');
-    const categoryId = searchParams.get('categoryId');
+    const categoryId = searchParams.get('category');
+    const tagName = searchParams.get('tag');
+    const sort = searchParams.get('sort') || 'relevance';
     const limit = parseInt(searchParams.get('limit') || '20');
 
     if (!query) {
@@ -15,40 +17,98 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Full-text search using PostgreSQL
-    const articles = await prisma.$queryRaw`
-      SELECT
-        a.id,
-        a.title,
-        a.slug,
-        a.excerpt,
-        a."coverImage",
-        c.name as "categoryName",
-        c.slug as "categorySlug",
-        ts_rank(
-          to_tsvector('english', coalesce(a.title, '') || ' ' || coalesce(a."contentPlain", '')),
-          plainto_tsquery('english', ${query})
-        ) as score
-      FROM "WikiArticle" a
-      JOIN "WikiCategory" c ON c.id = a."categoryId"
-      WHERE
-        a.status = 'PUBLISHED'
-        AND to_tsvector('english', coalesce(a.title, '') || ' ' || coalesce(a."contentPlain", ''))
-            @@ plainto_tsquery('english', ${query})
-        ${categoryId ? prisma.$queryRaw`AND a."categoryId" = ${categoryId}` : prisma.$queryRaw``}
-      ORDER BY score DESC
-      LIMIT ${limit}
-    `;
+    const whereConditions: any = {
+      status: 'PUBLISHED',
+      OR: [
+        { title: { contains: query, mode: 'insensitive' } },
+        { contentPlain: { contains: query, mode: 'insensitive' } },
+      ],
+    };
 
-    // Log search
+    if (categoryId) {
+      whereConditions.categoryId = categoryId;
+    }
+
+    if (tagName) {
+      whereConditions.tags = {
+        some: { name: { equals: tagName, mode: 'insensitive' } },
+      };
+    }
+
+    const orderBy = sort === 'date' 
+      ? { updatedAt: 'desc' as const }
+      : sort === 'views'
+      ? { views: 'desc' as const }
+      : { views: 'desc' as const };
+
+    const articles = await prisma.wikiArticle.findMany({
+      where: whereConditions,
+      include: {
+        category: { select: { id: true, name: true, slug: true } },
+        author: { select: { name: true } },
+        tags: { select: { id: true, name: true } },
+      },
+      orderBy,
+      take: limit,
+    });
+
+    const resultsWithHighlight = articles.map(article => {
+      const lowerQuery = query.toLowerCase();
+      const titleMatch = article.title.toLowerCase().includes(lowerQuery);
+      const contentMatch = article.contentPlain?.toLowerCase().includes(lowerQuery);
+      
+      let snippet = article.excerpt || '';
+      if (contentMatch && article.contentPlain) {
+        const index = article.contentPlain.toLowerCase().indexOf(lowerQuery);
+        if (index !== -1) {
+          const start = Math.max(0, index - 60);
+          const end = Math.min(article.contentPlain.length, index + query.length + 60);
+          snippet = (start > 0 ? '...' : '') + 
+                   article.contentPlain.slice(start, end) + 
+                   (end < article.contentPlain.length ? '...' : '');
+        }
+      }
+
+      return {
+        id: article.id,
+        title: article.title,
+        slug: article.slug,
+        excerpt: snippet,
+        coverImage: article.coverImage,
+        views: article.views,
+        updatedAt: article.updatedAt,
+        category: article.category,
+        author: article.author,
+        tags: article.tags,
+        matchType: titleMatch ? 'title' : 'content',
+      };
+    });
+
     await prisma.wikiSearchLog.create({
       data: {
         query,
-        results: (articles as any[]).length,
+        results: articles.length,
       },
     });
 
-    return NextResponse.json({ results: articles });
+    const categories = await prisma.wikiCategory.findMany({
+      select: { id: true, name: true },
+      orderBy: { name: 'asc' },
+    });
+
+    const tags = await prisma.wikiTag.findMany({
+      where: {
+        articles: { some: { status: 'PUBLISHED' } },
+      },
+      select: { id: true, name: true },
+      orderBy: { name: 'asc' },
+    });
+
+    return NextResponse.json({ 
+      results: resultsWithHighlight,
+      filters: { categories, tags },
+      total: articles.length,
+    });
   } catch (error) {
     console.error('Error searching articles:', error);
     return NextResponse.json(
