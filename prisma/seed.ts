@@ -908,6 +908,398 @@ async function main() {
 
   console.log('✅ Created Orientation course modules and lessons');
 
+  // Create Demo Course 3: Patient Communication Excellence
+  const communicationCourse = await prisma.course.upsert({
+    where: { slug: 'patient-communication-excellence' },
+    update: {},
+    create: {
+      title: 'Patient Communication Excellence',
+      slug: 'patient-communication-excellence',
+      description: 'Master the art of patient communication to build trust, reduce anxiety, and deliver exceptional patient experiences. This course covers verbal and non-verbal communication, handling difficult conversations, and creating lasting patient relationships.',
+      shortDescription: 'Build stronger patient relationships through effective communication',
+      difficulty: 'INTERMEDIATE',
+      duration: 75,
+      learningObjectives: [
+        'Apply active listening techniques with patients',
+        'Communicate treatment plans clearly and compassionately',
+        'Handle difficult conversations and patient concerns',
+        'Use non-verbal communication to build rapport'
+      ],
+      tags: ['communication', 'patient-care', 'soft-skills', 'professional-development'],
+      categoryId: createdCourseCategories['professional-development'],
+      isPublished: true,
+      isFeatured: true,
+      createdById: user.id,
+    },
+  });
+  console.log('✅ Created course:', communicationCourse.title);
+
+  // Communication Course - Module 1
+  const commModule1 = await prisma.courseModule.create({
+    data: {
+      title: 'Foundations of Patient Communication',
+      description: 'Core principles for effective patient interactions',
+      order: 1,
+      courseId: communicationCourse.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'The Power of First Impressions',
+      content: `
+        <h2>Making Every Introduction Count</h2>
+        
+        <p>Research shows that patients form lasting impressions within the first 7 seconds of meeting a healthcare provider. These initial moments set the tone for the entire patient relationship.</p>
+        
+        <h3>Key Elements of a Positive First Impression</h3>
+        <ul>
+          <li><strong>Eye Contact:</strong> Make genuine eye contact when greeting patients</li>
+          <li><strong>Smile:</strong> A warm, authentic smile immediately puts patients at ease</li>
+          <li><strong>Name Usage:</strong> Use the patient's name - it's the sweetest sound to their ears</li>
+          <li><strong>Body Language:</strong> Open posture signals you're approachable and attentive</li>
+          <li><strong>Undivided Attention:</strong> Put away distractions and focus fully on the patient</li>
+        </ul>
+        
+        <h3>The Greeting Formula</h3>
+        <ol>
+          <li>Stand up or move toward the patient</li>
+          <li>Make eye contact and smile</li>
+          <li>Introduce yourself with your name and role</li>
+          <li>Use the patient's name in your greeting</li>
+          <li>Ask how they're doing today</li>
+        </ol>
+        
+        <h3>Example Greetings</h3>
+        <p><em>"Good morning, Mrs. Johnson! I'm Sarah, and I'll be your hygienist today. How are you feeling?"</em></p>
+        <p><em>"Hi, Michael! Welcome back. I'm Dr. Chen. It's great to see you again."</em></p>
+      `,
+      lessonType: 'TEXT',
+      duration: 12,
+      order: 1,
+      moduleId: commModule1.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'Active Listening Skills',
+      content: `
+        <h2>Becoming an Active Listener</h2>
+        
+        <p>Active listening is one of the most powerful tools in patient communication. When patients feel truly heard, trust develops naturally.</p>
+        
+        <h3>The HEAR Framework</h3>
+        <ul>
+          <li><strong>H - Halt:</strong> Stop what you're doing and give full attention</li>
+          <li><strong>E - Engage:</strong> Show interest through nodding and verbal cues ("I see," "Go on")</li>
+          <li><strong>A - Anticipate:</strong> Listen to understand, not just to respond</li>
+          <li><strong>R - Reflect:</strong> Summarize what you heard to confirm understanding</li>
+        </ul>
+        
+        <h3>Common Listening Barriers</h3>
+        <ul>
+          <li>Thinking about your response while the patient is speaking</li>
+          <li>Interrupting to offer solutions too quickly</li>
+          <li>Multitasking (checking charts, computer) while listening</li>
+          <li>Making assumptions about what the patient will say</li>
+        </ul>
+        
+        <h3>Reflective Listening Phrases</h3>
+        <ul>
+          <li>"So what I'm hearing is..."</li>
+          <li>"It sounds like you're concerned about..."</li>
+          <li>"Let me make sure I understand..."</li>
+          <li>"That must be frustrating for you..."</li>
+        </ul>
+        
+        <h3>Practice Exercise</h3>
+        <p>This week, practice the HEAR framework with at least 3 patients. Notice how the quality of your conversations changes when you focus entirely on listening.</p>
+      `,
+      lessonType: 'TEXT',
+      duration: 15,
+      order: 2,
+      moduleId: commModule1.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'Non-Verbal Communication',
+      content: `
+        <h2>What You Don't Say Matters Most</h2>
+        
+        <p>Studies suggest that up to 93% of communication is non-verbal. In healthcare settings, patients are especially attuned to body language cues.</p>
+        
+        <h3>Positive Non-Verbal Signals</h3>
+        <ul>
+          <li><strong>Open Posture:</strong> Uncrossed arms, facing the patient directly</li>
+          <li><strong>Appropriate Eye Contact:</strong> Shows engagement without staring</li>
+          <li><strong>Nodding:</strong> Indicates you're following along</li>
+          <li><strong>Leaning In:</strong> Shows interest and attentiveness</li>
+          <li><strong>Facial Expressions:</strong> Match the tone of the conversation</li>
+        </ul>
+        
+        <h3>Negative Signals to Avoid</h3>
+        <ul>
+          <li>Crossing arms (defensive, closed off)</li>
+          <li>Looking at watch or clock (impatient)</li>
+          <li>Turning away or toward the door (wanting to leave)</li>
+          <li>Frowning or looking concerned (can increase patient anxiety)</li>
+          <li>Fidgeting (nervous, distracted)</li>
+        </ul>
+        
+        <h3>Mirroring Technique</h3>
+        <p>Subtly matching your patient's body language can build rapport. If they lean forward, you lean forward slightly. If they speak slowly, slow your pace. This creates subconscious connection.</p>
+        
+        <h3>The Dental Chair Challenge</h3>
+        <p>When patients are lying back in the dental chair, communication becomes harder. Strategies include:</p>
+        <ul>
+          <li>Get to their eye level when discussing important information</li>
+          <li>Touch their arm or shoulder gently for reassurance</li>
+          <li>Establish hand signals for "stop" or "I need a break"</li>
+        </ul>
+      `,
+      lessonType: 'TEXT',
+      duration: 12,
+      order: 3,
+      moduleId: commModule1.id,
+    },
+  });
+
+  // Module 1 Quiz
+  const commQuizLesson = await prisma.lesson.create({
+    data: {
+      title: 'Communication Foundations Quiz',
+      content: 'Test your understanding of communication fundamentals',
+      lessonType: 'QUIZ',
+      duration: 8,
+      order: 4,
+      moduleId: commModule1.id,
+    },
+  });
+
+  const commQuiz1 = await prisma.quiz.create({
+    data: {
+      title: 'Communication Foundations Quiz',
+      description: 'Test your knowledge of patient communication basics',
+      lessonId: commQuizLesson.id,
+      passingScore: 70,
+      timeLimit: 10,
+    },
+  });
+
+  const cq1 = await prisma.quizQuestion.create({
+    data: {
+      quizId: commQuiz1.id,
+      question: 'How long does it typically take for a patient to form a first impression?',
+      questionType: 'MULTIPLE_CHOICE',
+      order: 1,
+      points: 1,
+      explanation: 'Research shows first impressions are formed within approximately 7 seconds.',
+    },
+  });
+  await prisma.quizAnswer.createMany({
+    data: [
+      { questionId: cq1.id, text: '7 seconds', isCorrect: true, order: 1 },
+      { questionId: cq1.id, text: '30 seconds', isCorrect: false, order: 2 },
+      { questionId: cq1.id, text: '2 minutes', isCorrect: false, order: 3 },
+      { questionId: cq1.id, text: '5 minutes', isCorrect: false, order: 4 },
+    ],
+  });
+
+  const cq2 = await prisma.quizQuestion.create({
+    data: {
+      quizId: commQuiz1.id,
+      question: 'What does the "H" stand for in the HEAR framework?',
+      questionType: 'MULTIPLE_CHOICE',
+      order: 2,
+      points: 1,
+      explanation: 'H stands for Halt - stop what you\'re doing and give full attention.',
+    },
+  });
+  await prisma.quizAnswer.createMany({
+    data: [
+      { questionId: cq2.id, text: 'Halt', isCorrect: true, order: 1 },
+      { questionId: cq2.id, text: 'Help', isCorrect: false, order: 2 },
+      { questionId: cq2.id, text: 'Hear', isCorrect: false, order: 3 },
+      { questionId: cq2.id, text: 'Hurry', isCorrect: false, order: 4 },
+    ],
+  });
+
+  const cq3 = await prisma.quizQuestion.create({
+    data: {
+      quizId: commQuiz1.id,
+      question: 'Crossing your arms while talking to a patient sends a positive, open signal.',
+      questionType: 'TRUE_FALSE',
+      order: 3,
+      points: 1,
+      explanation: 'Crossing arms is generally perceived as defensive or closed off body language.',
+    },
+  });
+  await prisma.quizAnswer.createMany({
+    data: [
+      { questionId: cq3.id, text: 'True', isCorrect: false, order: 1 },
+      { questionId: cq3.id, text: 'False', isCorrect: true, order: 2 },
+    ],
+  });
+
+  // Communication Course - Module 2
+  const commModule2 = await prisma.courseModule.create({
+    data: {
+      title: 'Handling Difficult Conversations',
+      description: 'Navigate challenging patient interactions with confidence',
+      order: 2,
+      courseId: communicationCourse.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'Managing Patient Anxiety',
+      content: `
+        <h2>Helping Anxious Patients Feel at Ease</h2>
+        
+        <p>Dental anxiety affects an estimated 36% of the population. Learning to recognize and address anxiety is essential for patient comfort.</p>
+        
+        <h3>Signs of Dental Anxiety</h3>
+        <ul>
+          <li>Visible tension (clenched fists, rigid posture)</li>
+          <li>Sweating or pale complexion</li>
+          <li>Rapid breathing or heart rate</li>
+          <li>Excessive talking or complete silence</li>
+          <li>Rescheduling or canceling appointments</li>
+          <li>Difficulty making eye contact</li>
+        </ul>
+        
+        <h3>The CALM Approach</h3>
+        <ul>
+          <li><strong>C - Connect:</strong> Acknowledge their feelings ("I understand this can be stressful")</li>
+          <li><strong>A - Ask:</strong> Find out specific concerns ("What worries you most?")</li>
+          <li><strong>L - Listen:</strong> Let them express fears without judgment</li>
+          <li><strong>M - Manage:</strong> Offer solutions and coping strategies</li>
+        </ul>
+        
+        <h3>Comfort Strategies</h3>
+        <ul>
+          <li>Explain procedures before starting (the "tell-show-do" method)</li>
+          <li>Offer breaks during longer procedures</li>
+          <li>Establish a stop signal (raised hand)</li>
+          <li>Use calming language ("pressure" instead of "pain")</li>
+          <li>Provide headphones for music or podcasts</li>
+          <li>Offer a stress ball to squeeze</li>
+        </ul>
+        
+        <h3>Words That Help vs. Words That Hurt</h3>
+        <table>
+          <tr><th>Avoid</th><th>Use Instead</th></tr>
+          <tr><td>"This will hurt"</td><td>"You may feel some pressure"</td></tr>
+          <tr><td>"Sharp"</td><td>"A small pinch"</td></tr>
+          <tr><td>"Drill"</td><td>"Handpiece"</td></tr>
+          <tr><td>"Shot"</td><td>"We'll get you comfortable"</td></tr>
+        </table>
+      `,
+      lessonType: 'TEXT',
+      duration: 15,
+      order: 1,
+      moduleId: commModule2.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'Discussing Treatment Plans',
+      content: `
+        <h2>Explaining Treatment Options Clearly</h2>
+        
+        <p>Patients need to understand their treatment options to make informed decisions. Clear communication builds trust and improves treatment acceptance.</p>
+        
+        <h3>The LAYMAN Principle</h3>
+        <p>Always explain in terms a layperson can understand:</p>
+        <ul>
+          <li>Avoid jargon and technical terms</li>
+          <li>Use analogies and comparisons</li>
+          <li>Visual aids (images, models) are powerful tools</li>
+          <li>Check understanding by asking questions</li>
+        </ul>
+        
+        <h3>The 3-Part Treatment Explanation</h3>
+        <ol>
+          <li><strong>The What:</strong> What is the condition/problem?</li>
+          <li><strong>The Why:</strong> Why does it need treatment? What happens if untreated?</li>
+          <li><strong>The How:</strong> What are the treatment options and what do they involve?</li>
+        </ol>
+        
+        <h3>Discussing Costs</h3>
+        <ul>
+          <li>Be transparent about costs upfront</li>
+          <li>Explain insurance coverage clearly</li>
+          <li>Present payment options without pressure</li>
+          <li>Focus on value and long-term benefits</li>
+        </ul>
+        
+        <h3>Handling "I Need to Think About It"</h3>
+        <p>When patients hesitate:</p>
+        <ul>
+          <li>Acknowledge their need for time</li>
+          <li>Ask what specific concerns they have</li>
+          <li>Offer additional information or resources</li>
+          <li>Set a follow-up time to check in</li>
+        </ul>
+      `,
+      lessonType: 'TEXT',
+      duration: 12,
+      order: 2,
+      moduleId: commModule2.id,
+    },
+  });
+
+  await prisma.lesson.create({
+    data: {
+      title: 'Handling Complaints and Concerns',
+      content: `
+        <h2>Turning Complaints into Opportunities</h2>
+        
+        <p>Every complaint is an opportunity to demonstrate excellent patient care and build loyalty. How you respond matters more than the original issue.</p>
+        
+        <h3>The LEARN Method for Complaints</h3>
+        <ul>
+          <li><strong>L - Listen:</strong> Let them fully express their concern without interrupting</li>
+          <li><strong>E - Empathize:</strong> Acknowledge their feelings ("I understand your frustration")</li>
+          <li><strong>A - Apologize:</strong> Sincerely apologize for their experience</li>
+          <li><strong>R - Resolve:</strong> Offer a solution or explain what you'll do</li>
+          <li><strong>N - Notify:</strong> Follow up to ensure satisfaction</li>
+        </ul>
+        
+        <h3>What NOT to Do</h3>
+        <ul>
+          <li>Don't get defensive or argue</li>
+          <li>Don't blame others or make excuses</li>
+          <li>Don't minimize their concerns</li>
+          <li>Don't make promises you can't keep</li>
+        </ul>
+        
+        <h3>Sample Response Script</h3>
+        <p><em>"Mrs. Garcia, I'm so sorry you had to wait longer than expected today. I completely understand how frustrating that must be when you have a busy schedule. We had an emergency this morning that put us behind. What I can do is [offer solution]. Again, I truly apologize, and we'll do better to respect your time."</em></p>
+        
+        <h3>When to Escalate</h3>
+        <p>Involve your supervisor when:</p>
+        <ul>
+          <li>The patient becomes verbally abusive</li>
+          <li>You cannot resolve the issue yourself</li>
+          <li>The complaint involves clinical care</li>
+          <li>The patient requests to speak with management</li>
+        </ul>
+      `,
+      lessonType: 'TEXT',
+      duration: 15,
+      order: 3,
+      moduleId: commModule2.id,
+    },
+  });
+
+  console.log('✅ Created Patient Communication course modules and lessons');
+
   console.log('🎉 Seeding completed successfully!');
 
   await prisma.$disconnect();

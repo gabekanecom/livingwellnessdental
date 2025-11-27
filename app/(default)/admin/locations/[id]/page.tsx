@@ -13,6 +13,7 @@ import {
   ClockIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline';
+import { ResponsiveTabs } from '@/components/ui/responsive-tabs';
 
 interface LocationUser {
   id: string;
@@ -74,12 +75,12 @@ const defaultHours: LocationHours = {
 type TabKey = 'general' | 'hours' | 'staff' | 'documents' | 'photos' | 'settings';
 
 const tabs = [
-  { key: 'general' as TabKey, name: 'General', icon: MapPinIcon },
-  { key: 'hours' as TabKey, name: 'Hours', icon: ClockIcon },
-  { key: 'staff' as TabKey, name: 'Staff', icon: UserGroupIcon },
-  { key: 'documents' as TabKey, name: 'Documents', icon: DocumentIcon },
-  { key: 'photos' as TabKey, name: 'Photos', icon: PhotoIcon },
-  { key: 'settings' as TabKey, name: 'Settings', icon: Cog6ToothIcon },
+  { id: 'general', label: 'General', icon: MapPinIcon },
+  { id: 'hours', label: 'Hours', icon: ClockIcon },
+  { id: 'staff', label: 'Staff', icon: UserGroupIcon },
+  { id: 'documents', label: 'Documents', icon: DocumentIcon },
+  { id: 'photos', label: 'Photos', icon: PhotoIcon },
+  { id: 'settings', label: 'Settings', icon: Cog6ToothIcon },
 ];
 
 const formatPhoneNumber = (value: string): string => {
@@ -267,7 +268,7 @@ export default function LocationDetailPage() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mt-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
             <input
@@ -288,7 +289,7 @@ export default function LocationDetailPage() {
               className="form-input w-full"
             />
           </div>
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
             <input
               type="text"
@@ -303,7 +304,7 @@ export default function LocationDetailPage() {
 
       <section>
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
             <input
@@ -329,7 +330,7 @@ export default function LocationDetailPage() {
 
       <section>
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Settings</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Timezone</label>
             <select
@@ -343,8 +344,8 @@ export default function LocationDetailPage() {
               ))}
             </select>
           </div>
-          <div className="flex items-center pt-6">
-            <label className="flex items-center">
+          <div className="flex items-center sm:pt-6">
+            <label className="flex items-center min-h-[44px]">
               <input
                 type="checkbox"
                 name="isActive"
@@ -398,41 +399,43 @@ export default function LocationDetailPage() {
 
         <div className="space-y-3">
           {dayLabels.map(({ key, label }) => (
-            <div key={key} className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-              <div className="w-28 font-medium text-gray-700">{label}</div>
-              
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={!hoursData[key].closed}
-                  onChange={(e) => handleHoursChange(key, 'closed', !e.target.checked)}
-                  className="form-checkbox text-violet-600"
-                />
-                <span className="text-sm text-gray-600">Open</span>
-              </label>
+            <div key={key} className="p-3 sm:p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+                <div className="w-full sm:w-28 font-medium text-gray-700">{label}</div>
 
-              {!hoursData[key].closed ? (
-                <div className="flex items-center gap-2 flex-1">
+                <label className="flex items-center gap-2 cursor-pointer min-h-[44px]">
                   <input
-                    type="time"
-                    value={hoursData[key].open}
-                    onChange={(e) => handleHoursChange(key, 'open', e.target.value)}
-                    className="form-input text-sm"
+                    type="checkbox"
+                    checked={!hoursData[key].closed}
+                    onChange={(e) => handleHoursChange(key, 'closed', !e.target.checked)}
+                    className="form-checkbox text-violet-600"
                   />
-                  <span className="text-gray-500">to</span>
-                  <input
-                    type="time"
-                    value={hoursData[key].close}
-                    onChange={(e) => handleHoursChange(key, 'close', e.target.value)}
-                    className="form-input text-sm"
-                  />
-                  <span className="text-sm text-gray-500 ml-2">
-                    ({formatTimeDisplay(hoursData[key].open)} – {formatTimeDisplay(hoursData[key].close)})
-                  </span>
-                </div>
-              ) : (
-                <span className="text-sm text-gray-500 italic">Closed</span>
-              )}
+                  <span className="text-sm text-gray-600">Open</span>
+                </label>
+
+                {!hoursData[key].closed ? (
+                  <div className="flex flex-wrap items-center gap-2 flex-1">
+                    <input
+                      type="time"
+                      value={hoursData[key].open}
+                      onChange={(e) => handleHoursChange(key, 'open', e.target.value)}
+                      className="form-input text-sm"
+                    />
+                    <span className="text-gray-500">to</span>
+                    <input
+                      type="time"
+                      value={hoursData[key].close}
+                      onChange={(e) => handleHoursChange(key, 'close', e.target.value)}
+                      className="form-input text-sm"
+                    />
+                    <span className="hidden sm:inline text-sm text-gray-500 ml-2">
+                      ({formatTimeDisplay(hoursData[key].open)} – {formatTimeDisplay(hoursData[key].close)})
+                    </span>
+                  </div>
+                ) : (
+                  <span className="text-sm text-gray-500 italic">Closed</span>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -599,27 +602,12 @@ export default function LocationDetailPage() {
         </span>
       </div>
 
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="-mb-px flex space-x-8">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.key}
-                onClick={() => setActiveTab(tab.key)}
-                className={`flex items-center space-x-2 py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
-                  activeTab === tab.key
-                    ? 'border-violet-500 text-violet-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                <span>{tab.name}</span>
-              </button>
-            );
-          })}
-        </nav>
-      </div>
+      <ResponsiveTabs
+        tabs={tabs}
+        activeTab={activeTab}
+        onChange={(tabId) => setActiveTab(tabId as TabKey)}
+        className="mb-6"
+      />
 
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         {renderTabContent()}

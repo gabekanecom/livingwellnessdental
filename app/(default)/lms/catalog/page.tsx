@@ -28,11 +28,40 @@ interface SearchParams {
   q?: string;
 }
 
-async function getCourses(searchParams: SearchParams) {
+async function getUserRoleIds(): Promise<string[]> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+  
+  const dbUser = await prisma.user.findUnique({
+    where: { id: user.id },
+    include: {
+      userRoles: {
+        where: { isActive: true },
+        select: { roleId: true }
+      }
+    }
+  });
+  
+  return dbUser?.userRoles.map(ur => ur.roleId) || [];
+}
+
+async function getCourses(searchParams: SearchParams, userRoleIds: string[]) {
   const { category, difficulty, duration, sort, q } = searchParams;
 
   const where: Record<string, unknown> = {
-    isPublished: true
+    isPublished: true,
+    OR: [
+      { restrictByRole: false },
+      { 
+        restrictByRole: true,
+        allowedRoles: {
+          some: {
+            roleId: { in: userRoleIds.length > 0 ? userRoleIds : ['__none__'] }
+          }
+        }
+      }
+    ]
   };
 
   if (category) {
@@ -53,28 +82,32 @@ async function getCourses(searchParams: SearchParams) {
   }
 
   if (q) {
-    where.OR = [
-      { title: { contains: q, mode: 'insensitive' } },
-      { description: { contains: q, mode: 'insensitive' } },
-      { shortDescription: { contains: q, mode: 'insensitive' } }
+    where.AND = [
+      {
+        OR: [
+          { title: { contains: q, mode: 'insensitive' } },
+          { description: { contains: q, mode: 'insensitive' } },
+          { shortDescription: { contains: q, mode: 'insensitive' } }
+        ]
+      }
     ];
   }
 
-  let orderBy: Record<string, unknown>[] = [{ isFeatured: 'desc' }];
+  let orderBy: Record<string, unknown>[] = [];
   
   switch (sort) {
     case 'popular':
-      orderBy.push({ enrollments: { _count: 'desc' } });
-      break;
-    case 'rating':
-      orderBy.push({ rating: 'desc' });
+      orderBy = [{ enrollments: { _count: 'desc' } }, { createdAt: 'desc' }];
       break;
     case 'title':
-      orderBy.push({ title: 'asc' });
+      orderBy = [{ title: 'asc' }];
       break;
     case 'newest':
+      orderBy = [{ createdAt: 'desc' }];
+      break;
+    case 'featured':
     default:
-      orderBy.push({ createdAt: 'desc' });
+      orderBy = [{ isFeatured: 'desc' }, { createdAt: 'desc' }];
   }
 
   const courses = await prisma.course.findMany({
@@ -140,39 +173,6 @@ async function getCanManageCourses(): Promise<boolean> {
   return hasPermission(user.id, 'lms.manage_courses');
 }
 
-async function getFeaturedCourses() {
-  return prisma.course.findMany({
-    where: {
-      isPublished: true,
-      isFeatured: true
-    },
-    include: {
-      category: true,
-      createdBy: {
-        select: { id: true, name: true, email: true }
-      },
-      _count: { select: { enrollments: true } }
-    },
-    take: 3,
-    orderBy: { createdAt: 'desc' }
-  });
-}
-
-async function getPopularCourses() {
-  return prisma.course.findMany({
-    where: { isPublished: true },
-    include: {
-      category: true,
-      createdBy: {
-        select: { id: true, name: true, email: true }
-      },
-      _count: { select: { enrollments: true } }
-    },
-    orderBy: { enrollments: { _count: 'desc' } },
-    take: 3
-  });
-}
-
 export default async function CatalogPage({
   searchParams
 }: {
@@ -181,16 +181,13 @@ export default async function CatalogPage({
   const params = await searchParams;
   const hasFilters = params.category || params.difficulty || params.duration || params.q;
 
-  const [courses, categories, canManageCourses, featuredCourses, popularCourses] = await Promise.all([
-    getCourses(params),
+  const userRoleIds = await getUserRoleIds();
+  
+  const [courses, categories, canManageCourses] = await Promise.all([
+    getCourses(params, userRoleIds),
     getCategories(),
-    getCanManageCourses(),
-    !hasFilters ? getFeaturedCourses() : Promise.resolve([]),
-    !hasFilters ? getPopularCourses() : Promise.resolve([])
+    getCanManageCourses()
   ]);
-
-  const showFeatured = !hasFilters && featuredCourses.length > 0;
-  const showPopular = !hasFilters && popularCourses.length > 0;
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-7xl mx-auto">
@@ -199,7 +196,7 @@ export default async function CatalogPage({
           <div>
             <div className="flex items-center gap-3 mb-2">
               <AcademicCapIcon className="h-8 w-8 text-violet-600" />
-              <h1 className="text-3xl font-bold text-gray-900">Course Catalog</h1>
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Course Catalog</h1>
             </div>
             <p className="text-gray-600">
               Explore our collection of courses and start learning today
@@ -232,42 +229,11 @@ export default async function CatalogPage({
         </div>
       )}
 
-      {showFeatured && (
-        <div className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <SparklesIcon className="h-5 w-5 text-yellow-500" />
-            Featured Courses
-          </h2>
-          <CourseGrid
-            courses={featuredCourses}
-            showEnrollButton={true}
-            showManagementActions={canManageCourses}
-          />
-        </div>
-      )}
-
-      {showPopular && (
-        <div className="mb-12">
-          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-            <AcademicCapIcon className="h-5 w-5 text-violet-500" />
-            Popular Courses
-          </h2>
-          <CourseGrid
-            courses={popularCourses}
-            showEnrollButton={true}
-            showManagementActions={canManageCourses}
-          />
-        </div>
-      )}
-
       <div>
         {hasFilters && (
-          <h2 className="text-xl font-bold text-gray-900 mb-4">
-            {courses.length} {courses.length === 1 ? 'Course' : 'Courses'} Found
-          </h2>
-        )}
-        {!hasFilters && (showFeatured || showPopular) && (
-          <h2 className="text-xl font-bold text-gray-900 mb-4">All Courses</h2>
+          <p className="text-sm text-gray-600 mb-4">
+            {courses.length} {courses.length === 1 ? 'course' : 'courses'} found
+          </p>
         )}
 
         {courses.length === 0 ? (

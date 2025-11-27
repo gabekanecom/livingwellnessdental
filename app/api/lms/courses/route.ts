@@ -91,7 +91,9 @@ export async function POST(request: NextRequest) {
       categoryId,
       createdById,
       isPublished,
-      isFeatured
+      isFeatured,
+      restrictByRole,
+      allowedRoleIds
     } = body;
 
     if (!title) {
@@ -118,16 +120,27 @@ export async function POST(request: NextRequest) {
         categoryId: categoryId || null,
         createdById: createdById || null,
         isPublished: isPublished || false,
-        isFeatured: isFeatured || false
+        isFeatured: isFeatured || false,
+        restrictByRole: restrictByRole || false,
+        allowedRoles: restrictByRole && allowedRoleIds?.length > 0 ? {
+          create: allowedRoleIds.map((roleId: string) => ({
+            roleId
+          }))
+        } : undefined
       },
       include: {
         category: true,
-        createdBy: true
+        createdBy: true,
+        allowedRoles: {
+          include: {
+            role: true
+          }
+        }
       }
     });
 
     return NextResponse.json({
-      data: course,
+      course,
       message: 'Course created successfully'
     });
   } catch (error) {

@@ -18,7 +18,12 @@ export async function POST(
     }
 
     const course = await prisma.course.findUnique({
-      where: { id }
+      where: { id },
+      include: {
+        allowedRoles: {
+          select: { roleId: true }
+        }
+      }
     });
 
     if (!course) {
@@ -26,6 +31,28 @@ export async function POST(
         { error: 'Course not found' },
         { status: 404 }
       );
+    }
+
+    if (course.restrictByRole && course.allowedRoles.length > 0) {
+      const userRoles = await prisma.userRole.findMany({
+        where: {
+          userId,
+          isActive: true
+        },
+        select: { roleId: true }
+      });
+
+      const userRoleIds = userRoles.map(ur => ur.roleId);
+      const allowedRoleIds = course.allowedRoles.map(ar => ar.roleId);
+      
+      const hasAccess = userRoleIds.some(roleId => allowedRoleIds.includes(roleId));
+      
+      if (!hasAccess) {
+        return NextResponse.json(
+          { error: 'You do not have permission to enroll in this course' },
+          { status: 403 }
+        );
+      }
     }
 
     const existingEnrollment = await prisma.enrollment.findUnique({

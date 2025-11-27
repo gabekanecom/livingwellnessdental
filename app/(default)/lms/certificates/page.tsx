@@ -65,7 +65,7 @@ export default function CertificatesPage() {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <AcademicCapIcon className="h-8 w-8 text-violet-600" />
-          <h1 className="text-3xl font-bold text-gray-900">My Certificates</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Certificates</h1>
         </div>
         <p className="text-gray-600">
           View and download your course completion certificates

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeftIcon, EyeIcon, PlusIcon, BookOpenIcon, PlayIcon, Cog6ToothIcon, TagIcon, PhotoIcon, XMarkIcon, UserGroupIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, EyeIcon, PlusIcon, BookOpenIcon, PlayIcon, Cog6ToothIcon, TagIcon, PhotoIcon, XMarkIcon, UserGroupIcon, TrashIcon, ShieldCheckIcon } from '@heroicons/react/24/outline';
 import { CheckIcon as SaveIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
@@ -19,11 +19,23 @@ interface Course {
   duration?: number;
   isPublished: boolean;
   isFeatured: boolean;
+  restrictByRole: boolean;
   learningObjectives: string[];
   tags: string[];
   prerequisites: string[];
   enrollmentLimit?: number;
   modules?: Module[];
+  allowedRoles?: { roleId: string; role: Role }[];
+}
+
+interface Role {
+  id: string;
+  name: string;
+  userType: {
+    id: string;
+    name: string;
+    hierarchyLevel: number;
+  };
 }
 
 interface Module {
@@ -55,6 +67,8 @@ export default function CourseEditPage() {
 
   const [course, setCourse] = useState<Course | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [roles, setRoles] = useState<Role[]>([]);
+  const [selectedRoleIds, setSelectedRoleIds] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -68,6 +82,7 @@ export default function CourseEditPage() {
     if (courseId) {
       fetchCourse();
       fetchCategories();
+      fetchRoles();
     }
   }, [courseId]);
 
@@ -77,6 +92,9 @@ export default function CourseEditPage() {
       if (response.ok) {
         const data = await response.json();
         setCourse(data.course);
+        if (data.course.allowedRoles) {
+          setSelectedRoleIds(data.course.allowedRoles.map((ar: { roleId: string }) => ar.roleId));
+        }
       } else {
         toast.error('Failed to load course');
         router.push('/lms/catalog');
@@ -101,6 +119,35 @@ export default function CourseEditPage() {
       console.error('Error fetching categories:', error);
     }
   };
+
+  const fetchRoles = async () => {
+    try {
+      const response = await fetch('/api/lms/roles');
+      if (response.ok) {
+        const data = await response.json();
+        setRoles(data.roles || []);
+      }
+    } catch (error) {
+      console.error('Error fetching roles:', error);
+    }
+  };
+
+  const toggleRole = (roleId: string) => {
+    setSelectedRoleIds(prev => 
+      prev.includes(roleId) 
+        ? prev.filter(id => id !== roleId)
+        : [...prev, roleId]
+    );
+  };
+
+  const groupedRoles = roles.reduce((acc, role) => {
+    const typeName = role.userType.name;
+    if (!acc[typeName]) {
+      acc[typeName] = [];
+    }
+    acc[typeName].push(role);
+    return acc;
+  }, {} as Record<string, Role[]>);
 
   const calculateDuration = (modules?: Module[]) => {
     if (!modules || modules.length === 0) return 0;
@@ -225,6 +272,7 @@ export default function CourseEditPage() {
         learningObjectives: (course.learningObjectives || []).filter(obj => obj.trim() !== ''),
         tags: (course.tags || []).filter(tag => tag.trim() !== ''),
         prerequisites: (course.prerequisites || []).filter(prereq => prereq.trim() !== ''),
+        allowedRoleIds: course.restrictByRole ? selectedRoleIds : [],
       };
 
       const response = await fetch(`/api/lms/courses/${courseId}`, {
@@ -361,6 +409,7 @@ export default function CourseEditPage() {
             {[
               { id: 'basics', name: 'Basic Info', icon: Cog6ToothIcon },
               { id: 'content', name: 'Content', icon: BookOpenIcon },
+              { id: 'access', name: 'Role Access', icon: ShieldCheckIcon },
               { id: 'tags', name: 'Tags & Meta', icon: TagIcon },
               { id: 'enrollments', name: 'Students', icon: UserGroupIcon }
             ].map((tab) => (
@@ -734,6 +783,104 @@ export default function CourseEditPage() {
                   </Link>
                 </div>
               )}
+            </div>
+          )}
+
+          {activeTab === 'access' && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Role-Based Access
+                </h3>
+                <p className="text-sm text-gray-600 mb-6">
+                  Control which user roles can see and enroll in this course. When enabled, only users with selected roles will see this course in the catalog.
+                </p>
+
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="restrictByRole"
+                      checked={course.restrictByRole || false}
+                      onChange={handleInputChange}
+                      className="form-checkbox"
+                    />
+                    <label className="ml-2 text-sm font-medium">
+                      Restrict this course to specific roles
+                    </label>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-1 ml-6">
+                    {course.restrictByRole 
+                      ? 'Only selected roles below can view and enroll in this course' 
+                      : 'All users can view and enroll in this course'
+                    }
+                  </p>
+                </div>
+
+                {course.restrictByRole && (
+                  <div className="space-y-4">
+                    {Object.entries(groupedRoles).map(([userType, typeRoles]) => (
+                      <div key={userType} className="border border-gray-200 rounded-lg p-4">
+                        <h4 className="text-sm font-semibold text-gray-700 mb-3">{userType}</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {typeRoles.map(role => (
+                            <label
+                              key={role.id}
+                              className={`flex items-center p-3 rounded-lg border cursor-pointer transition-colors ${
+                                selectedRoleIds.includes(role.id)
+                                  ? 'bg-violet-50 border-violet-300'
+                                  : 'bg-white border-gray-200 hover:border-gray-300'
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={selectedRoleIds.includes(role.id)}
+                                onChange={() => toggleRole(role.id)}
+                                className="form-checkbox text-violet-600"
+                              />
+                              <span className="ml-2 text-sm">{role.name}</span>
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+
+                    {selectedRoleIds.length === 0 && (
+                      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+                        <strong>Warning:</strong> No roles selected. When role restriction is enabled, at least one role must be selected or no one will be able to access this course.
+                      </div>
+                    )}
+
+                    {selectedRoleIds.length > 0 && (
+                      <div className="bg-violet-50 border border-violet-200 rounded-lg p-4">
+                        <h5 className="text-sm font-medium text-violet-900 mb-2">
+                          Selected Roles ({selectedRoleIds.length})
+                        </h5>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedRoleIds.map(roleId => {
+                            const role = roles.find(r => r.id === roleId);
+                            return role ? (
+                              <span
+                                key={roleId}
+                                className="inline-flex items-center px-3 py-1 bg-white border border-violet-200 rounded-full text-sm text-violet-700"
+                              >
+                                {role.name}
+                                <button
+                                  type="button"
+                                  onClick={() => toggleRole(roleId)}
+                                  className="ml-2 text-violet-400 hover:text-violet-600"
+                                >
+                                  <XMarkIcon className="h-4 w-4" />
+                                </button>
+                              </span>
+                            ) : null;
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           )}
 

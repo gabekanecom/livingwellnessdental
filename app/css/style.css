@@ -170,3 +170,17 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+
+@layer utilities {
+  .font-headings {
+    font-family: var(--font-headings);
+  }
+
+  .font-primary {
+    font-family: var(--font-primary);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}

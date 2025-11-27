@@ -85,7 +85,7 @@ export default function MyCoursesPage() {
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-2">
           <BookOpenIcon className="h-8 w-8 text-indigo-600" />
-          <h1 className="text-3xl font-bold text-gray-900">My Courses</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">My Courses</h1>
         </div>
         <p className="text-gray-600">
           Continue learning where you left off

@@ -138,7 +138,7 @@ export default function WikiCategorySidebar() {
       <aside
         className={`
           md:relative md:translate-x-0 md:block
-          fixed inset-y-0 left-0 z-50 w-72 bg-white
+          fixed inset-y-0 left-0 z-50 w-[85vw] max-w-72 sm:w-72 bg-white
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
           border-r border-gray-200 overflow-y-auto

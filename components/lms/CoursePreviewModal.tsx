@@ -159,14 +159,14 @@ export default function CoursePreviewModal({ courseId, isOpen, onClose }: Course
                           alt={course.title}
                           width={672}
                           height={200}
-                          className="w-full h-48 object-cover"
+                          className="w-full h-32 sm:h-40 md:h-48 object-cover"
                         />
                       ) : (
                         <div
-                          className="w-full h-48 flex items-center justify-center"
+                          className="w-full h-32 sm:h-40 md:h-48 flex items-center justify-center"
                           style={{ backgroundColor: course.category?.color || '#8B5CF6' }}
                         >
-                          <span className="text-6xl font-bold text-white/30">
+                          <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-white/30">
                             {course.title.charAt(0)}
                           </span>
                         </div>

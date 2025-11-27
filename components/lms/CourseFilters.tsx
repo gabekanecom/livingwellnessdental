@@ -29,9 +29,9 @@ const DURATION_OPTIONS = [
 ];
 
 const SORT_OPTIONS = [
-  { value: 'newest', label: 'Newest' },
+  { value: 'featured', label: 'Featured' },
   { value: 'popular', label: 'Most Popular' },
-  { value: 'rating', label: 'Highest Rated' },
+  { value: 'newest', label: 'Newest' },
   { value: 'title', label: 'A-Z' },
 ];
 
@@ -42,7 +42,7 @@ export default function CourseFilters({ categories }: CourseFiltersProps) {
   const currentCategory = searchParams.get('category') || '';
   const currentDifficulty = searchParams.get('difficulty') || '';
   const currentDuration = searchParams.get('duration') || '';
-  const currentSort = searchParams.get('sort') || 'newest';
+  const currentSort = searchParams.get('sort') || 'featured';
   const currentQuery = searchParams.get('q') || '';
 
   const createQueryString = useCallback(
@@ -73,87 +73,81 @@ export default function CourseFilters({ categories }: CourseFiltersProps) {
 
   const hasActiveFilters = currentCategory || currentDifficulty || currentDuration || currentQuery;
 
+  const selectedCategory = categories.find(c => c.id === currentCategory);
+
   return (
     <div className="space-y-4">
       <div className="mb-4">
         <CourseSearchAutocomplete />
       </div>
 
-      <div className="flex flex-wrap gap-2 items-center">
-        <button
-          onClick={() => updateFilter('category', null)}
-          className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-            !currentCategory
-              ? 'bg-violet-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
-        >
-          All Courses
-        </button>
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            onClick={() => updateFilter('category', category.id)}
-            className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
-              currentCategory === category.id
-                ? 'text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-            style={currentCategory === category.id ? { backgroundColor: category.color } : {}}
-          >
-            {category.name}
-          </button>
-        ))}
-      </div>
-
-      <div className="flex flex-wrap gap-4 items-center">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 items-stretch sm:items-center">
         <div className="flex items-center gap-2">
           <FunnelIcon className="h-4 w-4 text-gray-500" />
           <span className="text-sm text-gray-600">Filters:</span>
         </div>
 
-        <select
-          value={currentDifficulty}
-          onChange={(e) => updateFilter('difficulty', e.target.value || null)}
-          className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
-        >
-          <option value="">All Levels</option>
-          {DIFFICULTY_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4">
+          <select
+            value={currentCategory}
+            onChange={(e) => updateFilter('category', e.target.value || null)}
+            className="pl-3 pr-8 py-2.5 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[44px] sm:min-h-0"
+            style={selectedCategory ? {
+              backgroundColor: `${selectedCategory.color}15`,
+              borderColor: selectedCategory.color
+            } : {}}
+          >
+            <option value="">All Categories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
 
-        <select
-          value={currentDuration}
-          onChange={(e) => updateFilter('duration', e.target.value || null)}
-          className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
-        >
-          <option value="">Any Duration</option>
-          {DURATION_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+          <select
+            value={currentDifficulty}
+            onChange={(e) => updateFilter('difficulty', e.target.value || null)}
+            className="pl-3 pr-8 py-2.5 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[44px] sm:min-h-0"
+          >
+            <option value="">All Levels</option>
+            {DIFFICULTY_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
 
-        <select
-          value={currentSort}
-          onChange={(e) => updateFilter('sort', e.target.value)}
-          className="px-3 py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
-        >
-          {SORT_OPTIONS.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+          <select
+            value={currentDuration}
+            onChange={(e) => updateFilter('duration', e.target.value || null)}
+            className="pl-3 pr-8 py-2.5 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[44px] sm:min-h-0"
+          >
+            <option value="">Any Duration</option>
+            {DURATION_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={currentSort}
+            onChange={(e) => updateFilter('sort', e.target.value)}
+            className="pl-3 pr-8 py-2.5 sm:py-1.5 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 min-h-[44px] sm:min-h-0 col-span-2 sm:col-span-1"
+          >
+            {SORT_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {hasActiveFilters && (
           <button
             onClick={clearAllFilters}
-            className="flex items-center gap-1 px-3 py-1.5 text-sm text-red-600 hover:text-red-700"
+            className="flex items-center justify-center gap-1 px-3 py-2.5 sm:py-1.5 text-sm text-red-600 hover:text-red-700 min-h-[44px] sm:min-h-0"
           >
             <XMarkIcon className="h-4 w-4" />
             Clear filters

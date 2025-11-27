@@ -427,7 +427,7 @@ export default function UsersPage() {
       </div>
 
       <div className="bg-white shadow-sm rounded-xl border border-gray-200">
-        <header className="px-5 py-4 border-b border-gray-100 flex justify-between items-center">
+        <header className="px-4 sm:px-5 py-4 border-b border-gray-100 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
           <h3 className="font-semibold text-gray-800">
             All Users{" "}
             <span className="text-gray-400 font-medium">
@@ -445,7 +445,100 @@ export default function UsersPage() {
           </label>
         </header>
 
-        <div className="overflow-x-auto">
+        {/* Mobile Card Layout */}
+        <div className="sm:hidden divide-y divide-gray-200">
+          {sortedUsers.map((user) => (
+            <div key={user.id} className="p-4 space-y-3">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox mt-1"
+                    checked={selectedUsers.includes(user.id)}
+                    onChange={(e) => handleSelectUser(user.id, e.target.checked)}
+                  />
+                  <div className="w-10 h-10 shrink-0">
+                    <UserAvatarSimple src={user.avatar} alt={user.name} size={40} />
+                  </div>
+                  <div>
+                    <Link
+                      href={`/admin/users/${user.id}`}
+                      className="font-medium text-gray-800 hover:text-violet-500"
+                    >
+                      {user.name}
+                    </Link>
+                    <p className="text-sm text-gray-500">{user.email}</p>
+                    {user.jobTitle && (
+                      <p className="text-xs text-gray-400">{user.jobTitle}</p>
+                    )}
+                  </div>
+                </div>
+                <span
+                  className={`inline-flex px-2 py-0.5 text-xs font-medium rounded-full ${
+                    user.isActive
+                      ? "bg-emerald-100 text-emerald-700"
+                      : "bg-gray-100 text-gray-700"
+                  }`}
+                >
+                  {user.isActive ? "Active" : "Inactive"}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap gap-1 pl-7">
+                {user.locations.slice(0, 3).map((ul) => (
+                  <span
+                    key={ul.location.id}
+                    className={`inline-flex items-center px-2 py-0.5 text-xs rounded ${
+                      ul.isPrimary
+                        ? "bg-green-100 text-green-700"
+                        : "bg-gray-100 text-gray-700"
+                    }`}
+                  >
+                    {ul.location.code || ul.location.name}
+                  </span>
+                ))}
+                {user.locations.length > 3 && (
+                  <span className="text-xs text-gray-500">
+                    +{user.locations.length - 3}
+                  </span>
+                )}
+                {getPrimaryRole(user) && (
+                  <span className="inline-flex px-2 py-0.5 text-xs font-medium rounded-full bg-violet-100 text-violet-700">
+                    {getPrimaryRole(user)?.name}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex gap-2 pt-2 border-t border-gray-100 pl-7">
+                <Link
+                  href={`/admin/users/${user.id}`}
+                  className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:text-violet-600 bg-gray-50 rounded-lg min-h-[44px]"
+                >
+                  <PencilIcon className="h-4 w-4" />
+                  <span>Edit</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    setUserToDelete(user);
+                    setIsDeleteModalOpen(true);
+                  }}
+                  className="flex items-center gap-1 px-3 py-2 text-sm text-gray-600 hover:text-rose-600 bg-gray-50 rounded-lg min-h-[44px]"
+                >
+                  <TrashIcon className="h-4 w-4" />
+                  <span>Delete</span>
+                </button>
+              </div>
+            </div>
+          ))}
+          {sortedUsers.length === 0 && (
+            <div className="px-4 py-8 text-center text-gray-500">
+              No users found.
+            </div>
+          )}
+        </div>
+
+        {/* Desktop Table Layout */}
+        <div className="hidden sm:block overflow-x-auto">
           <table className="table-auto w-full">
             <thead className="text-xs font-semibold uppercase text-gray-500 bg-gray-50 border-t border-b border-gray-200">
               <tr>
@@ -610,8 +703,8 @@ export default function UsersPage() {
         </div>
 
         {pagination.totalPages > 1 && (
-          <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-            <p className="text-sm text-gray-500">
+          <div className="px-4 sm:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-sm text-gray-500 text-center sm:text-left">
               Showing {(pagination.page - 1) * pagination.limit + 1} to{" "}
               {Math.min(pagination.page * pagination.limit, pagination.total)}{" "}
               of {pagination.total} users
@@ -622,7 +715,7 @@ export default function UsersPage() {
                   setPagination({ ...pagination, page: pagination.page - 1 })
                 }
                 disabled={pagination.page === 1}
-                className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-600 disabled:opacity-50"
+                className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-600 disabled:opacity-50 min-h-[44px]"
               >
                 Previous
               </button>
@@ -631,7 +724,7 @@ export default function UsersPage() {
                   setPagination({ ...pagination, page: pagination.page + 1 })
                 }
                 disabled={pagination.page === pagination.totalPages}
-                className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-600 disabled:opacity-50"
+                className="btn bg-white border-gray-200 hover:border-gray-300 text-gray-600 disabled:opacity-50 min-h-[44px]"
               >
                 Next
               </button>

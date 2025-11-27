@@ -91,11 +91,11 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2">
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
-            <div 
-              className="h-48 flex items-center justify-center"
+            <div
+              className="h-32 sm:h-40 md:h-48 flex items-center justify-center"
               style={{ backgroundColor: course.category?.color || '#6366F1' }}
             >
-              <span className="text-6xl font-bold text-white/50">
+              <span className="text-4xl sm:text-5xl md:text-6xl font-bold text-white/50">
                 {course.title.charAt(0)}
               </span>
             </div>
@@ -187,8 +187,8 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
           </div>
         </div>
 
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 sticky top-8">
+        <div className="lg:col-span-1 order-first lg:order-last">
+          <div className="bg-white rounded-xl border border-gray-200 p-6 lg:sticky lg:top-8">
             <Link
               href={`/lms/courses/${course.id}/take`}
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors mb-4"

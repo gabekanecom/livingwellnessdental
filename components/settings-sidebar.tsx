@@ -51,7 +51,47 @@ export default function SettingsSidebar({
               {title}
             </div>
 
-            <ul className="flex flex-nowrap md:block overflow-x-auto no-scrollbar mx-4 md:mx-0">
+            {/* Mobile horizontal scroll with fade edges */}
+            <div className="relative md:hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+              <div className="absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+              <ul className="flex flex-nowrap overflow-x-auto no-scrollbar mx-4 snap-x snap-mandatory pb-2">
+                {links.map((link, index) => {
+                  const isActive = link.matchPattern
+                    ? new RegExp(link.matchPattern).test(pathname)
+                    : link.href.endsWith("/profile") ||
+                      link.href.match(/\/[^\/]+$/)
+                    ? pathname === link.href
+                    : pathname === link.href ||
+                      pathname.startsWith(link.href + "/");
+
+                  return (
+                    <li key={index} className="mr-0.5 snap-start">
+                      <Link
+                        href={link.href}
+                        className={`flex items-center px-3 py-2.5 rounded-lg whitespace-nowrap min-h-[44px] ${
+                          isActive
+                            ? "bg-violet-100 text-violet-600"
+                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                        }`}
+                      >
+                        <span
+                          className={`shrink-0 fill-current mr-2 ${
+                            isActive ? "text-violet-500" : "text-gray-400"
+                          }`}
+                        >
+                          {link.icon}
+                        </span>
+                        <span className="text-sm font-medium">{link.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Desktop vertical list */}
+            <ul className="hidden md:block">
               {links.map((link, index) => {
                 const isActive = link.matchPattern
                   ? new RegExp(link.matchPattern).test(pathname)
@@ -62,7 +102,7 @@ export default function SettingsSidebar({
                     pathname.startsWith(link.href + "/");
 
                 return (
-                  <li key={index} className="mr-0.5 md:mr-0 md:mb-0.5">
+                  <li key={index} className="mb-0.5">
                     <Link
                       href={link.href}
                       className={`flex items-center px-2.5 py-2 rounded-lg whitespace-nowrap ${

@@ -106,6 +106,7 @@ model Role {
   updatedAt    DateTime         @updatedAt
   permissions  RolePermission[]
   userRoles    UserRole[]
+  courseAccess CourseRoleAccess[]
 
   @@index([userTypeId])
   @@index([isActive])
@@ -311,8 +312,10 @@ model Course {
   category           CourseCategory? @relation(fields: [categoryId], references: [id])
   modules            CourseModule[]
   enrollments        Enrollment[]
+  allowedRoles       CourseRoleAccess[]
   isPublished        Boolean        @default(false)
   isFeatured         Boolean        @default(false)
+  restrictByRole     Boolean        @default(false)
   rating             Float          @default(0)
   ratingCount        Int            @default(0)
   createdById        String?        @db.Uuid
@@ -509,6 +512,19 @@ model AICourseGeneration {
   userId        String?  @db.Uuid
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+}
+
+model CourseRoleAccess {
+  id        String   @id @default(cuid())
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  roleId    String
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([courseId, roleId])
+  @@index([courseId])
+  @@index([roleId])
 }
 
 enum CourseDifficulty {

@@ -94,19 +94,22 @@ export default function TakeCoursePage() {
     return () => contentArea?.removeEventListener('scroll', handleScroll);
   }, [currentLesson]);
 
+  // TODO: Replace with actual authenticated user ID when auth is implemented
+  const DEMO_USER_ID = '00000000-0000-0000-0000-000000000001';
+
   const loadCourse = async () => {
     try {
       const response = await fetch(`/api/lms/courses/${courseId}`);
       if (response.ok) {
         const data = await response.json();
         setCourse(data.course);
-        
+
         if (data.course.modules.length > 0 && data.course.modules[0].lessons.length > 0) {
           setCurrentLesson(data.course.modules[0].lessons[0]);
         }
       }
 
-      const enrollmentResponse = await fetch(`/api/lms/enrollments?courseId=${courseId}`);
+      const enrollmentResponse = await fetch(`/api/lms/enrollments?courseId=${courseId}&userId=${DEMO_USER_ID}`);
       if (enrollmentResponse.ok) {
         const enrollData = await enrollmentResponse.json();
         if (enrollData.enrollments && enrollData.enrollments.length > 0) {
@@ -128,7 +131,7 @@ export default function TakeCoursePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           courseId,
-          userId: 'demo-user'
+          userId: DEMO_USER_ID
         })
       });
 

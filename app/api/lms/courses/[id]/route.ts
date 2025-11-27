@@ -26,6 +26,15 @@ export async function GET(
           },
           orderBy: { order: 'asc' }
         },
+        allowedRoles: {
+          include: {
+            role: {
+              include: {
+                userType: true
+              }
+            }
+          }
+        },
         _count: {
           select: {
             enrollments: true
@@ -70,8 +79,14 @@ export async function PUT(
       tags,
       categoryId,
       isPublished,
-      isFeatured
+      isFeatured,
+      restrictByRole,
+      allowedRoleIds
     } = body;
+
+    await prisma.courseRoleAccess.deleteMany({
+      where: { courseId: id }
+    });
 
     const course = await prisma.course.update({
       where: { id },
@@ -87,11 +102,22 @@ export async function PUT(
         tags,
         categoryId,
         isPublished,
-        isFeatured
+        isFeatured,
+        restrictByRole: restrictByRole || false,
+        allowedRoles: restrictByRole && allowedRoleIds?.length > 0 ? {
+          create: allowedRoleIds.map((roleId: string) => ({
+            roleId
+          }))
+        } : undefined
       },
       include: {
         category: true,
-        createdBy: true
+        createdBy: true,
+        allowedRoles: {
+          include: {
+            role: true
+          }
+        }
       }
     });
 

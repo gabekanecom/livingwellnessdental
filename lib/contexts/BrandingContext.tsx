@@ -172,10 +172,38 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
     loadSettings();
   }, []);
 
+  const GOOGLE_FONTS = [
+    'Inter', 'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Poppins',
+    'Source Sans Pro', 'Nunito', 'Playfair Display', 'Merriweather',
+    'Libre Baskerville', 'Fira Code', 'JetBrains Mono'
+  ];
+
   const applyBrandSettings = (settings: BrandSettings) => {
     if (typeof document === 'undefined' || !settings) return;
 
     const root = document.documentElement;
+
+    // Load Google Fonts
+    const fontsToLoad = new Set<string>();
+    if (settings.fonts?.primary && GOOGLE_FONTS.includes(settings.fonts.primary)) {
+      fontsToLoad.add(settings.fonts.primary);
+    }
+    if (settings.fonts?.headings && GOOGLE_FONTS.includes(settings.fonts.headings)) {
+      fontsToLoad.add(settings.fonts.headings);
+    }
+    if (settings.fonts?.mono && GOOGLE_FONTS.includes(settings.fonts.mono)) {
+      fontsToLoad.add(settings.fonts.mono);
+    }
+
+    fontsToLoad.forEach(fontName => {
+      const existingLink = document.querySelector(`link[href*="${fontName.replace(/ /g, '+')}"]`);
+      if (!existingLink) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(/ /g, '+')}:wght@300;400;500;600;700&display=swap`;
+        document.head.appendChild(link);
+      }
+    });
     
     if (settings?.colors?.primary) {
       root.style.setProperty('--color-lwd-brand', settings.colors.primary);
@@ -210,6 +238,13 @@ export function BrandingProvider({ children }: { children: ReactNode }) {
 
     if (settings?.fonts?.primary) {
       root.style.setProperty('--font-inter', `"${settings.fonts.primary}", sans-serif`);
+      root.style.setProperty('--font-primary', `"${settings.fonts.primary}", sans-serif`);
+    }
+    if (settings?.fonts?.headings) {
+      root.style.setProperty('--font-headings', `"${settings.fonts.headings}", sans-serif`);
+    }
+    if (settings?.fonts?.mono) {
+      root.style.setProperty('--font-mono', `"${settings.fonts.mono}", monospace`);
     }
 
     const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
