@@ -189,11 +189,6 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
 
         <div className="lg:col-span-1">
           <div className="bg-white rounded-xl border border-gray-200 p-6 sticky top-8">
-            <div className="text-center mb-6">
-              <p className="text-3xl font-bold text-gray-900 mb-2">Free</p>
-              <p className="text-sm text-gray-500">Full access to all content</p>
-            </div>
-
             <Link
               href={`/lms/courses/${course.id}/take`}
               className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors mb-4"
