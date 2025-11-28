@@ -109,7 +109,7 @@ export default function DropdownProfile({ align }: {
           <MenuItem as="li">
             <Link
               className="flex items-center font-medium text-sm text-gray-600 hover:text-gray-700 py-1 px-3"
-              href="/profile/info"
+              href="/settings/profile"
             >
               <UserCircleIcon className="h-3.5 w-3.5 shrink-0 text-gray-400 mr-2" />
               <span>My Profile</span>
