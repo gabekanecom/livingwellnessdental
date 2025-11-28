@@ -1672,6 +1672,261 @@ async function main() {
     console.log(`✅ Created demo user: ${demoUser.name} with enrollments`);
   }
 
+  // Seed default email templates
+  console.log('📧 Seeding email templates...');
+
+  const emailTemplates = [
+    {
+      name: 'Welcome Email',
+      slug: 'welcome',
+      subject: 'Welcome to Living Wellness Dental, {{name}}!',
+      description: 'Sent to new users when they join the platform',
+      category: 'TRANSACTIONAL' as const,
+      isSystem: true,
+      variables: { name: 'User\'s name', email: 'User\'s email' },
+      htmlContent: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #3ec972 0%, #2db362 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+    .button { display: inline-block; background: #3ec972; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Welcome to Living Wellness Dental!</h1>
+    </div>
+    <div class="content">
+      <p>Hi {{name}},</p>
+      <p>Welcome to the Living Wellness Dental team! We're excited to have you on board.</p>
+      <p>Your account has been created with the email: <strong>{{email}}</strong></p>
+      <p>Here's what you can do next:</p>
+      <ul>
+        <li>Complete your profile</li>
+        <li>Explore the knowledge base</li>
+        <li>Start your assigned training courses</li>
+      </ul>
+      <a href="{{appUrl}}" class="button">Get Started</a>
+      <p>If you have any questions, don't hesitate to reach out to your manager or the HR team.</p>
+      <p>Best regards,<br>The Living Wellness Dental Team</p>
+    </div>
+    <div class="footer">
+      <p>Living Wellness Dental<br>{{unsubscribeLink}}</p>
+    </div>
+  </div>
+</body>
+</html>`,
+    },
+    {
+      name: 'Password Reset',
+      slug: 'password-reset',
+      subject: 'Reset your Living Wellness Dental password',
+      description: 'Sent when a user requests a password reset',
+      category: 'TRANSACTIONAL' as const,
+      isSystem: true,
+      variables: { name: 'User\'s name', resetLink: 'Password reset URL' },
+      htmlContent: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #3ec972; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+    .button { display: inline-block; background: #3ec972; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+    .warning { background: #fef3cd; border: 1px solid #ffc107; padding: 10px; border-radius: 4px; margin: 15px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Password Reset Request</h1>
+    </div>
+    <div class="content">
+      <p>Hi {{name}},</p>
+      <p>We received a request to reset your password. Click the button below to set a new password:</p>
+      <a href="{{resetLink}}" class="button">Reset Password</a>
+      <div class="warning">
+        <strong>Note:</strong> This link will expire in 1 hour.
+      </div>
+      <p>If you didn't request this password reset, you can safely ignore this email. Your password will remain unchanged.</p>
+      <p>Best regards,<br>The Living Wellness Dental Team</p>
+    </div>
+    <div class="footer">
+      <p>Living Wellness Dental</p>
+    </div>
+  </div>
+</body>
+</html>`,
+    },
+    {
+      name: 'Notification Email',
+      slug: 'notification',
+      subject: '{{title}}',
+      description: 'Generic notification email template',
+      category: 'NOTIFICATION' as const,
+      isSystem: true,
+      variables: { name: 'User\'s name', title: 'Notification title', message: 'Notification message', actionUrl: 'Optional action URL', actionText: 'Optional button text' },
+      htmlContent: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #3ec972; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+    .button { display: inline-block; background: #3ec972; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>{{title}}</h1>
+    </div>
+    <div class="content">
+      <p>Hi {{name}},</p>
+      <p>{{message}}</p>
+      {{#if actionUrl}}
+      <a href="{{actionUrl}}" class="button">{{actionText}}</a>
+      {{/if}}
+      <p>Best regards,<br>The Living Wellness Dental Team</p>
+    </div>
+    <div class="footer">
+      <p>Living Wellness Dental<br>{{unsubscribeLink}}</p>
+    </div>
+  </div>
+</body>
+</html>`,
+    },
+    {
+      name: 'Course Assigned',
+      slug: 'course-assigned',
+      subject: 'New Course Assigned: {{courseName}}',
+      description: 'Sent when a course is assigned to a user',
+      category: 'NOTIFICATION' as const,
+      isSystem: true,
+      variables: { name: 'User\'s name', courseName: 'Course title', courseDescription: 'Course description', courseUrl: 'Link to course' },
+      htmlContent: `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #6366f1; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #ffffff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; }
+    .course-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin: 20px 0; }
+    .button { display: inline-block; background: #6366f1; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>New Course Assigned</h1>
+    </div>
+    <div class="content">
+      <p>Hi {{name}},</p>
+      <p>You've been assigned a new training course to complete:</p>
+      <div class="course-card">
+        <h2 style="margin-top: 0;">{{courseName}}</h2>
+        <p>{{courseDescription}}</p>
+      </div>
+      <a href="{{courseUrl}}" class="button">Start Course</a>
+      <p>Best regards,<br>The Living Wellness Dental Team</p>
+    </div>
+    <div class="footer">
+      <p>Living Wellness Dental<br>{{unsubscribeLink}}</p>
+    </div>
+  </div>
+</body>
+</html>`,
+    },
+  ];
+
+  for (const template of emailTemplates) {
+    await prisma.emailTemplate.upsert({
+      where: { slug: template.slug },
+      update: {},
+      create: template,
+    });
+    console.log(`✅ Created email template: ${template.name}`);
+  }
+
+  // Seed default SMS templates
+  console.log('📱 Seeding SMS templates...');
+
+  const smsTemplates = [
+    {
+      name: 'Verification Code',
+      slug: 'verification-code',
+      content: 'Your Living Wellness Dental verification code is: {{code}}. This code expires in 10 minutes.',
+      description: 'SMS verification code for phone number verification',
+      category: 'TRANSACTIONAL' as const,
+      isSystem: true,
+      variables: { code: 'Verification code' },
+    },
+    {
+      name: 'General Notification',
+      slug: 'notification',
+      content: 'Living Wellness Dental: {{message}}',
+      description: 'Generic SMS notification template',
+      category: 'NOTIFICATION' as const,
+      isSystem: true,
+      variables: { message: 'Notification message' },
+    },
+    {
+      name: 'Course Reminder',
+      slug: 'course-reminder',
+      content: 'Living Wellness Dental: Reminder to complete your course "{{courseName}}". Start now: {{courseUrl}}',
+      description: 'Reminder to complete assigned courses',
+      category: 'REMINDER' as const,
+      isSystem: true,
+      variables: { courseName: 'Course name', courseUrl: 'Link to course' },
+    },
+  ];
+
+  for (const template of smsTemplates) {
+    await prisma.smsTemplate.upsert({
+      where: { slug: template.slug },
+      update: {},
+      create: template,
+    });
+    console.log(`✅ Created SMS template: ${template.name}`);
+  }
+
+  // Seed default messaging settings
+  console.log('⚙️ Seeding messaging settings...');
+
+  await prisma.messagingSettings.upsert({
+    where: { id: 'default' },
+    update: {},
+    create: {
+      id: 'default',
+      emailEnabled: false,
+      smsEnabled: false,
+      defaultEmailOptIn: true,
+      defaultSmsOptIn: false,
+      emailRateLimitPerHour: 100,
+      smsRateLimitPerHour: 50,
+    },
+  });
+  console.log('✅ Created default messaging settings');
+
   console.log('🎉 Seeding completed successfully!');
 
   await prisma.$disconnect();

@@ -45,6 +45,8 @@ model User {
   notifications        Notification[]
   // Media relation
   uploadedMedia        WikiMedia[]          @relation("UploadedMedia")
+  // Notification preferences relation
+  notificationPreferences UserNotificationPreference?
 }
 
 // Dental Locations
@@ -818,4 +820,292 @@ model ChatWidgetSettings {
   rateLimitPerMin   Int      @default(10) // Rate limit per IP per minute
   updatedAt         DateTime @updatedAt
   createdAt         DateTime @default(now())
+}
+
+// =============================================================================
+// MESSAGING SYSTEM (Email & SMS)
+// =============================================================================
+
+// Global Messaging Settings (singleton)
+model MessagingSettings {
+  id                    String   @id @default("default")
+
+  // Email (Resend) Configuration
+  emailEnabled          Boolean  @default(false)
+  resendApiKey          String?  // Encrypted in production
+  fromEmail             String?  // e.g., "notifications@livingwellnessdental.com"
+  fromName              String?  // e.g., "Living Wellness Dental"
+  replyToEmail          String?  // e.g., "support@livingwellnessdental.com"
+
+  // SMS (Twilio) Configuration
+  smsEnabled            Boolean  @default(false)
+  twilioAccountSid      String?  // Encrypted in production
+  twilioAuthToken       String?  // Encrypted in production
+  twilioPhoneNumber     String?  // e.g., "+18005551234"
+
+  // Default Preferences for new users
+  defaultEmailOptIn     Boolean  @default(true)
+  defaultSmsOptIn       Boolean  @default(false)
+
+  // Rate Limits
+  emailRateLimitPerHour Int      @default(100)
+  smsRateLimitPerHour   Int      @default(50)
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+// User Notification Preferences
+model UserNotificationPreference {
+  id                    String   @id @default(cuid())
+  userId                String   @unique @db.Uuid
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Email Preferences
+  emailEnabled          Boolean  @default(true)
+  emailNotifications    Boolean  @default(true)   // Transactional notifications
+  emailMarketing        Boolean  @default(false)  // Marketing emails (requires explicit consent)
+  emailDigest           Boolean  @default(false)  // Daily/weekly digest
+  digestFrequency       DigestFrequency @default(WEEKLY)
+
+  // SMS Preferences
+  smsEnabled            Boolean  @default(false)
+  smsNotifications      Boolean  @default(false)
+  smsMarketing          Boolean  @default(false)
+
+  // Phone for SMS (can be different from User.phone)
+  smsPhoneNumber        String?
+  smsPhoneVerified      Boolean  @default(false)
+  smsPhoneVerifiedAt    DateTime?
+
+  // Consent tracking
+  emailConsentAt        DateTime?
+  emailConsentIp        String?
+  smsConsentAt          DateTime?
+  smsConsentIp          String?
+  marketingConsentAt    DateTime?
+  marketingConsentIp    String?
+
+  // Unsubscribe tracking
+  emailUnsubscribedAt   DateTime?
+  smsUnsubscribedAt     DateTime?
+  unsubscribeToken      String   @unique @default(cuid()) // For one-click unsubscribe
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([userId])
+  @@index([unsubscribeToken])
+}
+
+enum DigestFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+// Email Templates
+model EmailTemplate {
+  id              String              @id @default(cuid())
+  name            String              // Internal name
+  slug            String              @unique // e.g., "welcome", "password-reset"
+  subject         String              // Email subject (supports variables)
+  htmlContent     String              @db.Text // HTML content (supports variables)
+  textContent     String?             @db.Text // Plain text fallback
+  description     String?             // Admin description
+  category        EmailTemplateCategory @default(TRANSACTIONAL)
+
+  // Template variables documentation
+  variables       Json?               // { "name": "User's name", "link": "Action URL" }
+
+  // Status
+  isActive        Boolean             @default(true)
+  isSystem        Boolean             @default(false) // System templates can't be deleted
+
+  // Versioning
+  version         Int                 @default(1)
+
+  // Tracking
+  sentCount       Int                 @default(0)
+
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  // Relations
+  emailMessages   EmailMessage[]
+
+  @@index([slug])
+  @@index([category])
+  @@index([isActive])
+}
+
+enum EmailTemplateCategory {
+  TRANSACTIONAL   // Password reset, verification, etc.
+  NOTIFICATION    // In-app notification emails
+  MARKETING       // Marketing campaigns
+  DIGEST          // Daily/weekly digests
+}
+
+// SMS Templates
+model SmsTemplate {
+  id              String            @id @default(cuid())
+  name            String            // Internal name
+  slug            String            @unique // e.g., "verification-code"
+  content         String            // SMS content (max ~160 chars for single SMS)
+  description     String?           // Admin description
+  category        SmsTemplateCategory @default(TRANSACTIONAL)
+
+  // Template variables documentation
+  variables       Json?             // { "code": "Verification code" }
+
+  // Status
+  isActive        Boolean           @default(true)
+  isSystem        Boolean           @default(false)
+
+  // Versioning
+  version         Int               @default(1)
+
+  // Tracking
+  sentCount       Int               @default(0)
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  // Relations
+  smsMessages     SmsMessage[]
+
+  @@index([slug])
+  @@index([category])
+  @@index([isActive])
+}
+
+enum SmsTemplateCategory {
+  TRANSACTIONAL   // Verification codes, confirmations
+  NOTIFICATION    // In-app notification SMS
+  MARKETING       // Marketing messages
+  REMINDER        // Appointment reminders, etc.
+}
+
+// Email Message Log
+model EmailMessage {
+  id              String            @id @default(cuid())
+
+  // Recipient
+  toEmail         String
+  toName          String?
+  userId          String?           @db.Uuid // If sent to a registered user
+
+  // Content
+  subject         String
+  htmlContent     String            @db.Text
+  textContent     String?           @db.Text
+
+  // Template (if used)
+  templateId      String?
+  template        EmailTemplate?    @relation(fields: [templateId], references: [id])
+  templateVariables Json?           // Variables used for this send
+
+  // Delivery Status
+  status          EmailStatus       @default(QUEUED)
+  resendId        String?           // Resend message ID
+
+  // Delivery Events
+  sentAt          DateTime?
+  deliveredAt     DateTime?
+  openedAt        DateTime?
+  clickedAt       DateTime?
+  bouncedAt       DateTime?
+  complainedAt    DateTime?         // Spam complaint
+
+  // Error tracking
+  errorMessage    String?
+  retryCount      Int               @default(0)
+  lastRetryAt     DateTime?
+
+  // Metadata
+  category        EmailTemplateCategory @default(TRANSACTIONAL)
+  referenceType   String?           // 'notification', 'article', etc.
+  referenceId     String?           // ID of related entity
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([userId])
+  @@index([toEmail])
+  @@index([status])
+  @@index([templateId])
+  @@index([createdAt])
+  @@index([resendId])
+}
+
+enum EmailStatus {
+  QUEUED
+  SENDING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  BOUNCED
+  COMPLAINED
+  FAILED
+}
+
+// SMS Message Log
+model SmsMessage {
+  id              String            @id @default(cuid())
+
+  // Recipient
+  toPhone         String
+  userId          String?           @db.Uuid // If sent to a registered user
+
+  // Content
+  content         String            @db.Text
+
+  // Template (if used)
+  templateId      String?
+  template        SmsTemplate?      @relation(fields: [templateId], references: [id])
+  templateVariables Json?           // Variables used for this send
+
+  // Delivery Status
+  status          SmsStatus         @default(QUEUED)
+  twilioSid       String?           // Twilio message SID
+
+  // Delivery Events
+  sentAt          DateTime?
+  deliveredAt     DateTime?
+  failedAt        DateTime?
+
+  // Pricing (from Twilio)
+  segments        Int               @default(1) // Number of SMS segments
+  price           Float?            // Cost in USD
+
+  // Error tracking
+  errorCode       String?           // Twilio error code
+  errorMessage    String?
+  retryCount      Int               @default(0)
+  lastRetryAt     DateTime?
+
+  // Metadata
+  category        SmsTemplateCategory @default(TRANSACTIONAL)
+  referenceType   String?           // 'notification', 'verification', etc.
+  referenceId     String?
+
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([userId])
+  @@index([toPhone])
+  @@index([status])
+  @@index([templateId])
+  @@index([createdAt])
+  @@index([twilioSid])
+}
+
+enum SmsStatus {
+  QUEUED
+  SENDING
+  SENT
+  DELIVERED
+  UNDELIVERED
+  FAILED
 }

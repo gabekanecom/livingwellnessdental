@@ -11,6 +11,7 @@ import {
   DocumentTextIcon,
   DocumentMagnifyingGlassIcon,
   ChatBubbleLeftRightIcon,
+  EnvelopeIcon,
 } from "@heroicons/react/24/outline";
 import { SidebarLink } from "./settings-sidebar";
 
@@ -74,5 +75,10 @@ export const adminSettingsLinks: SidebarLink[] = [
     href: "/admin/widget",
     label: "Chat Widget",
     icon: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/messaging",
+    label: "Messaging",
+    icon: <EnvelopeIcon className="h-5 w-5" />,
   },
 ];
