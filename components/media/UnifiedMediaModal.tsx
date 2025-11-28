@@ -416,7 +416,7 @@ export default function UnifiedMediaModal({
                               <div className="flex flex-wrap gap-1 mt-1">
                                 {item.tags.slice(0, 2).map(({ tag }) => (
                                   <span
-                                    key={tag.id}
+                                    key={`${item.id}-${tag.id}`}
                                     className="text-[10px] px-1 py-0.5 bg-white/20 rounded"
                                   >
                                     {tag.name}
