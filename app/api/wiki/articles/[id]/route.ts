@@ -125,6 +125,20 @@ export async function PUT(
       });
     }
 
+    // Sync media usage if content was updated
+    if (content) {
+      try {
+        await fetch(`${request.nextUrl.origin}/api/wiki/articles/${id}/sync-media`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content }),
+        });
+      } catch (syncError) {
+        console.error('Failed to sync media:', syncError);
+        // Don't fail the request if media sync fails
+      }
+    }
+
     return NextResponse.json(updatedArticle);
   } catch (error) {
     console.error('Error updating article:', error);

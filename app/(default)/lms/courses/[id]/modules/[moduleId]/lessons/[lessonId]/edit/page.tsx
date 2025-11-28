@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeftIcon, TrashIcon, PlayIcon, DocumentTextIcon, QuestionMarkCircleIcon, DocumentArrowUpIcon } from '@heroicons/react/24/outline';
 import { CheckIcon as SaveIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
+import LessonEditor from '@/components/lms/LessonEditor';
 
 interface Course {
   id: string;
@@ -316,13 +317,9 @@ export default function EditLessonPage() {
               <label className="block text-sm font-medium mb-2">
                 Lesson Content <span className="text-red-500">*</span>
               </label>
-              <textarea
-                name="content"
-                value={formData.content}
-                onChange={handleInputChange}
-                required={formData.type === 'TEXT'}
-                rows={8}
-                className="form-textarea w-full"
+              <LessonEditor
+                content={formData.content}
+                onChange={(html) => setFormData(prev => ({ ...prev, content: html }))}
                 placeholder="Write your lesson content here..."
               />
             </div>

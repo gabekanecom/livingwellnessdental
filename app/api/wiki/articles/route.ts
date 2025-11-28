@@ -109,6 +109,18 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Sync media usage
+    try {
+      await fetch(`${request.nextUrl.origin}/api/wiki/articles/${article.id}/sync-media`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content }),
+      });
+    } catch (syncError) {
+      console.error('Failed to sync media:', syncError);
+      // Don't fail the request if media sync fails
+    }
+
     return NextResponse.json(article, { status: 201 });
   } catch (error) {
     console.error('Error creating article:', error);

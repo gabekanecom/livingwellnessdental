@@ -66,18 +66,23 @@ export async function uploadFile(
 ): Promise<string> {
   const client = getS3Client();
 
-  await client.send(
-    new PutObjectCommand({
-      Bucket: S3_BUCKET,
-      Key: key,
-      Body: buffer,
-      ContentType: contentType,
-      ACL: 'public-read', // Make file publicly readable
-      CacheControl: 'public, max-age=31536000', // 1 year cache
-    })
-  );
+  try {
+    await client.send(
+      new PutObjectCommand({
+        Bucket: S3_BUCKET,
+        Key: key,
+        Body: buffer,
+        ContentType: contentType,
+        ACL: 'public-read', // Make the file publicly accessible
+        CacheControl: 'public, max-age=31536000', // 1 year cache
+      })
+    );
 
-  return getPublicUrl(key);
+    return getPublicUrl(key);
+  } catch (error) {
+    console.error('S3 upload error:', error);
+    throw new Error(`Failed to upload to storage: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }
 
 // Delete a file

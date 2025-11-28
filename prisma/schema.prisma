@@ -43,6 +43,8 @@ model User {
   reviewsCompleted     ArticleReview[]      @relation("ArticleReviewer")
   // Notification relation
   notifications        Notification[]
+  // Media relation
+  uploadedMedia        WikiMedia[]          @relation("UploadedMedia")
 }
 
 // Dental Locations
@@ -197,6 +199,137 @@ enum DataScope {
   GLOBAL
 }
 
+// Wiki Media Models
+model WikiMedia {
+  id              String             @id @default(cuid())
+
+  // File Information
+  key             String             @unique // S3/Spaces key
+  url             String             // Public CDN URL
+  filename        String             // Original filename
+  contentType     String             // MIME type
+  size            Int                // File size in bytes
+
+  // Metadata
+  width           Int?               // Image width (if image)
+  height          Int?               // Image height (if image)
+  alt             String?            // Alt text for accessibility
+  description     String?            @db.Text // User-provided description
+  title           String?            // Custom title (defaults to filename)
+
+  // Organization
+  tags            WikiMediaTag[]     // Many-to-many relationship with tags
+
+  // Ownership & Tracking
+  uploadedById    String             @db.Uuid
+  uploadedBy      User               @relation("UploadedMedia", fields: [uploadedById], references: [id], onDelete: Cascade)
+  module          String?            // Which module uploaded this (wiki, lms, etc.)
+
+  // Usage Tracking
+  usedInArticles  WikiArticleMedia[]
+  usageCount      Int                @default(0) // Denormalized count for quick queries
+
+  // Status & Lifecycle
+  status          MediaStatus        @default(ACTIVE)
+  uploadedAt      DateTime           @default(now())
+  lastUsedAt      DateTime?          // Last time it was added to an article
+  deletedAt       DateTime?          // Soft delete timestamp
+
+  // Cleanup tracking
+  isOrphaned      Boolean            @default(false)
+  orphanedAt      DateTime?
+
+  @@index([uploadedById])
+  @@index([status])
+  @@index([isOrphaned, orphanedAt])
+  @@index([contentType])
+  @@index([uploadedAt])
+}
+
+model WikiArticleMedia {
+  id        String      @id @default(cuid())
+
+  articleId String
+  article   WikiArticle @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  mediaId   String
+  media     WikiMedia   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  addedAt   DateTime    @default(now())
+
+  @@unique([articleId, mediaId])
+  @@index([articleId])
+  @@index([mediaId])
+}
+
+model WikiMediaTag {
+  id          String      @id @default(cuid())
+
+  mediaId     String
+  media       WikiMedia   @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+
+  tagId       String
+  tag         MediaTag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  addedAt     DateTime    @default(now())
+
+  @@unique([mediaId, tagId])
+  @@index([mediaId])
+  @@index([tagId])
+}
+
+model MediaTag {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  slug        String          @unique
+  description String?         @db.Text
+  color       String?         // Hex color for visual organization
+
+  media       WikiMediaTag[]
+
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([name])
+}
+
+model MediaCleanupLog {
+  id           String        @id @default(cuid())
+
+  // What was cleaned
+  mediaId      String?       // Null if batch operation
+  mediaKey     String        // S3 key for reference
+  mediaUrl     String        // URL for reference
+
+  // Why it was cleaned
+  reason       CleanupReason
+
+  // When and by whom
+  cleanedAt    DateTime      @default(now())
+  cleanedBy    String?       @db.Uuid // User ID if manual, null if automatic
+  isAutomatic  Boolean       @default(true)
+
+  // Results
+  success      Boolean
+  errorMessage String?
+
+  @@index([cleanedAt])
+  @@index([isAutomatic])
+}
+
+enum MediaStatus {
+  ACTIVE       // Currently in use or recently uploaded
+  ORPHANED     // Not used in any published article
+  DELETED      // Soft deleted
+}
+
+enum CleanupReason {
+  ORPHANED_EXPIRED  // Orphaned for X days
+  MANUAL_DELETE     // User deleted
+  ADMIN_CLEANUP     // Admin bulk cleanup
+  ARTICLE_DELETED   // Parent article deleted
+}
+
 // Wiki Models
 model WikiCategory {
   id          String                    @id @default(cuid())
@@ -243,6 +376,7 @@ model WikiArticle {
   tags         WikiTag[]
   versions     WikiArticleVersion[]
   reviews      ArticleReview[]
+  media        WikiArticleMedia[]
   views        Int                   @default(0)
   order        Int                   @default(0)
   publishedAt  DateTime?

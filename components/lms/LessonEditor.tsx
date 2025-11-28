@@ -12,7 +12,7 @@ import { Table } from '@tiptap/extension-table';
 import { TableRow } from '@tiptap/extension-table-row';
 import { TableCell } from '@tiptap/extension-table-cell';
 import { TableHeader } from '@tiptap/extension-table-header';
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import {
   BoldIcon,
   ItalicIcon,
@@ -32,13 +32,13 @@ const NumberedListIcon = () => (
   </svg>
 );
 
-interface ArticleEditorProps {
+interface LessonEditorProps {
   content: string;
   onChange: (content: string) => void;
   placeholder?: string;
 }
 
-export default function ArticleEditor({ content, onChange, placeholder }: ArticleEditorProps) {
+export default function LessonEditor({ content, onChange, placeholder }: LessonEditorProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [showMediaModal, setShowMediaModal] = useState(false);
@@ -49,7 +49,7 @@ export default function ArticleEditor({ content, onChange, placeholder }: Articl
     extensions: [
       StarterKit,
       Placeholder.configure({
-        placeholder: placeholder || 'Start writing your article...',
+        placeholder: placeholder || 'Start writing your lesson content...',
       }),
       ResizableImageExtension.configure({
         inline: false,
@@ -83,7 +83,7 @@ export default function ArticleEditor({ content, onChange, placeholder }: Articl
     },
     editorProps: {
       attributes: {
-        class: 'prose prose-lg max-w-none focus:outline-none min-h-[500px] px-6 py-4',
+        class: 'prose prose-lg max-w-none focus:outline-none min-h-[400px] px-6 py-4',
       },
       handleDrop: (view, event, slice, moved) => {
         if (!moved && event.dataTransfer?.files.length) {
@@ -168,7 +168,7 @@ export default function ArticleEditor({ content, onChange, placeholder }: Articl
     return (
       <div className="border border-gray-300 rounded-lg overflow-hidden animate-pulse">
         <div className="bg-gray-50 border-b border-gray-300 p-2 h-12" />
-        <div className="min-h-[500px] bg-gray-50" />
+        <div className="min-h-[400px] bg-gray-50" />
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function ArticleEditor({ content, onChange, placeholder }: Articl
         isOpen={showMediaModal}
         onClose={() => setShowMediaModal(false)}
         onSelect={handleMediaSelect}
-        module="wiki"
+        module="lms"
       />
 
       {/* Video embed modal */}

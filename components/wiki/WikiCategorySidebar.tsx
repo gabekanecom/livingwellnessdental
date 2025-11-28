@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 import { useWiki } from '@/contexts/WikiContext';
 import CategoryTree from './CategoryTree';
 import { buildCategoryTree } from '@/lib/wiki/utils';
-import { 
-  Cog6ToothIcon, 
-  Bars3Icon, 
+import {
+  Cog6ToothIcon,
+  Bars3Icon,
   XMarkIcon,
   HomeIcon,
   MagnifyingGlassIcon,
@@ -17,6 +17,7 @@ import {
   UserIcon,
   DocumentMagnifyingGlassIcon,
   ChartBarIcon,
+  PhotoIcon,
 } from '@heroicons/react/24/outline';
 
 const quickLinks = [
@@ -24,6 +25,7 @@ const quickLinks = [
   { href: '/wiki/search', label: 'Search', icon: MagnifyingGlassIcon },
   { href: '/wiki/browse', label: 'All Articles', icon: DocumentTextIcon },
   { href: '/wiki/tags', label: 'Tags', icon: TagIcon },
+  { href: '/wiki/media', label: 'Media Library', icon: PhotoIcon },
   { href: '/wiki/my-articles', label: 'My Articles', icon: UserIcon },
   { href: '/wiki/review', label: 'Review Queue', icon: DocumentMagnifyingGlassIcon },
   { href: '/wiki/analytics', label: 'Analytics', icon: ChartBarIcon },

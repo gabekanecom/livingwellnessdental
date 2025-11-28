@@ -218,6 +218,20 @@ export default function Sidebar({
                   )
                 }}
               </SidebarLinkGroup>
+
+              {/* Media Library */}
+              <li className={`pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r ${segments[0] === 'media' ? 'from-violet-500/[0.12] to-violet-500/[0.04]' : ''}`}>
+                <SidebarLink href="/media">
+                  <div className="flex items-center">
+                    <svg className={`shrink-0 fill-current ${segments[0] === 'media' ? 'text-violet-500' : 'text-gray-400'}`} xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                      <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM2 14V2h12v12H2Zm2-8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm10 4-3-3-3 3-2-2-2 2v2h10v-2Z"/>
+                    </svg>
+                    <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                      Media Library
+                    </span>
+                  </div>
+                </SidebarLink>
+              </li>
             </ul>
           </div>
 
