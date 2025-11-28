@@ -1,16 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { formatDistanceToNow, format } from 'date-fns';
-import { 
-  ClockIcon, 
-  EyeIcon, 
+import {
+  ClockIcon,
+  EyeIcon,
   UserCircleIcon,
   HandThumbUpIcon,
   HandThumbDownIcon,
   LinkIcon,
-  CheckIcon
+  CheckIcon,
+  PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import { HandThumbUpIcon as ThumbUpSolid, HandThumbDownIcon as ThumbDownSolid } from '@heroicons/react/24/solid';
 import { WikiArticle } from '@/lib/wiki/types';
@@ -24,6 +25,22 @@ export default function ArticleView({ article }: ArticleViewProps) {
   const readingTime = calculateReadingTime(article.content);
   const [feedback, setFeedback] = useState<'helpful' | 'not-helpful' | null>(null);
   const [copied, setCopied] = useState(false);
+  const [canEdit, setCanEdit] = useState(false);
+
+  useEffect(() => {
+    async function checkEditPermission() {
+      try {
+        const res = await fetch(`/api/wiki/articles/${article.id}/can-edit`);
+        if (res.ok) {
+          const data = await res.json();
+          setCanEdit(data.canEdit);
+        }
+      } catch (error) {
+        console.error('Error checking edit permission:', error);
+      }
+    }
+    checkEditPermission();
+  }, [article.id]);
 
   const handleCopyLink = async () => {
     try {
@@ -50,7 +67,18 @@ export default function ArticleView({ article }: ArticleViewProps) {
         />
       )}
 
-      <h1 className="text-4xl font-bold text-gray-900 mb-4">{article.title}</h1>
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <h1 className="text-4xl font-bold text-gray-900">{article.title}</h1>
+        {canEdit && (
+          <Link
+            href={`/wiki/article/${article.slug}/edit`}
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-violet-700 bg-violet-50 hover:bg-violet-100 rounded-lg transition-colors shrink-0"
+          >
+            <PencilSquareIcon className="h-4 w-4" />
+            Edit
+          </Link>
+        )}
+      </div>
 
       <div className="flex items-center space-x-6 text-sm text-gray-600 mb-8 pb-8 border-b border-gray-200">
         {article.author && (

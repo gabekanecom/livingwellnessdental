@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 import prisma from '@/lib/prisma';
+import sharp from 'sharp';
 
 export async function POST(request: NextRequest) {
   try {
@@ -54,12 +55,20 @@ export async function POST(request: NextRequest) {
     }
 
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
+
+    // Resize image to 256x256 max for optimized profile images
+    const resizedBuffer = await sharp(Buffer.from(arrayBuffer))
+      .resize(256, 256, {
+        fit: 'cover',
+        position: 'center'
+      })
+      .jpeg({ quality: 85 })
+      .toBuffer();
 
     const { data: uploadData, error: uploadError } = await adminClient.storage
       .from('profile_images')
-      .upload(fileName, buffer, {
-        contentType: file.type || 'image/jpeg',
+      .upload(fileName.replace(/\.[^.]+$/, '.jpg'), resizedBuffer, {
+        contentType: 'image/jpeg',
         upsert: true
       });
 

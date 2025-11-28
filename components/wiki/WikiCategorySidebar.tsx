@@ -17,7 +17,6 @@ import {
   UserIcon,
   DocumentMagnifyingGlassIcon,
   ChartBarIcon,
-  PhotoIcon,
 } from '@heroicons/react/24/outline';
 
 const quickLinks = [
@@ -25,7 +24,6 @@ const quickLinks = [
   { href: '/wiki/search', label: 'Search', icon: MagnifyingGlassIcon },
   { href: '/wiki/browse', label: 'All Articles', icon: DocumentTextIcon },
   { href: '/wiki/tags', label: 'Tags', icon: TagIcon },
-  { href: '/wiki/media', label: 'Media Library', icon: PhotoIcon },
   { href: '/wiki/my-articles', label: 'My Articles', icon: UserIcon },
   { href: '/wiki/review', label: 'Review Queue', icon: DocumentMagnifyingGlassIcon },
   { href: '/wiki/analytics', label: 'Analytics', icon: ChartBarIcon },

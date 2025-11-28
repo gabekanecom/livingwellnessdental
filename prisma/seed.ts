@@ -129,9 +129,9 @@ async function main() {
       contentPlain: 'Welcome to Our Team! We\'re thrilled to have you join Living Wellness Dental. This wiki is your central resource for all training materials, policies, and procedures.',
       excerpt: 'Welcome guide for new team members at Living Wellness Dental',
       status: 'PUBLISHED' as const,
-      categoryId: createdCategories[0].id,
       authorId: user.id,
       publishedAt: new Date(),
+      _categoryIndex: 0,
     },
     {
       title: 'Using the Wiki System',
@@ -161,9 +161,9 @@ async function main() {
       contentPlain: 'How to Use This Wiki. Our wiki is designed to be intuitive and easy to navigate.',
       excerpt: 'Learn how to navigate and use the wiki system effectively',
       status: 'PUBLISHED' as const,
-      categoryId: createdCategories[0].id,
       authorId: user.id,
       publishedAt: new Date(),
+      _categoryIndex: 0,
     },
     {
       title: 'Employee Handbook Overview',
@@ -190,9 +190,9 @@ async function main() {
       contentPlain: 'Employee Handbook. This handbook outlines the policies, procedures, and benefits for all Living Wellness Dental employees.',
       excerpt: 'Overview of employment policies, values, and benefits',
       status: 'PUBLISHED' as const,
-      categoryId: createdCategories[1].id,
       authorId: user.id,
       publishedAt: new Date(),
+      _categoryIndex: 1,
     },
     {
       title: 'Infection Control Protocols',
@@ -226,18 +226,38 @@ async function main() {
       contentPlain: 'Infection Control Protocols. Maintaining a sterile environment is critical to patient safety and regulatory compliance.',
       excerpt: 'Essential infection control and sterilization procedures',
       status: 'PUBLISHED' as const,
-      categoryId: createdCategories[4].id,
       authorId: user.id,
       publishedAt: new Date(),
+      _categoryIndex: 4,
     },
   ];
 
   for (const article of articles) {
+    // Extract category index and remove it from article data
+    const { _categoryIndex, ...articleData } = article;
+
     const created = await prisma.wikiArticle.upsert({
-      where: { slug: article.slug },
+      where: { slug: articleData.slug },
       update: {},
-      create: article,
+      create: articleData,
     });
+
+    // Create category relationship
+    if (_categoryIndex !== undefined && createdCategories[_categoryIndex]) {
+      await prisma.wikiArticleCategory.upsert({
+        where: {
+          articleId_categoryId: {
+            articleId: created.id,
+            categoryId: createdCategories[_categoryIndex].id,
+          },
+        },
+        update: {},
+        create: {
+          articleId: created.id,
+          categoryId: createdCategories[_categoryIndex].id,
+        },
+      });
+    }
 
     // Create initial version
     await prisma.wikiArticleVersion.create({
