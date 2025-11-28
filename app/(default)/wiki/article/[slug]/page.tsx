@@ -13,10 +13,13 @@ interface PageProps {
   }>;
 }
 
-async function getAdjacentArticles(categoryId: string, currentTitle: string) {
-  const articlesInCategory = await prisma.wikiArticle.findMany({
+async function getAdjacentArticles(categoryIds: string[], currentTitle: string) {
+  // Get articles in any of the article's categories
+  const articlesInCategories = await prisma.wikiArticle.findMany({
     where: {
-      categoryId,
+      categories: {
+        some: { categoryId: { in: categoryIds } },
+      },
       status: 'PUBLISHED',
     },
     select: {
@@ -25,24 +28,25 @@ async function getAdjacentArticles(categoryId: string, currentTitle: string) {
       slug: true,
     },
     orderBy: { title: 'asc' },
+    distinct: ['id'],
   });
 
-  const currentIndex = articlesInCategory.findIndex(a => a.title === currentTitle);
-  
+  const currentIndex = articlesInCategories.findIndex(a => a.title === currentTitle);
+
   return {
-    previous: currentIndex > 0 ? articlesInCategory[currentIndex - 1] : null,
-    next: currentIndex < articlesInCategory.length - 1 ? articlesInCategory[currentIndex + 1] : null,
+    previous: currentIndex > 0 ? articlesInCategories[currentIndex - 1] : null,
+    next: currentIndex < articlesInCategories.length - 1 ? articlesInCategories[currentIndex + 1] : null,
   };
 }
 
-async function getRelatedArticles(articleId: string, tagIds: string[], categoryId: string) {
+async function getRelatedArticles(articleId: string, tagIds: string[], categoryIds: string[]) {
   const related = await prisma.wikiArticle.findMany({
     where: {
       id: { not: articleId },
       status: 'PUBLISHED',
       OR: [
         { tags: { some: { id: { in: tagIds } } } },
-        { categoryId },
+        { categories: { some: { categoryId: { in: categoryIds } } } },
       ],
     },
     select: {
@@ -50,13 +54,24 @@ async function getRelatedArticles(articleId: string, tagIds: string[], categoryI
       title: true,
       slug: true,
       excerpt: true,
-      category: { select: { name: true } },
+      categories: {
+        include: { category: { select: { name: true } } },
+        orderBy: { isPrimary: 'desc' },
+        take: 1,
+      },
     },
     take: 5,
     orderBy: { views: 'desc' },
   });
 
-  return related;
+  // Map to format expected by RelatedArticles component
+  return related.map(article => ({
+    id: article.id,
+    title: article.title,
+    slug: article.slug,
+    excerpt: article.excerpt,
+    category: article.categories[0]?.category || { name: 'Uncategorized' },
+  }));
 }
 
 export default async function ArticlePage({ params }: PageProps) {
@@ -66,7 +81,10 @@ export default async function ArticlePage({ params }: PageProps) {
     where: { slug },
     include: {
       author: true,
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
       tags: true,
     },
   });
@@ -81,13 +99,19 @@ export default async function ArticlePage({ params }: PageProps) {
   });
 
   const tagIds = article.tags.map(t => t.id);
+  const categoryIds = article.categories.map(c => c.categoryId);
+  const primaryCategory = article.categories.find(c => c.isPrimary)?.category || article.categories[0]?.category;
+
   const [adjacentArticles, relatedArticles] = await Promise.all([
-    getAdjacentArticles(article.categoryId, article.title),
-    getRelatedArticles(article.id, tagIds, article.categoryId),
+    getAdjacentArticles(categoryIds, article.title),
+    getRelatedArticles(article.id, tagIds, categoryIds),
   ]);
 
-  const breadcrumbItems = [
-    { label: article.category.name, href: `/wiki/category/${article.category.slug}` },
+  // Build breadcrumb from primary category
+  const breadcrumbItems = primaryCategory ? [
+    { label: primaryCategory.name, href: `/wiki/category/${primaryCategory.slug}` },
+    { label: article.title, href: `/wiki/article/${article.slug}` },
+  ] : [
     { label: article.title, href: `/wiki/article/${article.slug}` },
   ];
 

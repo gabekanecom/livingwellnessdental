@@ -20,7 +20,23 @@ export async function GET() {
           status: 'DRAFT',
         },
         include: {
-          category: { select: { name: true, slug: true } },
+          categories: {
+            include: { category: { select: { id: true, name: true, slug: true } } },
+            orderBy: { isPrimary: 'desc' },
+          },
+          reviews: {
+            where: { status: 'REJECTED' },
+            orderBy: { reviewedAt: 'desc' },
+            take: 1,
+            select: {
+              id: true,
+              status: true,
+              feedback: true,
+              submittedAt: true,
+              reviewedAt: true,
+              reviewedBy: { select: { name: true } },
+            },
+          },
         },
         orderBy: { updatedAt: 'desc' },
       }),
@@ -30,7 +46,21 @@ export async function GET() {
           status: 'IN_REVIEW',
         },
         include: {
-          category: { select: { name: true, slug: true } },
+          categories: {
+            include: { category: { select: { id: true, name: true, slug: true } } },
+            orderBy: { isPrimary: 'desc' },
+          },
+          reviews: {
+            where: { status: 'PENDING' },
+            orderBy: { submittedAt: 'desc' },
+            take: 1,
+            select: {
+              id: true,
+              status: true,
+              submittedAt: true,
+              assignedTo: { select: { name: true } },
+            },
+          },
         },
         orderBy: { updatedAt: 'desc' },
       }),
@@ -40,7 +70,10 @@ export async function GET() {
           status: 'PUBLISHED',
         },
         include: {
-          category: { select: { name: true, slug: true } },
+          categories: {
+            include: { category: { select: { id: true, name: true, slug: true } } },
+            orderBy: { isPrimary: 'desc' },
+          },
         },
         orderBy: { updatedAt: 'desc' },
       }),

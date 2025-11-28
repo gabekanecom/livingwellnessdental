@@ -38,7 +38,11 @@ export async function GET() {
           title: true,
           slug: true,
           views: true,
-          category: { select: { name: true } },
+          categories: {
+            where: { isPrimary: true },
+            select: { category: { select: { name: true } } },
+            take: 1,
+          },
         },
         orderBy: { views: 'desc' },
         take: 10,
@@ -58,7 +62,7 @@ export async function GET() {
           id: true,
           name: true,
           _count: {
-            select: { articles: { where: { status: 'PUBLISHED' } } },
+            select: { articles: { where: { article: { status: 'PUBLISHED' } } } },
           },
         },
         orderBy: { name: 'asc' },
@@ -77,6 +81,15 @@ export async function GET() {
       }),
     ]);
 
+    // Map topArticles to have category in expected format
+    const mappedTopArticles = topArticles.map(article => ({
+      id: article.id,
+      title: article.title,
+      slug: article.slug,
+      views: article.views,
+      category: article.categories[0]?.category || { name: 'Uncategorized' },
+    }));
+
     return NextResponse.json({
       overview: {
         totalArticles,
@@ -87,7 +100,7 @@ export async function GET() {
         totalCategories,
         totalTags,
       },
-      topArticles,
+      topArticles: mappedTopArticles,
       recentSearches,
       topSearches: topSearches.map((s) => ({
         query: s.query,

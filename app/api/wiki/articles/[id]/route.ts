@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { generateExcerpt, stripHtml } from '@/lib/wiki/utils';
+import { generateExcerpt, generateSlug, stripHtml } from '@/lib/wiki/utils';
 
 export async function GET(
   request: NextRequest,
@@ -8,14 +8,17 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    
+
     const isCuid = /^c[a-z0-9]{24}$/.test(id);
-    
+
     const article = await prisma.wikiArticle.findFirst({
       where: isCuid ? { id } : { slug: id },
       include: {
         author: true,
-        category: true,
+        categories: {
+          include: { category: true },
+          orderBy: { isPrimary: 'desc' },
+        },
         tags: true,
         versions: {
           include: { author: true },
@@ -49,11 +52,15 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await request.json();
-    const { title, content, categoryId, tags, coverImage, status, authorId } = body;
+    const { title, content, categoryIds, tags, coverImage, status, authorId } = body;
+
+    // Support both old categoryId and new categoryIds array
+    const categories = categoryIds || (body.categoryId ? [body.categoryId] : null);
 
     const contentPlain = content ? stripHtml(content) : undefined;
     const excerpt = content ? generateExcerpt(content) : undefined;
 
+    // First update the article
     const article = await prisma.wikiArticle.update({
       where: { id },
       data: {
@@ -61,7 +68,6 @@ export async function PUT(
         content,
         contentPlain,
         excerpt,
-        categoryId,
         coverImage,
         status,
         publishedAt: status === 'PUBLISHED' ? new Date() : undefined,
@@ -69,15 +75,40 @@ export async function PUT(
           ? {
               set: [],
               connectOrCreate: tags.map((tag: string) => ({
-                where: { slug: tag },
-                create: { name: tag, slug: tag },
+                where: { slug: generateSlug(tag) },
+                create: { name: tag, slug: generateSlug(tag) },
               })),
             }
           : undefined,
       },
+    });
+
+    // Update categories if provided
+    if (categories && categories.length > 0) {
+      // Delete existing category associations
+      await prisma.wikiArticleCategory.deleteMany({
+        where: { articleId: id },
+      });
+
+      // Create new category associations
+      await prisma.wikiArticleCategory.createMany({
+        data: categories.map((catId: string, index: number) => ({
+          articleId: id,
+          categoryId: catId,
+          isPrimary: index === 0,
+        })),
+      });
+    }
+
+    // Fetch the updated article with all relations
+    const updatedArticle = await prisma.wikiArticle.findUnique({
+      where: { id },
       include: {
         author: true,
-        category: true,
+        categories: {
+          include: { category: true },
+          orderBy: { isPrimary: 'desc' },
+        },
         tags: true,
       },
     });
@@ -94,7 +125,7 @@ export async function PUT(
       });
     }
 
-    return NextResponse.json(article);
+    return NextResponse.json(updatedArticle);
   } catch (error) {
     console.error('Error updating article:', error);
     return NextResponse.json(

@@ -12,14 +12,17 @@ interface PageProps {
 
 async function getTagWithArticles(tagName: string) {
   const tag = await prisma.wikiTag.findFirst({
-    where: { 
-      name: { equals: tagName, mode: 'insensitive' } 
+    where: {
+      name: { equals: tagName, mode: 'insensitive' }
     },
     include: {
       articles: {
         where: { status: 'PUBLISHED' },
         include: {
-          category: true,
+          categories: {
+            include: { category: true },
+            orderBy: { isPrimary: 'desc' },
+          },
           author: { select: { name: true } },
         },
         orderBy: { updatedAt: 'desc' },
@@ -109,7 +112,7 @@ export default async function TagPage({ params }: PageProps) {
                       )}
                       <div className="flex items-center gap-4 text-xs text-gray-500">
                         <span className="text-violet-600 font-medium">
-                          {article.category.name}
+                          {article.categories[0]?.category.name}
                         </span>
                         <span>{article.author.name}</span>
                         <span className="flex items-center gap-1">

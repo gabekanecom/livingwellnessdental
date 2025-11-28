@@ -4,7 +4,7 @@ import { useState, useEffect, Fragment, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { Dialog, Transition } from "@headlessui/react";
-import { TrashIcon, CameraIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, CameraIcon, AcademicCapIcon, CheckCircleIcon, ClockIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 import UserAvatarSimple from "@/components/user-avatar-simple";
 import ImageCropper from "@/components/ImageCropper";
 import { toast, Toaster } from "react-hot-toast";
@@ -31,6 +31,37 @@ interface UserRole {
   role: Role;
   location: Location | null;
   isActive: boolean;
+}
+
+interface LearningStats {
+  totalEnrollments: number;
+  completedEnrollments: number;
+  activeEnrollments: number;
+  avgProgress: number;
+  avgDaysToComplete: number;
+  completionRate: number;
+}
+
+interface CourseEnrollment {
+  id: string;
+  status: string;
+  progress: number;
+  lessonsCompleted: number;
+  totalLessons: number;
+  enrolledAt: string;
+  lastAccessedAt: string | null;
+  completedAt: string | null;
+  daysSinceEnrollment: number;
+  daysSinceActivity: number | null;
+  course: {
+    id: string;
+    title: string;
+    description: string;
+    coverImage: string | null;
+    difficulty: string;
+    duration: number | null;
+    category: { id: string; name: string } | null;
+  };
 }
 
 interface User {
@@ -77,10 +108,16 @@ export default function UserProfilePage() {
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  // Learning data state
+  const [learningStats, setLearningStats] = useState<LearningStats | null>(null);
+  const [courseEnrollments, setCourseEnrollments] = useState<CourseEnrollment[]>([]);
+  const [isLoadingLearning, setIsLoadingLearning] = useState(false);
+
   useEffect(() => {
     fetchUser();
     fetchLocations();
     fetchRoles();
+    fetchLearningData();
   }, [userId]);
 
   const fetchUser = async () => {
@@ -139,6 +176,40 @@ export default function UserProfilePage() {
     } catch (error) {
       console.error("Error fetching roles:", error);
     }
+  };
+
+  const fetchLearningData = async () => {
+    setIsLoadingLearning(true);
+    try {
+      const response = await fetch(`/api/users/${userId}/learning`);
+      if (response.ok) {
+        const data = await response.json();
+        setLearningStats(data.stats);
+        setCourseEnrollments(data.enrollments);
+      }
+    } catch (error) {
+      console.error("Error fetching learning data:", error);
+    } finally {
+      setIsLoadingLearning(false);
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const getStatusBadge = (status: string) => {
+    const styles: Record<string, string> = {
+      ACTIVE: "bg-blue-100 text-blue-800",
+      COMPLETED: "bg-green-100 text-green-800",
+      PAUSED: "bg-yellow-100 text-yellow-800",
+      CANCELLED: "bg-red-100 text-red-800",
+    };
+    return styles[status] || "bg-gray-100 text-gray-800";
   };
 
   const handleInputChange = (
@@ -690,6 +761,164 @@ export default function UserProfilePage() {
               </div>
             </form>
           </div>
+        </div>
+      </div>
+
+      {/* Learning Progress Section */}
+      <div className="mt-6 bg-white shadow-sm rounded-xl">
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="bg-violet-100 p-2 rounded-lg">
+                <AcademicCapIcon className="h-5 w-5 text-violet-600" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Learning Progress</h3>
+            </div>
+            {learningStats && learningStats.totalEnrollments > 0 && (
+              <Link
+                href="/lms/analytics"
+                className="text-sm text-violet-600 hover:text-violet-700"
+              >
+                View in Analytics →
+              </Link>
+            )}
+          </div>
+
+          {isLoadingLearning ? (
+            <div className="animate-pulse space-y-4">
+              <div className="grid grid-cols-4 gap-4">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="h-20 bg-gray-200 rounded-lg"></div>
+                ))}
+              </div>
+              <div className="h-32 bg-gray-200 rounded-lg"></div>
+            </div>
+          ) : learningStats && learningStats.totalEnrollments > 0 ? (
+            <>
+              {/* Stats Cards */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-gray-600 mb-1">
+                    <AcademicCapIcon className="w-4 h-4" />
+                    <span className="text-xs">Enrolled Courses</span>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900">{learningStats.totalEnrollments}</p>
+                  <p className="text-xs text-gray-500">{learningStats.activeEnrollments} active</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-gray-600 mb-1">
+                    <CheckCircleIcon className="w-4 h-4" />
+                    <span className="text-xs">Completed</span>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900">{learningStats.completedEnrollments}</p>
+                  <p className="text-xs text-gray-500">{learningStats.completionRate}% completion rate</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-gray-600 mb-1">
+                    <ChartBarIcon className="w-4 h-4" />
+                    <span className="text-xs">Avg Progress</span>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900">{learningStats.avgProgress}%</p>
+                  <p className="text-xs text-gray-500">across all courses</p>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4">
+                  <div className="flex items-center gap-2 text-gray-600 mb-1">
+                    <ClockIcon className="w-4 h-4" />
+                    <span className="text-xs">Avg Days to Complete</span>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900">{learningStats.avgDaysToComplete}</p>
+                  <p className="text-xs text-gray-500">for completed courses</p>
+                </div>
+              </div>
+
+              {/* Course List */}
+              <div className="space-y-3">
+                <h4 className="text-sm font-semibold text-gray-800">Course Enrollments</h4>
+                {courseEnrollments.map((enrollment) => (
+                  <div
+                    key={enrollment.id}
+                    className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:bg-gray-50"
+                  >
+                    {/* Course Image */}
+                    {enrollment.course.coverImage ? (
+                      <img
+                        src={enrollment.course.coverImage}
+                        alt=""
+                        className="w-16 h-12 rounded object-cover"
+                      />
+                    ) : (
+                      <div className="w-16 h-12 rounded bg-gray-100 flex items-center justify-center">
+                        <AcademicCapIcon className="w-6 h-6 text-gray-400" />
+                      </div>
+                    )}
+
+                    {/* Course Info */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="font-medium text-gray-900 truncate">
+                          {enrollment.course.title}
+                        </p>
+                        <span
+                          className={`inline-flex px-2 py-0.5 rounded-full text-xs font-medium ${getStatusBadge(
+                            enrollment.status
+                          )}`}
+                        >
+                          {enrollment.status}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-4 mt-1 text-xs text-gray-500">
+                        <span>
+                          Enrolled {formatDate(enrollment.enrolledAt)}
+                        </span>
+                        {enrollment.completedAt && (
+                          <span>
+                            Completed {formatDate(enrollment.completedAt)}
+                          </span>
+                        )}
+                        {!enrollment.completedAt && enrollment.lastAccessedAt && (
+                          <span>
+                            Last active {enrollment.daysSinceActivity} days ago
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Progress */}
+                    <div className="text-right">
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full rounded-full ${
+                              enrollment.progress >= 100
+                                ? "bg-green-500"
+                                : enrollment.progress >= 50
+                                ? "bg-violet-500"
+                                : "bg-amber-500"
+                            }`}
+                            style={{ width: `${enrollment.progress}%` }}
+                          />
+                        </div>
+                        <span className="text-sm font-medium text-gray-900 w-12 text-right">
+                          {enrollment.progress}%
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">
+                        {enrollment.lessonsCompleted}/{enrollment.totalLessons} lessons
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="text-center py-8">
+              <AcademicCapIcon className="w-12 h-12 text-gray-300 mx-auto mb-3" />
+              <p className="text-gray-500">No course enrollments yet</p>
+              <p className="text-sm text-gray-400 mt-1">
+                This user hasn&apos;t been enrolled in any courses
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

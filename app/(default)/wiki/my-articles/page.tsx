@@ -12,7 +12,22 @@ import {
   DocumentDuplicateIcon,
   PaperAirplaneIcon,
   CheckCircleIcon,
+  ExclamationTriangleIcon,
 } from '@heroicons/react/24/outline';
+
+interface ArticleReview {
+  id: string;
+  status: string;
+  feedback: string | null;
+  submittedAt: string;
+  reviewedAt: string | null;
+  reviewedBy: { name: string } | null;
+}
+
+interface ArticleCategory {
+  category: { id: string; name: string; slug: string };
+  isPrimary: boolean;
+}
 
 interface Article {
   id: string;
@@ -23,7 +38,8 @@ interface Article {
   views: number;
   createdAt: string;
   updatedAt: string;
-  category: { name: string; slug: string };
+  categories: ArticleCategory[];
+  reviews?: ArticleReview[];
 }
 
 interface MyArticlesData {
@@ -37,13 +53,30 @@ interface MyArticlesData {
   };
 }
 
-function ArticleCard({ article, showViews = false }: { article: Article; showViews?: boolean }) {
+function ArticleCard({
+  article,
+  showViews = false,
+  showFeedback = false,
+}: {
+  article: Article;
+  showViews?: boolean;
+  showFeedback?: boolean;
+}) {
+  // Find the latest rejected review with feedback
+  const latestRejectedReview = article.reviews?.find(
+    (r) => r.status === 'REJECTED' && r.feedback
+  );
+
   return (
     <div className="group p-4 bg-white border border-gray-200 rounded-lg hover:border-violet-300 hover:shadow-sm transition-all">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
           <Link
-            href={article.status === 'PUBLISHED' ? `/wiki/article/${article.slug}` : `/wiki/article/${article.slug}/edit`}
+            href={
+              article.status === 'PUBLISHED'
+                ? `/wiki/article/${article.slug}`
+                : `/wiki/article/${article.slug}/edit`
+            }
             className="font-medium text-gray-900 hover:text-violet-700 line-clamp-1"
           >
             {article.title}
@@ -51,8 +84,17 @@ function ArticleCard({ article, showViews = false }: { article: Article; showVie
           {article.excerpt && (
             <p className="text-sm text-gray-500 mt-1 line-clamp-2">{article.excerpt}</p>
           )}
-          <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
-            <span className="text-violet-600">{article.category.name}</span>
+          <div className="flex items-center flex-wrap gap-2 mt-2 text-xs text-gray-400">
+            <div className="flex items-center gap-1.5">
+              {article.categories.map((cat, idx) => (
+                <span
+                  key={cat.category.id}
+                  className={`${cat.isPrimary ? 'text-violet-600' : 'text-gray-500'}`}
+                >
+                  {cat.category.name}{idx < article.categories.length - 1 ? ',' : ''}
+                </span>
+              ))}
+            </div>
             <span className="flex items-center gap-1">
               <ClockIcon className="h-3 w-3" />
               {formatDistanceToNow(new Date(article.updatedAt), { addSuffix: true })}
@@ -64,6 +106,22 @@ function ArticleCard({ article, showViews = false }: { article: Article; showVie
               </span>
             )}
           </div>
+          {showFeedback && latestRejectedReview && (
+            <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <div className="flex items-start gap-2">
+                <ExclamationTriangleIcon className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
+                <div className="text-sm">
+                  <p className="font-medium text-amber-800">Revision Requested</p>
+                  <p className="text-amber-700 mt-1">{latestRejectedReview.feedback}</p>
+                  {latestRejectedReview.reviewedBy && (
+                    <p className="text-xs text-amber-600 mt-1">
+                      — {latestRejectedReview.reviewedBy.name}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <Link
           href={`/wiki/article/${article.slug}/edit`}
@@ -77,19 +135,21 @@ function ArticleCard({ article, showViews = false }: { article: Article; showVie
   );
 }
 
-function ArticleSection({ 
-  title, 
-  icon: Icon, 
-  articles, 
+function ArticleSection({
+  title,
+  icon: Icon,
+  articles,
   emptyMessage,
   showViews = false,
-  color = 'gray'
-}: { 
-  title: string; 
+  showFeedback = false,
+  color = 'gray',
+}: {
+  title: string;
   icon: React.ElementType;
-  articles: Article[]; 
+  articles: Article[];
   emptyMessage: string;
   showViews?: boolean;
+  showFeedback?: boolean;
   color?: 'gray' | 'yellow' | 'green';
 }) {
   const colorClasses = {
@@ -110,7 +170,12 @@ function ArticleSection({
       {articles.length > 0 ? (
         <div className="space-y-3">
           {articles.map((article) => (
-            <ArticleCard key={article.id} article={article} showViews={showViews} />
+            <ArticleCard
+              key={article.id}
+              article={article}
+              showViews={showViews}
+              showFeedback={showFeedback}
+            />
           ))}
         </div>
       ) : (
@@ -227,6 +292,7 @@ export default function MyArticlesPage() {
           icon={DocumentDuplicateIcon}
           articles={data.drafts}
           emptyMessage="No drafts. Start writing a new article!"
+          showFeedback
           color="gray"
         />
 

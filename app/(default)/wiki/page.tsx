@@ -20,7 +20,10 @@ async function getFeaturedArticles() {
       isFeatured: true,
     },
     include: {
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
       author: { select: { name: true } },
     },
     orderBy: { updatedAt: 'desc' },
@@ -32,7 +35,10 @@ async function getRecentArticles() {
   return prisma.wikiArticle.findMany({
     where: { status: 'PUBLISHED' },
     include: {
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
       author: { select: { name: true } },
     },
     orderBy: { updatedAt: 'desc' },
@@ -44,7 +50,10 @@ async function getPopularArticles() {
   return prisma.wikiArticle.findMany({
     where: { status: 'PUBLISHED' },
     include: {
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
     },
     orderBy: { views: 'desc' },
     take: 5,
@@ -141,7 +150,7 @@ export default async function WikiHomePage() {
               >
                 <div className="flex items-start justify-between mb-2">
                   <span className="text-xs font-medium text-violet-600 bg-violet-100 px-2 py-0.5 rounded">
-                    {article.category.name}
+                    {article.categories[0]?.category.name}
                   </span>
                   <StarIconSolid className="h-4 w-4 text-yellow-500" />
                 </div>
@@ -199,7 +208,7 @@ export default async function WikiHomePage() {
                         )}
                       </div>
                       <div className="flex items-center text-xs text-gray-500 gap-3">
-                        <span className="text-violet-600">{article.category.name}</span>
+                        <span className="text-violet-600">{article.categories[0]?.category.name}</span>
                         <span>{article.author.name}</span>
                         <span className="flex items-center gap-1">
                           <EyeIcon className="h-3 w-3" />
@@ -250,7 +259,7 @@ export default async function WikiHomePage() {
                         {article.title}
                       </h3>
                       <div className="flex items-center text-xs text-gray-500 gap-2">
-                        <span>{article.category.name}</span>
+                        <span>{article.categories[0]?.category.name}</span>
                         <span>•</span>
                         <span className="flex items-center gap-1">
                           <EyeIcon className="h-3 w-3" />

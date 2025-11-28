@@ -11,12 +11,15 @@ export async function GET(
       where: { id },
       include: {
         articles: {
-          where: { status: 'PUBLISHED' },
+          where: { article: { status: 'PUBLISHED' } },
           include: {
-            author: true,
-            tags: true,
+            article: {
+              include: {
+                author: true,
+                tags: true,
+              },
+            },
           },
-          orderBy: { order: 'asc' },
         },
         children: true,
         parent: true,

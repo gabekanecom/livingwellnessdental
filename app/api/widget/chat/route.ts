@@ -66,14 +66,18 @@ async function searchWikiContent(query: string) {
     select: {
       title: true,
       contentPlain: true,
-      category: { select: { name: true } },
+      categories: {
+        include: { category: { select: { name: true } } },
+        orderBy: { isPrimary: 'desc' },
+        take: 1,
+      },
     },
     take: 3,
   });
 
   return articles.map(a => ({
     title: a.title,
-    category: a.category.name,
+    category: a.categories[0]?.category.name || 'Uncategorized',
     content: a.contentPlain.substring(0, 500),
   }));
 }

@@ -1,11 +1,119 @@
 'use client'
 
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { Menu, MenuButton, MenuItems, MenuItem, Transition } from '@headlessui/react'
+import { BellIcon, CheckIcon } from '@heroicons/react/24/outline'
+
+interface Notification {
+  id: string
+  type: string
+  title: string
+  message: string
+  actionUrl?: string
+  isRead: boolean
+  createdAt: string
+}
+
+function getNotificationIcon(type: string): string {
+  switch (type) {
+    case 'ARTICLE_SUBMITTED_FOR_REVIEW':
+      return '📝'
+    case 'ARTICLE_REVIEW_ASSIGNED':
+      return '👤'
+    case 'ARTICLE_APPROVED':
+      return '✅'
+    case 'ARTICLE_REJECTED':
+      return '⚠️'
+    case 'ARTICLE_PUBLISHED':
+      return '🎉'
+    case 'COURSE_ASSIGNED':
+      return '📚'
+    case 'COURSE_COMPLETED':
+      return '🏆'
+    default:
+      return '📣'
+  }
+}
+
+function formatTimeAgo(dateString: string): string {
+  const date = new Date(dateString)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffMins = Math.floor(diffMs / 60000)
+  const diffHours = Math.floor(diffMs / 3600000)
+  const diffDays = Math.floor(diffMs / 86400000)
+
+  if (diffMins < 1) return 'Just now'
+  if (diffMins < 60) return `${diffMins}m ago`
+  if (diffHours < 24) return `${diffHours}h ago`
+  if (diffDays < 7) return `${diffDays}d ago`
+  return date.toLocaleDateString()
+}
 
 export default function DropdownNotifications({ align }: {
   align?: 'left' | 'right'
 }) {
+  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [unreadCount, setUnreadCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const fetchNotifications = useCallback(async () => {
+    try {
+      const [notifResponse, countResponse] = await Promise.all([
+        fetch('/api/notifications?limit=5'),
+        fetch('/api/notifications/unread-count'),
+      ])
+
+      if (notifResponse.ok) {
+        const data = await notifResponse.json()
+        setNotifications(data.notifications || [])
+      }
+
+      if (countResponse.ok) {
+        const data = await countResponse.json()
+        setUnreadCount(data.count || 0)
+      }
+    } catch (error) {
+      console.error('Error fetching notifications:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchNotifications()
+    // Poll for new notifications every 30 seconds
+    const interval = setInterval(fetchNotifications, 30000)
+    return () => clearInterval(interval)
+  }, [fetchNotifications])
+
+  const markAsRead = async (notificationId: string) => {
+    try {
+      await fetch(`/api/notifications/${notificationId}`, {
+        method: 'PATCH',
+      })
+      setNotifications(prev =>
+        prev.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
+      )
+      setUnreadCount(prev => Math.max(0, prev - 1))
+    } catch (error) {
+      console.error('Error marking notification as read:', error)
+    }
+  }
+
+  const markAllAsRead = async () => {
+    try {
+      await fetch('/api/notifications/mark-all-read', {
+        method: 'POST',
+      })
+      setNotifications(prev => prev.map(n => ({ ...n, isRead: true })))
+      setUnreadCount(0)
+    } catch (error) {
+      console.error('Error marking all notifications as read:', error)
+    }
+  }
+
   return (
     <Menu as="div" className="relative inline-flex">
       {({ open }) => (
@@ -16,21 +124,18 @@ export default function DropdownNotifications({ align }: {
             }`}
           >
             <span className="sr-only">Notifications</span>
-            <svg
-              className="fill-current text-gray-500/80"
-              width={16}
-              height={16}
-              viewBox="0 0 16 16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M7 0a7 7 0 0 0-7 7c0 1.202.308 2.33.84 3.316l-.789 2.368a1 1 0 0 0 1.265 1.265l2.595-.865a1 1 0 0 0-.632-1.898l-.698.233.3-.9a1 1 0 0 0-.104-.85A4.97 4.97 0 0 1 2 7a5 5 0 0 1 5-5 4.99 4.99 0 0 1 4.093 2.135 1 1 0 1 0 1.638-1.148A6.99 6.99 0 0 0 7 0Z" />
-              <path d="M11 6a5 5 0 0 0 0 10c.807 0 1.567-.194 2.24-.533l1.444.482a1 1 0 0 0 1.265-1.265l-.482-1.444A4.962 4.962 0 0 0 16 11a5 5 0 0 0-5-5Zm-3 5a3 3 0 0 1 6 0c0 .588-.171 1.134-.466 1.6a1 1 0 0 0-.115.82 1 1 0 0 0-.82.114A2.973 2.973 0 0 1 11 14a3 3 0 0 1-3-3Z" />
-            </svg>
-            <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-gray-100 rounded-full"></div>
+            <BellIcon className="w-5 h-5 text-gray-500/80" />
+            {unreadCount > 0 && (
+              <div className="absolute top-0 right-0 w-4 h-4 bg-red-500 border-2 border-gray-100 rounded-full flex items-center justify-center">
+                <span className="text-[10px] font-bold text-white">
+                  {unreadCount > 9 ? '9+' : unreadCount}
+                </span>
+              </div>
+            )}
           </MenuButton>
           <Transition
             as="div"
-            className={`origin-top-right z-10 absolute top-full -mr-48 sm:mr-0 min-w-[20rem] bg-white border border-gray-200 py-1.5 rounded-lg shadow-lg overflow-hidden mt-1 ${
+            className={`origin-top-right z-10 absolute top-full -mr-48 sm:mr-0 min-w-[20rem] bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden mt-1 ${
               align === 'right' ? 'right-0' : 'left-0'
             }`}
             enter="transition ease-out duration-200 transform"
@@ -40,42 +145,68 @@ export default function DropdownNotifications({ align }: {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4">Notifications</div>
-            <MenuItems as="ul" className="focus:outline-hidden">
-              <MenuItem as="li" className="border-b border-gray-200 last:border-0">
-                {({ active }) => (
-                  <Link className={`block py-2 px-4 ${active && 'bg-gray-50'}`} href="#0">
-                    <span className="block text-sm mb-2">
-                      📣 <span className="font-medium text-gray-800">Edit your information in a swipe</span> Sint occaecat cupidatat non proident,
-                      sunt in culpa qui officia deserunt mollit anim.
-                    </span>
-                    <span className="block text-xs font-medium text-gray-400">Feb 12, 2024</span>
-                  </Link>
-                )}
-              </MenuItem>
-              <MenuItem as="li" className="border-b border-gray-200 last:border-0">
-                {({ active }) => (
-                  <Link className={`block py-2 px-4 ${active && 'bg-gray-50'}`} href="#0">
-                    <span className="block text-sm mb-2">
-                      📣 <span className="font-medium text-gray-800">Edit your information in a swipe</span> Sint occaecat cupidatat non proident,
-                      sunt in culpa qui officia deserunt mollit anim.
-                    </span>
-                    <span className="block text-xs font-medium text-gray-400">Feb 9, 2024</span>
-                  </Link>
-                )}
-              </MenuItem>
-              <MenuItem as="li" className="border-b border-gray-200 last:border-0">
-                {({ active }) => (
-                  <Link className={`block py-2 px-4 ${active && 'bg-gray-50'}`} href="#0">
-                    <span className="block text-sm mb-2">
-                      🚀<span className="font-medium text-gray-800">Say goodbye to paper receipts!</span> Sint occaecat cupidatat non proident, sunt
-                      in culpa qui officia deserunt mollit anim.
-                    </span>
-                    <span className="block text-xs font-medium text-gray-400">Jan 24, 2024</span>
-                  </Link>
-                )}
-              </MenuItem>
+            <div className="flex items-center justify-between pt-3 pb-2 px-4 border-b border-gray-200">
+              <span className="text-xs font-semibold text-gray-400 uppercase">Notifications</span>
+              {unreadCount > 0 && (
+                <button
+                  onClick={markAllAsRead}
+                  className="text-xs text-violet-600 hover:text-violet-700 flex items-center gap-1"
+                >
+                  <CheckIcon className="w-3 h-3" />
+                  Mark all read
+                </button>
+              )}
+            </div>
+            <MenuItems as="ul" className="focus:outline-hidden max-h-80 overflow-y-auto">
+              {isLoading ? (
+                <li className="py-8 text-center text-gray-500 text-sm">
+                  Loading...
+                </li>
+              ) : notifications.length === 0 ? (
+                <li className="py-8 text-center text-gray-500 text-sm">
+                  No notifications
+                </li>
+              ) : (
+                notifications.map((notification) => (
+                  <MenuItem key={notification.id} as="li" className="border-b border-gray-200 last:border-0">
+                    {({ active }) => (
+                      <Link
+                        className={`block py-2 px-4 ${active && 'bg-gray-50'} ${
+                          !notification.isRead && 'bg-violet-50'
+                        }`}
+                        href={notification.actionUrl || '#'}
+                        onClick={() => {
+                          if (!notification.isRead) {
+                            markAsRead(notification.id)
+                          }
+                        }}
+                      >
+                        <span className="block text-sm mb-1">
+                          {getNotificationIcon(notification.type)}{' '}
+                          <span className="font-medium text-gray-800">{notification.title}</span>
+                        </span>
+                        <span className="block text-xs text-gray-600 line-clamp-2">
+                          {notification.message}
+                        </span>
+                        <span className="block text-xs font-medium text-gray-400 mt-1">
+                          {formatTimeAgo(notification.createdAt)}
+                        </span>
+                      </Link>
+                    )}
+                  </MenuItem>
+                ))
+              )}
             </MenuItems>
+            {notifications.length > 0 && (
+              <div className="border-t border-gray-200 p-2">
+                <Link
+                  href="/notifications"
+                  className="block text-center text-sm text-violet-600 hover:text-violet-700 py-1"
+                >
+                  View all notifications
+                </Link>
+              </div>
+            )}
           </Transition>
         </>
       )}

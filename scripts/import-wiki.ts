@@ -129,7 +129,12 @@ async function importMarkdownFiles() {
           excerpt: generateExcerpt(plainText),
           status: frontmatter.status || 'PUBLISHED',
           order: frontmatter.order || 0,
-          categoryId: category.id,
+          categories: {
+            create: {
+              categoryId: category.id,
+              isPrimary: true,
+            },
+          },
           authorId: author.id,
           publishedAt: frontmatter.status === 'PUBLISHED' || !frontmatter.status ? new Date() : null,
           tags: frontmatter.tags?.length

@@ -6,16 +6,18 @@ import {
   PaintBrushIcon,
   Cog6ToothIcon,
   BookOpenIcon,
-  MagnifyingGlassIcon,
   PlusCircleIcon,
   FolderIcon,
+  DocumentTextIcon,
+  DocumentMagnifyingGlassIcon,
+  ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 import { SidebarLink } from "./settings-sidebar";
 
 export const wikiLinks: SidebarLink[] = [
   {
     href: "/wiki",
-    label: "Browse",
+    label: "Articles",
     icon: <BookOpenIcon className="h-5 w-5" />,
     matchPattern: "^/wiki$",
   },
@@ -23,6 +25,16 @@ export const wikiLinks: SidebarLink[] = [
     href: "/wiki/categories",
     label: "Categories",
     icon: <FolderIcon className="h-5 w-5" />,
+  },
+  {
+    href: "/wiki/my-articles",
+    label: "My Articles",
+    icon: <DocumentTextIcon className="h-5 w-5" />,
+  },
+  {
+    href: "/wiki/review",
+    label: "Review Queue",
+    icon: <DocumentMagnifyingGlassIcon className="h-5 w-5" />,
   },
   {
     href: "/wiki/article/new",
@@ -57,5 +69,10 @@ export const adminSettingsLinks: SidebarLink[] = [
     href: "/admin/branding",
     label: "Branding",
     icon: <PaintBrushIcon className="h-5 w-5" />,
+  },
+  {
+    href: "/admin/widget",
+    label: "Chat Widget",
+    icon: <ChatBubbleLeftRightIcon className="h-5 w-5" />,
   },
 ];

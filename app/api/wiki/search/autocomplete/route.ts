@@ -23,13 +23,26 @@ export async function GET(request: NextRequest) {
         title: true,
         slug: true,
         excerpt: true,
-        category: { select: { name: true } },
+        categories: {
+          include: { category: { select: { name: true } } },
+          orderBy: { isPrimary: 'desc' },
+          take: 1,
+        },
       },
       take: 6,
       orderBy: { views: 'desc' },
     });
 
-    return NextResponse.json({ suggestions: articles });
+    // Map to expected format with category
+    const suggestions = articles.map(a => ({
+      id: a.id,
+      title: a.title,
+      slug: a.slug,
+      excerpt: a.excerpt,
+      category: a.categories[0]?.category || { name: 'Uncategorized' },
+    }));
+
+    return NextResponse.json({ suggestions });
   } catch (error) {
     console.error('Error in autocomplete:', error);
     return NextResponse.json({ suggestions: [] });

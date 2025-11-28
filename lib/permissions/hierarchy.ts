@@ -72,8 +72,12 @@ export async function getUserHierarchyContext(userId: string): Promise<UserHiera
     orderBy: { hierarchyLevel: 'asc' }
   });
 
+  // Super Admins (level 0) can manage all user types including other Super Admins
+  // Other users can only manage user types with higher hierarchy level (lower authority)
   const canManageUserTypes = allUserTypes
-    .filter(ut => ut.hierarchyLevel > lowestHierarchyLevel)
+    .filter(ut => lowestHierarchyLevel === 0
+      ? true  // Super Admin can manage everyone
+      : ut.hierarchyLevel > lowestHierarchyLevel)
     .map(ut => ut.id);
 
   let canManageAtLocations: string[] | 'ALL' = Array.from(locationIds);

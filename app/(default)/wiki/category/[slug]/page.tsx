@@ -16,13 +16,19 @@ export default async function CategoryPage({ params }: PageProps) {
     where: { slug },
     include: {
       articles: {
-        where: { status: 'PUBLISHED' },
+        where: { article: { status: 'PUBLISHED' } },
         include: {
-          author: true,
-          category: true,
-          tags: true,
+          article: {
+            include: {
+              author: true,
+              categories: {
+                include: { category: true },
+                orderBy: { isPrimary: 'desc' },
+              },
+              tags: true,
+            },
+          },
         },
-        orderBy: { order: 'asc' },
       },
       children: true,
     },
@@ -73,8 +79,8 @@ export default async function CategoryPage({ params }: PageProps) {
             Articles ({category.articles.length})
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {category.articles.map((article) => (
-              <ArticleCard key={article.id} article={article as any} />
+            {category.articles.map((ac) => (
+              <ArticleCard key={ac.article.id} article={ac.article as any} />
             ))}
           </div>
         </div>

@@ -11,14 +11,21 @@ export async function GET(request: NextRequest) {
     const offset = parseInt(searchParams.get('offset') || '0');
 
     const where: any = {};
-    if (categoryId) where.categoryId = categoryId;
+    if (categoryId) {
+      where.categories = {
+        some: { categoryId },
+      };
+    }
     if (status) where.status = status;
 
     const articles = await prisma.wikiArticle.findMany({
       where,
       include: {
         author: true,
-        category: true,
+        categories: {
+          include: { category: true },
+          orderBy: { isPrimary: 'desc' },
+        },
         tags: true,
       },
       orderBy: { createdAt: 'desc' },
@@ -41,9 +48,12 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, content, categoryId, authorId, tags, coverImage, status } = body;
+    const { title, content, categoryIds, authorId, tags, coverImage, status } = body;
 
-    if (!title || !content || !categoryId || !authorId) {
+    // Support both old categoryId and new categoryIds array
+    const categories = categoryIds || (body.categoryId ? [body.categoryId] : []);
+
+    if (!title || !content || categories.length === 0 || !authorId) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
@@ -63,8 +73,13 @@ export async function POST(request: NextRequest) {
         excerpt,
         coverImage,
         status: status || 'DRAFT',
-        categoryId,
         authorId,
+        categories: {
+          create: categories.map((catId: string, index: number) => ({
+            categoryId: catId,
+            isPrimary: index === 0, // First category is primary
+          })),
+        },
         tags: tags
           ? {
               connectOrCreate: tags.map((tag: string) => ({
@@ -76,7 +91,10 @@ export async function POST(request: NextRequest) {
       },
       include: {
         author: true,
-        category: true,
+        categories: {
+          include: { category: true },
+          orderBy: { isPrimary: 'desc' },
+        },
         tags: true,
       },
     });

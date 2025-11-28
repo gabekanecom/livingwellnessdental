@@ -51,7 +51,10 @@ export async function PATCH(
       where: { id },
       data: updateData,
       include: {
-        category: { select: { name: true } },
+        categories: {
+          include: { category: { select: { name: true } } },
+          orderBy: { isPrimary: 'desc' },
+        },
         author: { select: { name: true } },
       },
     });

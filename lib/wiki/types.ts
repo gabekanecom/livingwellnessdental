@@ -13,6 +13,11 @@ export interface WikiCategory {
   updatedAt: Date;
 }
 
+export interface WikiArticleCategory {
+  category: WikiCategory;
+  isPrimary: boolean;
+}
+
 export interface WikiArticle {
   id: string;
   title: string;
@@ -22,8 +27,7 @@ export interface WikiArticle {
   excerpt?: string;
   coverImage?: string;
   status: ArticleStatus;
-  categoryId: string;
-  category?: WikiCategory;
+  categories?: WikiArticleCategory[];
   authorId: string;
   author?: User;
   tags?: WikiTag[];

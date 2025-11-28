@@ -7,8 +7,8 @@ export async function GET() {
     const categories = await prisma.wikiCategory.findMany({
       include: {
         articles: {
-          where: { status: 'PUBLISHED' },
-          select: { id: true },
+          where: { article: { status: 'PUBLISHED' } },
+          select: { articleId: true },
         },
         children: true,
       },

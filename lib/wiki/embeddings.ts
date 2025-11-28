@@ -135,7 +135,12 @@ export function chunkText(text: string): string[] {
 export async function indexArticle(articleId: string): Promise<number> {
   const article = await prisma.wikiArticle.findUnique({
     where: { id: articleId },
-    include: { category: true },
+    include: {
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
+    },
   });
 
   if (!article) throw new Error('Article not found');
@@ -146,7 +151,8 @@ export async function indexArticle(articleId: string): Promise<number> {
   // });
 
   // Create chunks with context
-  const contextPrefix = `Title: ${article.title}\nCategory: ${article.category.name}\n\n`;
+  const primaryCategoryName = article.categories[0]?.category.name || 'Uncategorized';
+  const contextPrefix = `Title: ${article.title}\nCategory: ${primaryCategoryName}\n\n`;
   const chunks = chunkText(article.contentPlain);
 
   for (let i = 0; i < chunks.length; i++) {
@@ -213,7 +219,10 @@ export async function searchSimilar(query: string, limit = 5) {
       ],
     },
     include: {
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
     },
     take: limit,
   });
@@ -222,7 +231,7 @@ export async function searchSimilar(query: string, limit = 5) {
     articleId: article.id,
     title: article.title,
     slug: article.slug,
-    categoryName: article.category.name,
+    categoryName: article.categories[0]?.category.name || 'Uncategorized',
     chunkText: article.excerpt || article.contentPlain.substring(0, 500),
     similarity: 0.5,
   }));

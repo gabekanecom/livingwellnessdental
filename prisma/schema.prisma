@@ -36,6 +36,13 @@ model User {
   userPermissions      UserPermission[]
   assignedRoles        UserRole[]           @relation("RoleAssigner")
   grantedPermissions   UserPermission[]     @relation("PermissionGranter")
+  // Article Review relations
+  reviewsSubmitted     ArticleReview[]      @relation("ReviewSubmitter")
+  reviewsAssigned      ArticleReview[]      @relation("ReviewAssignee")
+  reviewAssignments    ArticleReview[]      @relation("ReviewAssigner")
+  reviewsCompleted     ArticleReview[]      @relation("ArticleReviewer")
+  // Notification relation
+  notifications        Notification[]
 }
 
 // Dental Locations
@@ -192,43 +199,56 @@ enum DataScope {
 
 // Wiki Models
 model WikiCategory {
-  id          String         @id @default(cuid())
+  id          String                    @id @default(cuid())
   name        String
-  slug        String         @unique
+  slug        String                    @unique
   description String?
   icon        String?
   parentId    String?
-  parent      WikiCategory?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
-  children    WikiCategory[] @relation("CategoryHierarchy")
-  articles    WikiArticle[]
-  order       Int            @default(0)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  parent      WikiCategory?             @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    WikiCategory[]            @relation("CategoryHierarchy")
+  articles    WikiArticleCategory[]
+  order       Int                       @default(0)
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+}
+
+model WikiArticleCategory {
+  id          String       @id @default(cuid())
+  articleId   String
+  article     WikiArticle  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  categoryId  String
+  category    WikiCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  isPrimary   Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+
+  @@unique([articleId, categoryId])
+  @@index([articleId])
+  @@index([categoryId])
 }
 
 model WikiArticle {
-  id           String              @id @default(cuid())
+  id           String                @id @default(cuid())
   title        String
-  slug         String              @unique
-  content      String              @db.Text
-  contentPlain String              @db.Text
+  slug         String                @unique
+  content      String                @db.Text
+  contentPlain String                @db.Text
   excerpt      String?
   coverImage   String?
-  status       ArticleStatus       @default(DRAFT)
-  isFeatured   Boolean             @default(false)
-  categoryId   String
-  category     WikiCategory        @relation(fields: [categoryId], references: [id])
-  authorId     String              @db.Uuid
-  author       User                @relation(fields: [authorId], references: [id])
+  status       ArticleStatus         @default(DRAFT)
+  isFeatured   Boolean               @default(false)
+  categories   WikiArticleCategory[]
+  authorId     String                @db.Uuid
+  author       User                  @relation(fields: [authorId], references: [id])
   tags         WikiTag[]
   versions     WikiArticleVersion[]
-  views        Int                 @default(0)
-  order        Int                 @default(0)
+  reviews      ArticleReview[]
+  views        Int                   @default(0)
+  order        Int                   @default(0)
   publishedAt  DateTime?
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
 
-  @@index([categoryId])
   @@index([authorId])
   @@index([status])
   @@index([isFeatured])
@@ -275,11 +295,95 @@ model WikiSearchLog {
   createdAt DateTime @default(now())
 }
 
+// Article Review model for wiki content workflow
+model ArticleReview {
+  id                String        @id @default(cuid())
+  articleId         String
+  article           WikiArticle   @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  articleVersionId  String?       // Snapshot of version being reviewed
+
+  // Submission info
+  submittedById     String        @db.Uuid
+  submittedBy       User          @relation("ReviewSubmitter", fields: [submittedById], references: [id])
+  submittedAt       DateTime      @default(now())
+
+  // Assignment
+  assignedToId      String?       @db.Uuid
+  assignedTo        User?         @relation("ReviewAssignee", fields: [assignedToId], references: [id])
+  assignedAt        DateTime?
+  assignedById      String?       @db.Uuid
+  assignedBy        User?         @relation("ReviewAssigner", fields: [assignedById], references: [id])
+
+  // Review outcome
+  status            ReviewStatus  @default(PENDING)
+  reviewedById      String?       @db.Uuid
+  reviewedBy        User?         @relation("ArticleReviewer", fields: [reviewedById], references: [id])
+  reviewedAt        DateTime?
+
+  // Feedback
+  feedback          String?       @db.Text  // Shown to author on rejection
+  internalNotes     String?       @db.Text  // Reviewer-only notes
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([articleId])
+  @@index([submittedById])
+  @@index([assignedToId])
+  @@index([status])
+}
+
+// Notification model for in-app notifications
+model Notification {
+  id              String           @id @default(cuid())
+  userId          String           @db.Uuid
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type            NotificationType
+  title           String
+  message         String           @db.Text
+
+  // Reference to related entity
+  referenceType   String?          // 'article', 'review', 'course', etc.
+  referenceId     String?          // ID of the referenced entity
+  actionUrl       String?          // URL to navigate to
+
+  isRead          Boolean          @default(false)
+  readAt          DateTime?
+
+  createdAt       DateTime         @default(now())
+
+  @@index([userId])
+  @@index([userId, isRead])
+  @@index([createdAt])
+}
+
 enum ArticleStatus {
   DRAFT
   IN_REVIEW
   PUBLISHED
   ARCHIVED
+}
+
+enum ReviewStatus {
+  PENDING
+  IN_PROGRESS
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum NotificationType {
+  // Wiki notifications
+  ARTICLE_SUBMITTED_FOR_REVIEW
+  ARTICLE_REVIEW_ASSIGNED
+  ARTICLE_APPROVED
+  ARTICLE_REJECTED
+  ARTICLE_PUBLISHED
+  // General notifications (for future use)
+  SYSTEM_ANNOUNCEMENT
+  COURSE_ASSIGNED
+  COURSE_COMPLETED
 }
 
 // LMS Models
@@ -562,4 +666,22 @@ model BrandingSettings {
   settings  Json
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
+}
+
+// Chat Widget Settings (singleton - only one row)
+model ChatWidgetSettings {
+  id                String   @id @default("default")
+  isEnabled         Boolean  @default(true)
+  theme             String   @default("light") // light, dark
+  accentColor       String   @default("3ec972") // hex without #
+  position          String   @default("right") // left, right
+  greeting          String   @default("Hi! How can I help you today?")
+  headerTitle       String   @default("Living Wellness Dental")
+  headerSubtitle    String   @default("Ask us anything")
+  inputPlaceholder  String   @default("Type your message...")
+  systemPrompt      String?  @db.Text // Custom system prompt for the AI
+  allowedDomains    String[] @default([]) // Domains where widget is allowed
+  rateLimitPerMin   Int      @default(10) // Rate limit per IP per minute
+  updatedAt         DateTime @updatedAt
+  createdAt         DateTime @default(now())
 }

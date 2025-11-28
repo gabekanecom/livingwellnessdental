@@ -7,16 +7,34 @@ async function main() {
 
   // Create a demo user with fixed UUID (for seeding only - real users come from Supabase Auth)
   const DEMO_USER_ID = '00000000-0000-0000-0000-000000000001';
-  const user = await prisma.user.upsert({
-    where: { id: DEMO_USER_ID },
-    update: {},
-    create: {
-      id: DEMO_USER_ID,
-      email: 'admin@livingwellness.dental',
-      name: 'Admin User',
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
-    },
-  });
+  const DEMO_USER_EMAIL = 'demo.admin@livingwellness.dental';
+
+  // First, check if a user with the demo email already exists and update it, or create new
+  let user = await prisma.user.findUnique({ where: { email: DEMO_USER_EMAIL } });
+  if (!user) {
+    user = await prisma.user.findUnique({ where: { id: DEMO_USER_ID } });
+  }
+
+  if (user) {
+    // Update existing user
+    user = await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        name: 'Demo Admin',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
+      },
+    });
+  } else {
+    // Create new demo user
+    user = await prisma.user.create({
+      data: {
+        id: DEMO_USER_ID,
+        email: DEMO_USER_EMAIL,
+        name: 'Demo Admin',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
+      },
+    });
+  }
 
   console.log('✅ Created demo user:', user.email);
 
@@ -315,6 +333,11 @@ async function main() {
     { id: 'wiki.create', name: 'Create Wiki Articles', category: 'Wiki' },
     { id: 'wiki.edit', name: 'Edit Wiki Articles', category: 'Wiki' },
     { id: 'wiki.delete', name: 'Delete Wiki Articles', category: 'Wiki' },
+    { id: 'wiki.submit_for_review', name: 'Submit Articles for Review', category: 'Wiki' },
+    { id: 'wiki.view_review_queue', name: 'View Review Queue', category: 'Wiki' },
+    { id: 'wiki.review_articles', name: 'Review and Approve/Reject Articles', category: 'Wiki' },
+    { id: 'wiki.publish_directly', name: 'Publish Articles Directly (Skip Review)', category: 'Wiki' },
+    { id: 'wiki.assign_reviewers', name: 'Assign Reviewers to Articles', category: 'Wiki' },
     // Reports
     { id: 'reports.view', name: 'View Reports', category: 'Reports' },
     { id: 'reports.export', name: 'Export Reports', category: 'Reports' },
@@ -344,11 +367,52 @@ async function main() {
   }
   console.log('✅ Assigned all permissions to Super Admin role');
 
-  // Create sample locations
+  // Assign wiki review permissions to Corporate Admin
+  const corporateAdminWikiPermissions = [
+    'wiki.view', 'wiki.create', 'wiki.edit', 'wiki.delete', 'wiki.submit_for_review',
+    'wiki.view_review_queue', 'wiki.review_articles', 'wiki.publish_directly', 'wiki.assign_reviewers'
+  ];
+  for (const permId of corporateAdminWikiPermissions) {
+    await prisma.rolePermission.upsert({
+      where: { roleId_permissionId: { roleId: 'corporate_admin', permissionId: permId } },
+      update: {},
+      create: { roleId: 'corporate_admin', permissionId: permId, granted: true },
+    });
+  }
+  console.log('✅ Assigned wiki permissions to Corporate Admin role');
+
+  // Assign wiki review permissions to Practice Manager (can review but not publish directly)
+  const practiceManagerWikiPermissions = [
+    'wiki.view', 'wiki.create', 'wiki.edit', 'wiki.submit_for_review',
+    'wiki.view_review_queue', 'wiki.review_articles'
+  ];
+  for (const permId of practiceManagerWikiPermissions) {
+    await prisma.rolePermission.upsert({
+      where: { roleId_permissionId: { roleId: 'practice_manager', permissionId: permId } },
+      update: {},
+      create: { roleId: 'practice_manager', permissionId: permId, granted: true },
+    });
+  }
+  console.log('✅ Assigned wiki permissions to Practice Manager role');
+
+  // Assign basic wiki permissions to all location staff roles (can create/edit and submit for review)
+  const locationStaffRoles = ['dentist', 'hygienist', 'dental_assistant', 'front_desk', 'office_manager'];
+  const staffWikiPermissions = ['wiki.view', 'wiki.create', 'wiki.edit', 'wiki.submit_for_review'];
+  for (const roleId of locationStaffRoles) {
+    for (const permId of staffWikiPermissions) {
+      await prisma.rolePermission.upsert({
+        where: { roleId_permissionId: { roleId, permissionId: permId } },
+        update: {},
+        create: { roleId, permissionId: permId, granted: true },
+      });
+    }
+  }
+  console.log('✅ Assigned wiki permissions to location staff roles');
+
+  // Create production locations (Northland and Dorchester)
   const locations = [
-    { id: 'loc_nyc01', name: 'Manhattan Office', city: 'New York', state: 'NY', address: '123 Main Street', zipCode: '10001', phone: '(212) 555-0100' },
-    { id: 'loc_nyc02', name: 'Brooklyn Office', city: 'Brooklyn', state: 'NY', address: '456 Park Avenue', zipCode: '11201', phone: '(718) 555-0200' },
-    { id: 'loc_la01', name: 'Los Angeles Office', city: 'Los Angeles', state: 'CA', address: '789 Sunset Blvd', zipCode: '90001', phone: '(310) 555-0300' },
+    { id: 'loc_northland', name: 'Northland', city: 'Columbus', state: 'OH', address: '1234 Northland Blvd', zipCode: '43229', phone: '(614) 555-0100' },
+    { id: 'loc_dorchester', name: 'Dorchester', city: 'Columbus', state: 'OH', address: '5678 Dorchester Way', zipCode: '43214', phone: '(614) 555-0200' },
   ];
 
   for (const location of locations) {
@@ -1299,6 +1363,294 @@ async function main() {
   });
 
   console.log('✅ Created Patient Communication course modules and lessons');
+
+  // Create Demo Enrollments with realistic progress data
+  console.log('📚 Creating demo enrollments...');
+
+  // Get all lessons for each course
+  const hipaaLessons = await prisma.lesson.findMany({
+    where: { module: { courseId: hipaaCourse.id } },
+    orderBy: [{ module: { order: 'asc' } }, { order: 'asc' }],
+  });
+
+  const orientationLessons = await prisma.lesson.findMany({
+    where: { module: { courseId: orientationCourse.id } },
+    orderBy: [{ module: { order: 'asc' } }, { order: 'asc' }],
+  });
+
+  const communicationLessons = await prisma.lesson.findMany({
+    where: { module: { courseId: communicationCourse.id } },
+    orderBy: [{ module: { order: 'asc' } }, { order: 'asc' }],
+  });
+
+  // Enrollment 1: Demo user completed HIPAA course
+  const hipaaEnrollment = await prisma.enrollment.upsert({
+    where: {
+      userId_courseId: {
+        userId: user.id,
+        courseId: hipaaCourse.id,
+      },
+    },
+    update: {},
+    create: {
+      userId: user.id,
+      courseId: hipaaCourse.id,
+      status: 'COMPLETED',
+      progress: 100,
+      createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
+      completedAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000), // 25 days ago
+      lastAccessedAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000),
+    },
+  });
+
+  // Create lesson progress for all HIPAA lessons (all completed)
+  for (const lesson of hipaaLessons) {
+    await prisma.lessonProgress.upsert({
+      where: {
+        enrollmentId_lessonId: {
+          enrollmentId: hipaaEnrollment.id,
+          lessonId: lesson.id,
+        },
+      },
+      update: {},
+      create: {
+        lessonId: lesson.id,
+        enrollmentId: hipaaEnrollment.id,
+        isCompleted: true,
+        completedAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000),
+        timeSpent: lesson.duration ? lesson.duration * 60 : 600, // in seconds
+      },
+    });
+  }
+  console.log('✅ Created HIPAA enrollment (completed) for demo user');
+
+  // Enrollment 2: Demo user in progress on Orientation course
+  const orientEnrollment = await prisma.enrollment.upsert({
+    where: {
+      userId_courseId: {
+        userId: user.id,
+        courseId: orientationCourse.id,
+      },
+    },
+    update: {},
+    create: {
+      userId: user.id,
+      courseId: orientationCourse.id,
+      status: 'ACTIVE',
+      progress: 60,
+      createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+      lastAccessedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // yesterday
+    },
+  });
+
+  // Create lesson progress for first 3 of 5 lessons (60%)
+  const completedOrientLessons = orientationLessons.slice(0, 3);
+  for (const lesson of completedOrientLessons) {
+    await prisma.lessonProgress.upsert({
+      where: {
+        enrollmentId_lessonId: {
+          enrollmentId: orientEnrollment.id,
+          lessonId: lesson.id,
+        },
+      },
+      update: {},
+      create: {
+        lessonId: lesson.id,
+        enrollmentId: orientEnrollment.id,
+        isCompleted: true,
+        completedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+        timeSpent: lesson.duration ? lesson.duration * 60 : 600,
+      },
+    });
+  }
+  console.log('✅ Created Orientation enrollment (in progress, 60%) for demo user');
+
+  // Enrollment 3: Demo user just started Communication course
+  const commEnrollment = await prisma.enrollment.upsert({
+    where: {
+      userId_courseId: {
+        userId: user.id,
+        courseId: communicationCourse.id,
+      },
+    },
+    update: {},
+    create: {
+      userId: user.id,
+      courseId: communicationCourse.id,
+      status: 'ACTIVE',
+      progress: 17,
+      createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+      lastAccessedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    },
+  });
+
+  // Create lesson progress for first lesson only (1 of 6 = ~17%)
+  if (communicationLessons.length > 0) {
+    await prisma.lessonProgress.upsert({
+      where: {
+        enrollmentId_lessonId: {
+          enrollmentId: commEnrollment.id,
+          lessonId: communicationLessons[0].id,
+        },
+      },
+      update: {},
+      create: {
+        lessonId: communicationLessons[0].id,
+        enrollmentId: commEnrollment.id,
+        isCompleted: true,
+        completedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        timeSpent: communicationLessons[0].duration ? communicationLessons[0].duration * 60 : 720,
+      },
+    });
+  }
+  console.log('✅ Created Communication enrollment (in progress, 17%) for demo user');
+
+  // Create additional demo users with various enrollment states for realistic admin dashboard
+  const demoUsers = [
+    { id: '00000000-0000-0000-0000-000000000002', name: 'Sarah Chen', email: 'sarah.chen@livingwellness.dental', role: 'Hygienist' },
+    { id: '00000000-0000-0000-0000-000000000003', name: 'Michael Torres', email: 'michael.torres@livingwellness.dental', role: 'Dental Assistant' },
+    { id: '00000000-0000-0000-0000-000000000004', name: 'Emily Johnson', email: 'emily.johnson@livingwellness.dental', role: 'Front Desk' },
+    { id: '00000000-0000-0000-0000-000000000005', name: 'James Williams', email: 'james.williams@livingwellness.dental', role: 'Dental Assistant' },
+    { id: '00000000-0000-0000-0000-000000000006', name: 'Lisa Anderson', email: 'lisa.anderson@livingwellness.dental', role: 'Hygienist' },
+  ];
+
+  // Get the default location
+  const defaultLocation = await prisma.location.findFirst();
+
+  for (let i = 0; i < demoUsers.length; i++) {
+    const demoUser = demoUsers[i];
+
+    const createdUser = await prisma.user.upsert({
+      where: { email: demoUser.email },
+      update: {},
+      create: {
+        id: demoUser.id,
+        name: demoUser.name,
+        email: demoUser.email,
+        emailVerified: new Date(),
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(demoUser.name)}`,
+      },
+    });
+
+    // Assign to default location if available
+    if (defaultLocation) {
+      await prisma.userLocation.upsert({
+        where: {
+          userId_locationId: {
+            userId: createdUser.id,
+            locationId: defaultLocation.id,
+          },
+        },
+        update: {},
+        create: {
+          userId: createdUser.id,
+          locationId: defaultLocation.id,
+          isActive: true,
+        },
+      });
+    }
+
+    // Create varied enrollments for each demo user
+    // User 0: Completed HIPAA, active on both others
+    // User 1: All completed
+    // User 2: Stalled learner (low progress, no activity for 14+ days)
+    // User 3: Active on HIPAA only
+    // User 4: Never accessed (enrolled but 0 progress)
+
+    const enrollmentConfigs: Array<{
+      course: typeof hipaaCourse;
+      lessons: typeof hipaaLessons;
+      status: 'ACTIVE' | 'COMPLETED' | 'PAUSED' | 'CANCELLED';
+      progress: number;
+      createdDaysAgo: number;
+      lastAccessDaysAgo: number | null;
+      completedDaysAgo: number | null;
+      lessonsCompleted: number;
+    }> = [];
+
+    if (i === 0) {
+      // Sarah: Completed HIPAA, 40% Orientation, 33% Communication
+      enrollmentConfigs.push(
+        { course: hipaaCourse, lessons: hipaaLessons, status: 'COMPLETED', progress: 100, createdDaysAgo: 45, lastAccessDaysAgo: 40, completedDaysAgo: 40, lessonsCompleted: hipaaLessons.length },
+        { course: orientationCourse, lessons: orientationLessons, status: 'ACTIVE', progress: 40, createdDaysAgo: 20, lastAccessDaysAgo: 5, completedDaysAgo: null, lessonsCompleted: 2 },
+        { course: communicationCourse, lessons: communicationLessons, status: 'ACTIVE', progress: 33, createdDaysAgo: 10, lastAccessDaysAgo: 3, completedDaysAgo: null, lessonsCompleted: 2 },
+      );
+    } else if (i === 1) {
+      // Michael: All completed - model employee
+      enrollmentConfigs.push(
+        { course: hipaaCourse, lessons: hipaaLessons, status: 'COMPLETED', progress: 100, createdDaysAgo: 60, lastAccessDaysAgo: 55, completedDaysAgo: 55, lessonsCompleted: hipaaLessons.length },
+        { course: orientationCourse, lessons: orientationLessons, status: 'COMPLETED', progress: 100, createdDaysAgo: 55, lastAccessDaysAgo: 50, completedDaysAgo: 50, lessonsCompleted: orientationLessons.length },
+        { course: communicationCourse, lessons: communicationLessons, status: 'COMPLETED', progress: 100, createdDaysAgo: 40, lastAccessDaysAgo: 35, completedDaysAgo: 35, lessonsCompleted: communicationLessons.length },
+      );
+    } else if (i === 2) {
+      // Emily: Stalled learner - enrolled but not progressing
+      enrollmentConfigs.push(
+        { course: hipaaCourse, lessons: hipaaLessons, status: 'ACTIVE', progress: 20, createdDaysAgo: 30, lastAccessDaysAgo: 18, completedDaysAgo: null, lessonsCompleted: 1 },
+        { course: orientationCourse, lessons: orientationLessons, status: 'ACTIVE', progress: 20, createdDaysAgo: 25, lastAccessDaysAgo: 20, completedDaysAgo: null, lessonsCompleted: 1 },
+      );
+    } else if (i === 3) {
+      // James: Active only on HIPAA, 80% complete
+      enrollmentConfigs.push(
+        { course: hipaaCourse, lessons: hipaaLessons, status: 'ACTIVE', progress: 80, createdDaysAgo: 14, lastAccessDaysAgo: 2, completedDaysAgo: null, lessonsCompleted: 4 },
+      );
+    } else if (i === 4) {
+      // Lisa: Enrolled but never accessed
+      enrollmentConfigs.push(
+        { course: hipaaCourse, lessons: hipaaLessons, status: 'ACTIVE', progress: 0, createdDaysAgo: 21, lastAccessDaysAgo: null, completedDaysAgo: null, lessonsCompleted: 0 },
+        { course: communicationCourse, lessons: communicationLessons, status: 'ACTIVE', progress: 0, createdDaysAgo: 14, lastAccessDaysAgo: null, completedDaysAgo: null, lessonsCompleted: 0 },
+      );
+    }
+
+    for (const config of enrollmentConfigs) {
+      const enrollment = await prisma.enrollment.upsert({
+        where: {
+          userId_courseId: {
+            userId: createdUser.id,
+            courseId: config.course.id,
+          },
+        },
+        update: {},
+        create: {
+          userId: createdUser.id,
+          courseId: config.course.id,
+          status: config.status,
+          progress: config.progress,
+          createdAt: new Date(Date.now() - config.createdDaysAgo * 24 * 60 * 60 * 1000),
+          lastAccessedAt: config.lastAccessDaysAgo !== null
+            ? new Date(Date.now() - config.lastAccessDaysAgo * 24 * 60 * 60 * 1000)
+            : null,
+          completedAt: config.completedDaysAgo !== null
+            ? new Date(Date.now() - config.completedDaysAgo * 24 * 60 * 60 * 1000)
+            : null,
+        },
+      });
+
+      // Create lesson progress for completed lessons
+      const lessonsToComplete = config.lessons.slice(0, config.lessonsCompleted);
+      for (const lesson of lessonsToComplete) {
+        await prisma.lessonProgress.upsert({
+          where: {
+            enrollmentId_lessonId: {
+              enrollmentId: enrollment.id,
+              lessonId: lesson.id,
+            },
+          },
+          update: {},
+          create: {
+            lessonId: lesson.id,
+            enrollmentId: enrollment.id,
+            isCompleted: true,
+            completedAt: config.lastAccessDaysAgo !== null
+              ? new Date(Date.now() - config.lastAccessDaysAgo * 24 * 60 * 60 * 1000)
+              : new Date(),
+            timeSpent: lesson.duration ? lesson.duration * 60 : 600,
+          },
+        });
+      }
+    }
+
+    console.log(`✅ Created demo user: ${demoUser.name} with enrollments`);
+  }
 
   console.log('🎉 Seeding completed successfully!');
 

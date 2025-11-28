@@ -30,7 +30,10 @@ async function getArticles(sort: string = 'recent') {
       status: 'PUBLISHED',
     },
     include: {
-      category: true,
+      categories: {
+        include: { category: true },
+        orderBy: { isPrimary: 'desc' },
+      },
       author: { select: { name: true } },
       tags: true,
     },
@@ -118,7 +121,7 @@ export default async function BrowsePage({ searchParams }: PageProps) {
                       )}
                       <div className="flex items-center flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500">
                         <span className="text-violet-600 font-medium">
-                          {article.category.name}
+                          {article.categories[0]?.category.name}
                         </span>
                         <span>{article.author.name}</span>
                         <span className="flex items-center gap-1">

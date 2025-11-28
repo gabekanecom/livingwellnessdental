@@ -26,7 +26,9 @@ export async function GET(request: NextRequest) {
     };
 
     if (categoryId) {
-      whereConditions.categoryId = categoryId;
+      whereConditions.categories = {
+        some: { categoryId },
+      };
     }
 
     if (tagName) {
@@ -44,7 +46,10 @@ export async function GET(request: NextRequest) {
     const articles = await prisma.wikiArticle.findMany({
       where: whereConditions,
       include: {
-        category: { select: { id: true, name: true, slug: true } },
+        categories: {
+          include: { category: { select: { id: true, name: true, slug: true } } },
+          orderBy: { isPrimary: 'desc' },
+        },
         author: { select: { name: true } },
         tags: { select: { id: true, name: true } },
       },
@@ -69,6 +74,9 @@ export async function GET(request: NextRequest) {
         }
       }
 
+      // Get primary category (first in sorted list)
+      const primaryCategory = article.categories[0]?.category || null;
+
       return {
         id: article.id,
         title: article.title,
@@ -77,7 +85,8 @@ export async function GET(request: NextRequest) {
         coverImage: article.coverImage,
         views: article.views,
         updatedAt: article.updatedAt,
-        category: article.category,
+        category: primaryCategory,
+        categories: article.categories.map(c => c.category),
         author: article.author,
         tags: article.tags,
         matchType: titleMatch ? 'title' : 'content',

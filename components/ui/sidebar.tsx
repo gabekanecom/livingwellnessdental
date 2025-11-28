@@ -6,7 +6,7 @@ import { useSelectedLayoutSegments } from 'next/navigation'
 import Link from 'next/link'
 import SidebarLinkGroup from './sidebar-link-group'
 import SidebarLink from './sidebar-link'
-import Logo from './logo'
+import { useBranding } from '@/lib/contexts/BrandingContext'
 
 export default function Sidebar({
   variant = 'default',
@@ -16,6 +16,7 @@ export default function Sidebar({
   const sidebar = useRef<HTMLDivElement>(null)
   const { sidebarOpen, setSidebarOpen, sidebarExpanded, setSidebarExpanded } = useAppProvider()
   const segments = useSelectedLayoutSegments()
+  const { brandSettings, isLoading: isBrandingLoading } = useBranding()
 
   useEffect(() => {
     const clickHandler = ({ target }: { target: EventTarget | null }): void => {      
@@ -62,7 +63,33 @@ export default function Sidebar({
               <path d="M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z" />
             </svg>
           </button>
-          <Logo />
+          {/* Logo - show full logo when expanded, favicon when collapsed */}
+          <Link className="block" href="/">
+            {isBrandingLoading ? (
+              /* Placeholder skeleton while branding loads */
+              <div className="w-8 h-8 bg-gray-200 rounded animate-pulse" />
+            ) : (
+              <>
+                {/* Full logo - visible on mobile, when expanded, or on 2xl screens */}
+                <img
+                  src={brandSettings.logo.url || '/logo.svg'}
+                  alt={brandSettings.logo.alt || 'Logo'}
+                  style={{
+                    width: brandSettings.logo.width ? `${brandSettings.logo.width}px` : 'auto',
+                    height: brandSettings.logo.height ? `${brandSettings.logo.height}px` : '32px',
+                    maxHeight: '40px',
+                  }}
+                  className="object-contain lg:hidden lg:sidebar-expanded:block 2xl:block"
+                />
+                {/* Favicon - visible only when sidebar is collapsed on lg screens (not 2xl) */}
+                <img
+                  src={brandSettings.favicon.url || '/favicon.ico'}
+                  alt={brandSettings.logo.alt || 'Logo'}
+                  className="w-8 h-8 object-contain hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden"
+                />
+              </>
+            )}
+          </Link>
         </div>
 
         <div className="space-y-8">
@@ -108,7 +135,14 @@ export default function Sidebar({
                           <li className="mb-1 last:mb-0">
                             <SidebarLink href="/wiki">
                               <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                                Browse
+                                Articles
+                              </span>
+                            </SidebarLink>
+                          </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/wiki/categories">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Categories
                               </span>
                             </SidebarLink>
                           </li>
@@ -171,6 +205,13 @@ export default function Sidebar({
                               </span>
                             </SidebarLink>
                           </li>
+                          <li className="mb-1 last:mb-0">
+                            <SidebarLink href="/lms/analytics">
+                              <span className="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                Analytics
+                              </span>
+                            </SidebarLink>
+                          </li>
                         </ul>
                       </div>
                     </>
@@ -189,7 +230,7 @@ export default function Sidebar({
               <span className="lg:hidden lg:sidebar-expanded:block 2xl:block">Admin</span>
             </h3>
             <ul className="mt-3">
-              {/* Admin */}
+              {/* Admin Settings */}
               <li className={`pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-linear-to-r ${segments[0] === 'admin' ? 'from-violet-500/[0.12] to-violet-500/[0.04]' : ''}`}>
                 <SidebarLink href="/admin">
                   <div className="flex items-center">
@@ -197,7 +238,7 @@ export default function Sidebar({
                       <path d="M10.5 1a3.502 3.502 0 0 1 3.355 2.5H15a1 1 0 1 1 0 2h-1.145a3.502 3.502 0 0 1-6.71 0H1a1 1 0 0 1 0-2h6.145A3.502 3.502 0 0 1 10.5 1ZM9 4.5a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM5.5 9a3.502 3.502 0 0 1 3.355 2.5H15a1 1 0 1 1 0 2H8.855a3.502 3.502 0 0 1-6.71 0H1a1 1 0 1 1 0-2h1.145A3.502 3.502 0 0 1 5.5 9ZM4 12.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0Z" fillRule="evenodd" />
                     </svg>
                     <span className="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
-                      Admin
+                      Settings
                     </span>
                   </div>
                 </SidebarLink>

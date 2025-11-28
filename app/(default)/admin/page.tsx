@@ -6,7 +6,7 @@ import {
   BuildingOffice2Icon,
   ShieldCheckIcon,
   KeyIcon,
-  PaintBrushIcon
+  PaintBrushIcon,
 } from '@heroicons/react/24/outline';
 
 const adminSections = [
@@ -44,7 +44,7 @@ const adminSections = [
     href: '/admin/branding',
     icon: PaintBrushIcon,
     color: 'bg-pink-500'
-  }
+  },
 ];
 
 export default function AdminDashboard() {

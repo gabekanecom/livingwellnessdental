@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import ArticleEditor from '@/components/wiki/ArticleEditor';
 import { generateSlug } from '@/lib/wiki/utils';
-import { 
-  CloudArrowUpIcon, 
+import {
+  CloudArrowUpIcon,
   CheckCircleIcon,
   ExclamationCircleIcon,
   PaperAirplaneIcon,
@@ -17,9 +17,18 @@ interface Article {
   title: string;
   slug: string;
   content: string;
-  categoryId: string;
+  categories: { category: { id: string; name: string; slug: string }; isPrimary: boolean }[];
   status: string;
   tags: { id: string; name: string }[];
+}
+
+interface WikiPermissions {
+  canCreateArticle: boolean;
+  canSubmitForReview: boolean;
+  canViewReviewQueue: boolean;
+  canReviewArticles: boolean;
+  canPublishDirectly: boolean;
+  canAssignReviewers: boolean;
 }
 
 export default function EditArticlePage() {
@@ -30,7 +39,7 @@ export default function EditArticlePage() {
   const [article, setArticle] = useState<Article | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [categoryId, setCategoryId] = useState('');
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [tags, setTags] = useState('');
   const [isLoading, setIsLoading] = useState(true);
@@ -38,18 +47,32 @@ export default function EditArticlePage() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
+  const [permissions, setPermissions] = useState<WikiPermissions | null>(null);
 
   useEffect(() => {
     fetchArticle();
     fetchCategories();
+    fetchPermissions();
   }, [slug]);
+
+  const fetchPermissions = async () => {
+    try {
+      const res = await fetch('/api/wiki/permissions');
+      if (res.ok) {
+        const data = await res.json();
+        setPermissions(data.permissions);
+      }
+    } catch (error) {
+      console.error('Error fetching permissions:', error);
+    }
+  };
 
   useEffect(() => {
     if (autoSaveTimer.current) {
       clearTimeout(autoSaveTimer.current);
     }
 
-    if (article && title && content && categoryId) {
+    if (article && title && content && selectedCategoryIds.length > 0) {
       autoSaveTimer.current = setTimeout(() => {
         handleAutoSave();
       }, 30000);
@@ -60,7 +83,7 @@ export default function EditArticlePage() {
         clearTimeout(autoSaveTimer.current);
       }
     };
-  }, [title, content, categoryId, tags]);
+  }, [title, content, selectedCategoryIds, tags]);
 
   const fetchArticle = async () => {
     try {
@@ -70,7 +93,11 @@ export default function EditArticlePage() {
         setArticle(data);
         setTitle(data.title);
         setContent(data.content);
-        setCategoryId(data.categoryId);
+        // Sort by isPrimary to ensure primary category is first, then extract IDs
+        const sortedCats = [...(data.categories || [])].sort((a, b) =>
+          (b.isPrimary ? 1 : 0) - (a.isPrimary ? 1 : 0)
+        );
+        setSelectedCategoryIds(sortedCats.map((c: any) => c.category.id));
         setTags(data.tags.map((t: any) => t.name).join(', '));
       }
     } catch (error) {
@@ -101,7 +128,7 @@ export default function EditArticlePage() {
         body: JSON.stringify({
           title,
           content,
-          categoryId,
+          categoryIds: selectedCategoryIds,
           tags: tags.split(',').map(t => t.trim()).filter(Boolean),
         }),
       });
@@ -119,9 +146,9 @@ export default function EditArticlePage() {
     }
   };
 
-  const handleSave = async (status?: 'DRAFT' | 'PUBLISHED' | 'IN_REVIEW') => {
-    if (!article || !title || !content || !categoryId) {
-      alert('Please fill in all required fields');
+  const handleSave = async (action: 'SAVE' | 'PUBLISHED' | 'SUBMIT_FOR_REVIEW' = 'SAVE') => {
+    if (!article || !title || !content || selectedCategoryIds.length === 0) {
+      alert('Please fill in all required fields (including at least one category)');
       return;
     }
 
@@ -129,33 +156,58 @@ export default function EditArticlePage() {
     setSaveStatus('saving');
 
     try {
+      // First save the article changes
       const response = await fetch(`/api/wiki/articles/${article.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title,
           content,
-          categoryId,
-          tags: tags.split(',').map(t => t.trim()).filter(Boolean),
-          ...(status && { status }),
+          categoryIds: selectedCategoryIds,
+          tags: tags.split(',').map((t) => t.trim()).filter(Boolean),
+          ...(action === 'PUBLISHED' && { status: 'PUBLISHED' }),
         }),
       });
 
       if (!response.ok) throw new Error('Failed to update article');
 
       const updated = await response.json();
+
+      // Handle submit for review
+      if (action === 'SUBMIT_FOR_REVIEW') {
+        const reviewRes = await fetch(
+          `/api/wiki/articles/${article.id}/submit-for-review`,
+          { method: 'POST' }
+        );
+
+        if (!reviewRes.ok) {
+          const error = await reviewRes.json();
+          throw new Error(error.error || 'Failed to submit for review');
+        }
+
+        setSaveStatus('saved');
+        setLastSaved(new Date());
+        router.push('/wiki/my-articles');
+        return;
+      }
+
+      // Handle publish directly
+      if (action === 'PUBLISHED') {
+        setSaveStatus('saved');
+        setLastSaved(new Date());
+        router.push(`/wiki/article/${updated.slug}`);
+        return;
+      }
+
+      // Just saving changes
       setSaveStatus('saved');
       setLastSaved(new Date());
-
-      if (status === 'PUBLISHED') {
-        router.push(`/wiki/article/${updated.slug}`);
-      } else if (status === 'IN_REVIEW') {
-        router.push('/wiki/my-articles');
-      }
+      setArticle(updated);
+      setTimeout(() => setSaveStatus('idle'), 3000);
     } catch (error) {
       console.error('Error saving article:', error);
       setSaveStatus('error');
-      alert('Failed to save article');
+      alert(error instanceof Error ? error.message : 'Failed to save article');
     } finally {
       setIsSaving(false);
     }
@@ -260,22 +312,42 @@ export default function EditArticlePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
-              Category *
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Categories * <span className="text-gray-500 font-normal">(select at least one)</span>
             </label>
-            <select
-              id="category"
-              value={categoryId}
-              onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
-            >
-              <option value="">Select a category</option>
+            <div className="border border-gray-300 rounded-lg p-3 max-h-48 overflow-y-auto space-y-2">
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
-                </option>
+                <label
+                  key={cat.id}
+                  className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1 rounded"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedCategoryIds.includes(cat.id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setSelectedCategoryIds([...selectedCategoryIds, cat.id]);
+                      } else {
+                        setSelectedCategoryIds(selectedCategoryIds.filter(id => id !== cat.id));
+                      }
+                    }}
+                    className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
+                  />
+                  <span className="text-sm text-gray-700">{cat.name}</span>
+                  {selectedCategoryIds[0] === cat.id && selectedCategoryIds.length > 0 && (
+                    <span className="text-xs text-violet-600 bg-violet-50 px-1.5 py-0.5 rounded">Primary</span>
+                  )}
+                </label>
               ))}
-            </select>
+              {categories.length === 0 && (
+                <p className="text-sm text-gray-500 italic">No categories available</p>
+              )}
+            </div>
+            {selectedCategoryIds.length > 0 && (
+              <p className="mt-1 text-xs text-gray-500">
+                First selected category is the primary category
+              </p>
+            )}
           </div>
 
           <div>
@@ -319,26 +391,40 @@ export default function EditArticlePage() {
               disabled={isSaving}
               className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50"
             >
-              {isSaving ? 'Saving...' : 'Save Changes'}
+              {isSaving ? 'Saving...' : 'Save Draft'}
             </button>
-            {article.status === 'DRAFT' && (
+            {article.status === 'DRAFT' && permissions?.canSubmitForReview && !permissions?.canPublishDirectly && (
               <button
-                onClick={() => handleSave('IN_REVIEW')}
+                onClick={() => handleSave('SUBMIT_FOR_REVIEW')}
                 disabled={isSaving}
-                className="flex items-center gap-2 px-6 py-2 border border-violet-300 text-violet-700 rounded-lg hover:bg-violet-50 disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50"
               >
                 <PaperAirplaneIcon className="h-4 w-4" />
                 Submit for Review
               </button>
             )}
-            {(article.status === 'DRAFT' || article.status === 'IN_REVIEW') && (
-              <button
-                onClick={() => handleSave('PUBLISHED')}
-                disabled={isSaving}
-                className="px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50"
-              >
-                Publish
-              </button>
+            {permissions?.canPublishDirectly && (
+              <>
+                {article.status === 'DRAFT' && (
+                  <button
+                    onClick={() => handleSave('SUBMIT_FOR_REVIEW')}
+                    disabled={isSaving}
+                    className="flex items-center gap-2 px-6 py-2 border border-violet-300 text-violet-700 rounded-lg hover:bg-violet-50 disabled:opacity-50"
+                  >
+                    <PaperAirplaneIcon className="h-4 w-4" />
+                    Submit for Review
+                  </button>
+                )}
+                {(article.status === 'DRAFT' || article.status === 'IN_REVIEW') && (
+                  <button
+                    onClick={() => handleSave('PUBLISHED')}
+                    disabled={isSaving}
+                    className="px-6 py-2 bg-violet-600 text-white rounded-lg hover:bg-violet-700 disabled:opacity-50"
+                  >
+                    Publish
+                  </button>
+                )}
+              </>
             )}
           </div>
         </div>

@@ -62,7 +62,12 @@ export async function POST(request: NextRequest) {
             contentPlain: plainText,
             excerpt: generateExcerpt(plainText),
             status: data.status || 'DRAFT',
-            categoryId,
+            categories: {
+              create: {
+                categoryId,
+                isPrimary: true,
+              },
+            },
             authorId: author.id,
             publishedAt: data.status === 'PUBLISHED' ? new Date() : null,
             tags: data.tags?.length
