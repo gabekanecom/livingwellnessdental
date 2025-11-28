@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import UserAvatarSimple from "@/components/user-avatar-simple";
 import { toast, Toaster } from "react-hot-toast";
 import { createClient } from "@/lib/supabase/client";
+import { CameraIcon } from "@heroicons/react/24/outline";
+import ImageCropper from "@/components/ImageCropper";
 
 interface Location {
   id: string;
@@ -48,11 +50,16 @@ export default function CreateUserPage() {
     password: "",
     phone: "",
     jobTitle: "",
+    avatar: "",
     isActive: true,
   });
 
   const [selectedLocationIds, setSelectedLocationIds] = useState<string[]>([]);
   const [selectedRoleId, setSelectedRoleId] = useState("");
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetchAllowedAssignments();
@@ -77,6 +84,60 @@ export default function CreateUserPage() {
     }
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please select an image file');
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image must be less than 5MB');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCroppedImage = async (croppedBlob: Blob) => {
+    setIsUploadingImage(true);
+    try {
+      const fileName = `profile_${Date.now()}.jpg`;
+      const file = new File([croppedBlob], fileName, { type: "image/jpeg" });
+
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
+      formDataUpload.append("userId", "temp");
+
+      const response = await fetch("/api/upload/profile-image", {
+        method: "POST",
+        body: formDataUpload,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to upload image");
+      }
+
+      const data = await response.json();
+
+      setFormData((prev) => ({ ...prev, avatar: data.url }));
+      toast.success("Profile image uploaded");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      toast.error("Failed to upload image");
+    } finally {
+      setIsUploadingImage(false);
+      setSelectedImage(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -97,6 +158,18 @@ export default function CreateUserPage() {
         : [...prev, locationId]
     );
   };
+
+  const handleSelectAllLocations = (selectAll: boolean) => {
+    if (selectAll && allowedAssignments) {
+      setSelectedLocationIds(allowedAssignments.locations.map((loc) => loc.id));
+    } else {
+      setSelectedLocationIds([]);
+    }
+  };
+
+  const allLocationsSelected = allowedAssignments
+    ? allowedAssignments.locations.length > 0 && selectedLocationIds.length === allowedAssignments.locations.length
+    : false;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,6 +205,7 @@ export default function CreateUserPage() {
           email: formData.email,
           phone: formData.phone,
           jobTitle: formData.jobTitle,
+          avatar: formData.avatar || null,
           locationIds: selectedLocationIds,
           roleAssignments: selectedRoleId
             ? [{ roleId: selectedRoleId }]
@@ -263,12 +337,31 @@ export default function CreateUserPage() {
           <div className="w-full md:w-60 lg:w-72 md:shrink-0 md:border-r border-gray-200">
             <div className="p-6 space-y-6">
               <div className="flex flex-col items-center">
-                <div className="mb-3">
+                <div className="mb-3 relative group">
                   <UserAvatarSimple
-                    src={null}
+                    src={formData.avatar || null}
                     alt={formData.name || "New User"}
                     size={80}
                     className="w-20 h-20"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingImage}
+                    className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                  >
+                    {isUploadingImage ? (
+                      <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent" />
+                    ) : (
+                      <CameraIcon className="h-6 w-6 text-white" />
+                    )}
+                  </button>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileSelect}
+                    className="hidden"
                   />
                 </div>
                 <div className="text-center">
@@ -279,6 +372,13 @@ export default function CreateUserPage() {
                     {formData.email || "Enter email address"}
                   </p>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="mt-2 text-xs text-violet-600 hover:text-violet-700"
+                >
+                  {formData.avatar ? 'Change Photo' : 'Add Photo'}
+                </button>
               </div>
 
               {getSelectedRole() && (
@@ -494,27 +594,42 @@ export default function CreateUserPage() {
                             No locations available
                           </p>
                         ) : (
-                          allowedAssignments.locations.map((location) => (
-                            <label
-                              key={location.id}
-                              className="flex items-center"
-                            >
+                          <>
+                            <label className="flex items-center pb-2 mb-2 border-b border-gray-200">
                               <input
                                 type="checkbox"
                                 className="form-checkbox"
-                                checked={selectedLocationIds.includes(
-                                  location.id
-                                )}
-                                onChange={() =>
-                                  handleLocationToggle(location.id)
+                                checked={allLocationsSelected}
+                                onChange={(e) =>
+                                  handleSelectAllLocations(e.target.checked)
                                 }
                               />
-                              <span className="ml-2 text-sm text-gray-700">
-                                {location.name}{" "}
-                                {location.code && `(${location.code})`}
+                              <span className="ml-2 text-sm font-medium text-gray-700">
+                                All Locations
                               </span>
                             </label>
-                          ))
+                            {allowedAssignments.locations.map((location) => (
+                              <label
+                                key={location.id}
+                                className="flex items-center"
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="form-checkbox"
+                                  checked={selectedLocationIds.includes(
+                                    location.id
+                                  )}
+                                  onChange={() =>
+                                    handleLocationToggle(location.id)
+                                  }
+                                />
+                                <span className="ml-2 text-sm text-gray-700">
+                                  {location.name}{" "}
+                                  {location.code && `(${location.code})`}
+                                </span>
+                              </label>
+                            ))}
+                          </>
                         )}
                       </div>
                     </div>
@@ -583,6 +698,19 @@ export default function CreateUserPage() {
           </div>
         </div>
       </div>
+
+      {selectedImage && (
+        <ImageCropper
+          image={selectedImage}
+          onCropComplete={handleCroppedImage}
+          onCancel={() => {
+            setSelectedImage(null);
+            if (fileInputRef.current) {
+              fileInputRef.current.value = "";
+            }
+          }}
+        />
+      )}
     </div>
   );
 }
