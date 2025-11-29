@@ -415,7 +415,7 @@ export default function TakeCoursePage() {
         style={{ width: `${readingProgress}%` }}
       />
 
-      <div className="hidden lg:flex w-72 bg-white border-r border-gray-200 flex-col flex-shrink-0">
+      <div className="hidden lg:flex w-72 bg-gray-50 border-r border-gray-200 flex-col flex-shrink-0">
         {sidebarContent}
       </div>
 
@@ -425,7 +425,7 @@ export default function TakeCoursePage() {
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={() => setIsSidebarOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-white z-50 flex flex-col lg:hidden shadow-xl">
+          <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-gray-50 z-50 flex flex-col lg:hidden shadow-xl">
             {sidebarContent}
           </div>
         </>
@@ -448,7 +448,7 @@ export default function TakeCoursePage() {
           </div>
         </div>
 
-        <div id="lesson-content" className="flex-1 overflow-y-auto">
+        <div id="lesson-content" className="flex-1 overflow-y-auto bg-white">
           <div className="p-4 sm:p-6 lg:p-8">
             {currentLesson ? (
               <div className="max-w-3xl mx-auto">

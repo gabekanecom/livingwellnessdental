@@ -9,16 +9,60 @@ interface Message {
   sources?: { title: string; slug: string; category: string }[];
 }
 
+interface WidgetSettings {
+  isEnabled: boolean;
+  theme: 'light' | 'dark';
+  accentColor: string;
+  position: 'left' | 'right';
+  greeting: string;
+  headerTitle: string;
+  headerSubtitle: string;
+  inputPlaceholder: string;
+}
+
+const defaultSettings: WidgetSettings = {
+  isEnabled: true,
+  theme: 'light',
+  accentColor: '7c98ab',
+  position: 'right',
+  greeting: 'Hi! How can I help you today?',
+  headerTitle: 'Wiki Assistant',
+  headerSubtitle: 'Ask about procedures & policies',
+  inputPlaceholder: 'Ask a question...',
+};
+
 export default function WikiChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [settings, setSettings] = useState<WidgetSettings>(defaultSettings);
+  const [settingsLoaded, setSettingsLoaded] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch('/api/admin/widget');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.settings) {
+          setSettings(data.settings);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching widget settings:', error);
+    } finally {
+      setSettingsLoaded(true);
+    }
+  };
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -64,12 +108,21 @@ export default function WikiChatWidget() {
     }
   };
 
+  const accentColor = `#${settings.accentColor}`;
+  const positionClass = settings.position === 'left' ? 'left-6' : 'right-6';
+
+  // Don't render if widget is disabled
+  if (settingsLoaded && !settings.isEnabled) {
+    return null;
+  }
+
   return (
     <>
       {/* Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center z-50"
+        className={`fixed bottom-6 ${positionClass} w-14 h-14 text-white rounded-full shadow-lg transition-all flex items-center justify-center z-50`}
+        style={{ backgroundColor: accentColor }}
         aria-label="Toggle wiki assistant"
       >
         {isOpen ? (
@@ -90,11 +143,11 @@ export default function WikiChatWidget() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200">
+        <div className={`fixed bottom-24 ${positionClass} w-96 h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200`}>
           {/* Header */}
-          <div className="p-4 border-b border-gray-200 bg-blue-600 rounded-t-2xl">
-            <h3 className="font-semibold text-white">Wiki Assistant</h3>
-            <p className="text-sm text-blue-100">Ask about procedures & policies</p>
+          <div className="p-4 border-b border-gray-200 rounded-t-2xl" style={{ backgroundColor: accentColor }}>
+            <h3 className="font-semibold text-white">{settings.headerTitle}</h3>
+            <p className="text-sm text-white/80">{settings.headerSubtitle}</p>
           </div>
 
           {/* Messages */}
@@ -118,8 +171,9 @@ export default function WikiChatWidget() {
               <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div
                   className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                    msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-900'
+                    msg.role === 'user' ? 'text-white' : 'bg-gray-100 text-gray-900'
                   }`}
+                  style={msg.role === 'user' ? { backgroundColor: accentColor } : undefined}
                 >
                   <p className="text-sm whitespace-pre-wrap">{msg.content}</p>
 
@@ -131,7 +185,8 @@ export default function WikiChatWidget() {
                           <Link
                             key={j}
                             href={`/wiki/article/${source.slug}`}
-                            className="text-xs text-blue-600 hover:underline"
+                            className="text-xs hover:underline"
+                            style={{ color: accentColor }}
                             onClick={() => setIsOpen(false)}
                           >
                             📄 {source.title}
@@ -167,13 +222,18 @@ export default function WikiChatWidget() {
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && sendMessage()}
-                placeholder="Ask a question..."
-                className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                placeholder={settings.inputPlaceholder}
+                className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2"
+                style={{
+                  '--tw-ring-color': accentColor,
+                  borderColor: input ? accentColor : undefined
+                } as React.CSSProperties}
               />
               <button
                 onClick={sendMessage}
                 disabled={!input.trim() || isLoading}
-                className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="w-10 h-10 text-white rounded-full flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed transition-colors hover:opacity-90"
+                style={{ backgroundColor: accentColor }}
                 aria-label="Send message"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

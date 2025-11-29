@@ -77,9 +77,9 @@ export default function AdminLayout({
             links={adminSettingsLinks}
           />
           
-          <div className="grow">
-            {children} 
-          </div>
+          <main className="grow min-w-0 overflow-hidden">
+            {children}
+          </main>
         </div>
       </div>
     </div>

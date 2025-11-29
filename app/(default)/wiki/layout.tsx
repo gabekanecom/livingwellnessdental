@@ -3,7 +3,6 @@
 import { WikiProvider } from '@/contexts/WikiContext';
 import WikiChatWidget from '@/components/wiki/WikiChatWidget';
 import WikiCategorySidebar from '@/components/wiki/WikiCategorySidebar';
-import Link from 'next/link';
 import '@/app/css/wiki-print.css';
 
 export default function WikiLayout({ children }: { children: React.ReactNode }) {
@@ -27,15 +26,6 @@ export default function WikiLayout({ children }: { children: React.ReactNode }) 
                 Your centralized knowledge base for staff training and documentation
               </p>
             </div>
-            <Link 
-              href="/"
-              className="hidden sm:inline-flex items-center text-sm font-medium text-gray-600 hover:text-violet-600 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 rounded-lg px-2 py-1"
-            >
-              <svg className="mr-2 w-4 h-4 fill-current text-gray-400" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M9.4 13.4l-4.7-4.8 4.7-4.8 1.4 1.4-3.4 3.4 3.4 3.4z" />
-              </svg>
-              <span>Return to App</span>
-            </Link>
           </div>
         </header>
 

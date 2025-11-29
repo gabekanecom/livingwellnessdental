@@ -222,30 +222,39 @@ export default function RolesTable({
         </div>
       </div>
 
-      <div className="bg-white shadow-sm border border-gray-200 rounded-lg">
+      <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
+          <table className="w-full divide-y divide-gray-200 table-fixed">
+            <colgroup>
+              <col className="w-[28%]" />
+              <col className="w-[14%]" />
+              <col className="w-[14%]" />
+              <col className="w-[14%]" />
+              <col className="w-[10%]" />
+              <col className="w-[12%]" />
+              <col className="w-[8%]" />
+            </colgroup>
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-2/5">
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Role
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6">
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   User Type
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/8">
+                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Data Scope
                 </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/8">
+                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Permissions
                 </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Users
                 </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                <th className="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider w-1/12">
+                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider sr-only">
                   Actions
                 </th>
               </tr>
@@ -253,53 +262,50 @@ export default function RolesTable({
             <tbody className="bg-white divide-y divide-gray-200">
               {roles.map((role) => (
                 <tr key={role.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
+                  <td className="px-4 py-4">
+                    <div className="flex items-center min-w-0">
                       <div className="flex-shrink-0 h-10 w-10 bg-violet-500 rounded-lg flex items-center justify-center text-white font-medium text-sm">
                         {role.name.substring(0, 2).toUpperCase()}
                       </div>
-                      <div className="ml-4">
-                        <div className="flex items-center">
-                          <div className="text-sm font-medium text-gray-900">
+                      <div className="ml-3 min-w-0">
+                        <div className="flex items-center flex-wrap gap-1">
+                          <span className="text-sm font-medium text-gray-900 truncate">
                             {role.name}
-                          </div>
+                          </span>
                           {role.isDefault && (
-                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
                               Default
                             </span>
                           )}
                           {role.isProtected && (
-                            <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
+                            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800">
                               Protected
                             </span>
                           )}
                         </div>
-                        <div className="text-sm text-gray-500">
-                          {role.description}
-                        </div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800">
+                  <td className="px-4 py-4">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800">
                       {role.userTypeName}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  <td className="px-4 py-4">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                       DATA_SCOPE_LABELS[role.dataScope]?.color || 'bg-gray-100 text-gray-800'
                     }`}>
                       {DATA_SCOPE_LABELS[role.dataScope]?.label || role.dataScope}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                  <td className="px-4 py-4 text-center text-sm text-gray-900">
                     <span className="font-medium">{role.permissionCount}</span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-900">
+                  <td className="px-4 py-4 text-center text-sm text-gray-900">
                     <span className="font-medium">{role.userCount}</span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                  <td className="px-4 py-4 text-center">
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${
                       role.isActive
                         ? 'bg-green-100 text-green-800'
                         : 'bg-gray-100 text-gray-800'
@@ -307,7 +313,7 @@ export default function RolesTable({
                       {role.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="px-4 py-4 text-right text-sm font-medium">
                     <div className="relative inline-block text-left" data-dropdown>
                       <button
                         type="button"

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import ArticleEditor from '@/components/wiki/ArticleEditor';
+import CategorySelect from '@/components/wiki/CategorySelect';
 import { generateSlug } from '@/lib/wiki/utils';
 import {
   CloudArrowUpIcon,
@@ -313,41 +314,15 @@ export default function EditArticlePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Categories * <span className="text-gray-500 font-normal">(select at least one)</span>
+              Categories *
             </label>
-            <div className="border border-gray-300 rounded-lg p-3 max-h-48 overflow-y-auto space-y-2">
-              {categories.map((cat) => (
-                <label
-                  key={cat.id}
-                  className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 p-1 rounded"
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedCategoryIds.includes(cat.id)}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setSelectedCategoryIds([...selectedCategoryIds, cat.id]);
-                      } else {
-                        setSelectedCategoryIds(selectedCategoryIds.filter(id => id !== cat.id));
-                      }
-                    }}
-                    className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
-                  />
-                  <span className="text-sm text-gray-700">{cat.name}</span>
-                  {selectedCategoryIds[0] === cat.id && selectedCategoryIds.length > 0 && (
-                    <span className="text-xs text-violet-600 bg-violet-50 px-1.5 py-0.5 rounded">Primary</span>
-                  )}
-                </label>
-              ))}
-              {categories.length === 0 && (
-                <p className="text-sm text-gray-500 italic">No categories available</p>
-              )}
-            </div>
-            {selectedCategoryIds.length > 0 && (
-              <p className="mt-1 text-xs text-gray-500">
-                First selected category is the primary category
-              </p>
-            )}
+            <CategorySelect
+              categories={categories}
+              selectedIds={selectedCategoryIds}
+              onChange={setSelectedCategoryIds}
+              placeholder="Search and select categories..."
+              required
+            />
           </div>
 
           <div>
